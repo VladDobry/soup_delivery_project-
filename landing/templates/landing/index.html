@@ -1,0 +1,221 @@
+{% load static %}
+{% now "U" as cache_bust %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Я ЕСТЬ СУП!</title>
+    <link rel="stylesheet" href="{% static 'landing/css/styles.css' %}?v={{ cache_bust }}">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header" aria-label="Главная навигация">
+            <a class="mini-logo" href="#top" aria-label="Я есть суп">
+                <span>Я ЕСТЬ СУП</span>
+            </a>
+            <nav class="main-nav">
+                <a href="#soups">Супы</a>
+                <a href="#about">О нас</a>
+                <a href="#delivery">Доставка</a>
+                <a href="#buy">Где купить</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <div class="header-actions">
+                <a class="social-link" href="#contacts" aria-label="Telegram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.8 3.6 18.5 20c-.2 1-1.1 1.2-1.9.7l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3L5.8 13.2.9 11.6c-1-.3-1-1 .2-1.5l19.2-7.4c.9-.3 1.7.2 1.5.9Z"/></svg>
+                </a>
+                <a class="social-link" href="#contacts" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 2h9.2A5.4 5.4 0 0 1 22 7.4v9.2a5.4 5.4 0 0 1-5.4 5.4H7.4A5.4 5.4 0 0 1 2 16.6V7.4A5.4 5.4 0 0 1 7.4 2Zm0 2A3.4 3.4 0 0 0 4 7.4v9.2A3.4 3.4 0 0 0 7.4 20h9.2a3.4 3.4 0 0 0 3.4-3.4V7.4A3.4 3.4 0 0 0 16.6 4H7.4Zm4.6 3.4A4.6 4.6 0 1 1 7.4 12 4.6 4.6 0 0 1 12 7.4Zm0 2A2.6 2.6 0 1 0 14.6 12 2.6 2.6 0 0 0 12 9.4ZM17.3 6.5a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"/></svg>
+                </a>
+                <a class="btn btn-dark" href="#buy">Заказать</a>
+            </div>
+        </header>
+
+        <main id="top">
+            <section class="hero section-band" id="about">
+                <div class="space-decor decor-star decor-star-a depth-near" aria-hidden="true">✦</div>
+                <div class="space-decor decor-star decor-star-b depth-mid" aria-hidden="true">✶</div>
+                <div class="space-decor decor-star decor-star-c depth-far" aria-hidden="true">✦</div>
+                <div class="space-decor decor-star decor-star-d depth-mid" aria-hidden="true">✧</div>
+                <div class="space-decor decor-star decor-star-e depth-near" aria-hidden="true">✶</div>
+                <div class="space-decor decor-star decor-star-f depth-far" aria-hidden="true">✦</div>
+                <div class="space-decor decor-star decor-star-g depth-mid" aria-hidden="true">✧</div>
+                <div class="space-decor decor-star decor-star-h depth-near" aria-hidden="true">✦</div>
+                <div class="space-decor decor-planet decor-planet-a depth-mid" aria-hidden="true"></div>
+                <div class="space-decor decor-planet decor-planet-b decor-planet-small depth-far" aria-hidden="true"></div>
+                <div class="space-decor decor-planet decor-planet-c decor-planet-tiny depth-near" aria-hidden="true"></div>
+                <div class="hero-brand reveal">
+                    <div class="brand-lockup" aria-label="Я ЕСТЬ СУП!">
+                        <img class="brand-logo-img" src="{% static 'landing/img/hero-logo.png' %}?v={{ cache_bust }}" alt="Я ЕСТЬ СУП!">
+                    </div>
+                    <div class="mascot-wrap floaty" aria-hidden="true">
+                        <img class="asset asset-mascot" src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="">
+                    </div>
+                </div>
+                <div class="hero-copy reveal">
+                    <p class="hero-kicker">Я есть суп! —</p>
+                    <h1>Это настоящая, домашняя еда, которую варят <span>25 часов</span> на живом огне!</h1>
+                    <p class="copy-lead"><strong>Что у меня внутри?</strong><br>Коллагеновый бульон, родниковая вода, фермерские продукты и мясо!</p>
+                    <p class="copy-lead"><strong>Я не “быстрый перекус”.</strong><br>Я — суп, после которого тебе хорошо!</p>
+                    <p class="hero-shout">Я есть суп!</p>
+                    <div class="benefits" aria-label="Преимущества">
+                        <article>
+                            <span class="benefit-icon">25⏳</span>
+                            <b>25 часов<br>варки</b>
+                        </article>
+                        <article>
+                            <span class="benefit-icon benefit-no">NO🐷</span>
+                            <b>Без свинины<br>без химии</b>
+                        </article>
+                        <article>
+                            <span class="benefit-icon">🥬🐔👨🏻‍🌾</span>
+                            <b>Фермерские<br>продукты</b>
+                        </article>
+                        <article>
+                            <span class="benefit-icon">H2O💧</span>
+                            <b>Родниковая<br>вода</b>
+                        </article>
+                        <article>
+                            <span class="benefit-icon">BUL🐄</span>
+                            <b>Коллагеновый<br>бульон</b>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band soup-line" id="soups">
+                <div class="section-title reveal">
+                    <span></span>
+                    <h2>Наша линейка супов</h2>
+                    <span></span>
+                </div>
+                <div class="soup-grid">
+                    <article class="soup-card reveal">
+                        <div class="soup-label"><h3>Борщ</h3><p>На страже<br>твоего желудка</p></div>
+                        <img class="asset" src="{% static 'landing/img/soup-borsch.png' %}" alt="Борщ в черной чаше">
+                    </article>
+                    <article class="soup-card reveal">
+                        <div class="soup-label"><h3>Солянка</h3><p>После неправильных<br>решений</p></div>
+                        <img class="asset" src="{% static 'landing/img/soup-solyanka.png' %}" alt="Солянка с оливками и лимоном">
+                    </article>
+                    <article class="soup-card reveal">
+                        <div class="soup-label"><h3>Уха</h3><p>На норвежский<br>манер</p></div>
+                        <img class="asset" src="{% static 'landing/img/soup-ukha.png' %}" alt="Уха с рыбой и картофелем">
+                    </article>
+                    <article class="soup-card reveal">
+                        <div class="soup-label"><h3>Тыквенный<br>суп-пюре</h3><p>С креветкой</p></div>
+                        <img class="asset" src="{% static 'landing/img/soup-pumpkin.png' %}" alt="Тыквенный суп-пюре с креветкой">
+                    </article>
+                    <article class="soup-card reveal">
+                        <div class="soup-label"><h3>Коллагеновый<br>бульон</h3><p>Сила внутри</p></div>
+                        <img class="asset" src="{% static 'landing/img/soup-broth.png' %}" alt="Коллагеновый бульон с овощами">
+                    </article>
+                </div>
+                <p class="section-note">Обновляем и улучшаем рецептуру каждую неделю!</p>
+            </section>
+
+            <section class="section-band feature-line" id="delivery">
+                <div class="section-title reveal">
+                    <span></span>
+                    <h2>Наши фишки</h2>
+                    <span></span>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card feature-card-wide reveal">
+                        <div class="feature-copy"><h3>Сет супов</h3><p>Борщ • Солянка • Уха</p></div>
+                        <img class="asset" src="{% static 'landing/img/feature-set.png' %}" alt="Сет из трех супов">
+                    </article>
+                    <article class="feature-card reveal">
+                        <div class="feature-copy"><h3>Суп дня</h3><p>Секретный</p></div>
+                        <img class="asset" src="{% static 'landing/img/feature-mystery.png' %}" alt="Черный контейнер с секретным супом">
+                    </article>
+                    <article class="feature-card feature-card-wide reveal">
+                        <div class="feature-copy"><h3>С собой</h3><p>Банка, тара, миска — всё готово</p></div>
+                        <img class="asset" src="{% static 'landing/img/feature-pack.png' %}" alt="Суповая упаковка и банка">
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-band gallery-line" id="buy">
+                <div class="gallery-grid">
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Ингредиенты уже ждут котёл">
+                        <img class="asset" src="{% static 'landing/img/gallery-ingredients.png' %}" alt="Овощи и специи для супа">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Суп варится на живом огне">
+                        <img class="asset" src="{% static 'landing/img/gallery-pot.png' %}" alt="Котел супа на огне">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Демо-баночки без реальных этикеток">
+                        <img class="asset" src="{% static 'landing/img/gallery-jars.png' %}" alt="Банки с суповой заготовкой">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Бульон льётся красиво">
+                        <img class="asset" src="{% static 'landing/img/gallery-ladle.png' %}" alt="Половник с бульоном">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Горячий суп и хлеб">
+                        <img class="asset" src="{% static 'landing/img/gallery-bowl.png' %}" alt="Суп с хлебом и зеленью">
+                    </button>
+                    <button class="gallery-tile gallery-video reveal" type="button" data-video-open>
+                        <img class="asset" src="{% static 'landing/img/gallery-video.png' %}" alt="Видео-превью котла с супом">
+                        <span class="play-button" aria-hidden="true"></span>
+                        <span class="sr-only">Открыть демо-видео</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer section-band" id="contacts">
+            <div class="footer-logo reveal">
+                <div class="footer-brand" aria-label="Я есть суп">
+                    <span>Я</span><span>Есть</span><span>Суп!</span>
+                </div>
+            </div>
+            <div class="footer-column reveal">
+                <h2>Заказать</h2>
+                <p>+7 (999) 123-45-67</p>
+                <p>@YA_EST_SUP_BOT</p>
+                <a class="btn btn-dark" href="#top">Заказать</a>
+            </div>
+            <div class="footer-column reveal">
+                <h2>Где купить</h2>
+                <p>Смотрите в разделе<br>«Где купить»</p>
+                <a class="btn btn-dark" href="#buy">Показать магазины</a>
+            </div>
+            <div class="footer-column reveal">
+                <h2>Мы в соцсетях</h2>
+                <p>@YA_EST_SUP</p>
+                <div class="footer-socials">
+                    <a class="social-link" href="#contacts" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 2h9.2A5.4 5.4 0 0 1 22 7.4v9.2a5.4 5.4 0 0 1-5.4 5.4H7.4A5.4 5.4 0 0 1 2 16.6V7.4A5.4 5.4 0 0 1 7.4 2Zm4.6 5.4A4.6 4.6 0 1 1 7.4 12 4.6 4.6 0 0 1 12 7.4Zm5.3-.9a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"/></svg>
+                    </a>
+                    <a class="social-link" href="#contacts" aria-label="Telegram">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.8 3.6 18.5 20c-.2 1-1.1 1.2-1.9.7l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3L5.8 13.2.9 11.6c-1-.3-1-1 .2-1.5l19.2-7.4c.9-.3 1.7.2 1.5.9Z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="space-banner reveal">
+                <img class="asset" src="{% static 'landing/img/banner-space.png' %}" alt="Космический суповый баннер">
+                <strong>Суп спасёт<br>человечество!</strong>
+            </div>
+        </footer>
+    </div>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+
+    <div class="video-modal" aria-hidden="true">
+        <div class="video-backdrop" data-video-close></div>
+        <div class="video-dialog" role="dialog" aria-modal="true" aria-labelledby="video-title">
+            <button class="video-close" type="button" data-video-close aria-label="Закрыть">×</button>
+            <div class="video-stage">
+                <img class="asset" src="{% static 'landing/img/gallery-video.png' %}" alt="">
+                <div class="video-message">
+                    <span class="play-button"></span>
+                    <h2 id="video-title">Демо-видео</h2>
+                    <p>Здесь будет ролик о том, как суп варится 25 часов на живом огне.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'landing/js/main.js' %}"></script>
+</body>
+</html>
