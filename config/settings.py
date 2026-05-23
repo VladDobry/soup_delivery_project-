@@ -119,7 +119,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 ALLOWED_HOSTS = [
-    '.onrender.com'
+    '.onrender.com',
     "127.0.0.1",
     "localhost",
     ".ngrok-free.app",
