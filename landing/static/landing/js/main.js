@@ -1,8 +1,16 @@
 const revealItems = document.querySelectorAll(".reveal");
 const toast = document.querySelector(".toast");
+const soupModal = document.querySelector(".soup-modal");
+const soupOpeners = document.querySelectorAll("[data-soup-open]");
+const soupClosers = document.querySelectorAll("[data-soup-close]");
+const soupModalImage = document.querySelector("[data-soup-modal-image]");
+const soupModalTitle = document.querySelector("[data-soup-modal-title]");
+const soupModalTagline = document.querySelector("[data-soup-modal-tagline]");
+const soupModalDescription = document.querySelector("[data-soup-modal-description]");
 const videoModal = document.querySelector(".video-modal");
 const videoOpen = document.querySelector("[data-video-open]");
 const videoClosers = document.querySelectorAll("[data-video-close]");
+let activeSoupTrigger = null;
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -41,17 +49,49 @@ document.querySelectorAll(".soup-card, .feature-card, .gallery-tile").forEach((c
     });
 });
 
+const setModalLock = () => {
+    document.body.classList.toggle(
+        "modal-open",
+        soupModal?.classList.contains("is-open") || videoModal?.classList.contains("is-open")
+    );
+};
+
+const setSoupState = (open, trigger = null) => {
+    if (!soupModal) return;
+
+    if (open && trigger) {
+        activeSoupTrigger = trigger;
+        soupModalImage.src = trigger.dataset.soupImage;
+        soupModalImage.alt = trigger.dataset.soupAlt;
+        soupModalTitle.textContent = trigger.dataset.soupTitle;
+        soupModalTagline.textContent = trigger.dataset.soupTagline;
+        soupModalDescription.textContent = trigger.dataset.soupDescription;
+    }
+
+    soupModal.classList.toggle("is-open", open);
+    soupModal.setAttribute("aria-hidden", String(!open));
+    setModalLock();
+
+    if (!open && activeSoupTrigger) {
+        activeSoupTrigger.focus();
+        activeSoupTrigger = null;
+    }
+};
+
 const setVideoState = (open) => {
     videoModal.classList.toggle("is-open", open);
     videoModal.setAttribute("aria-hidden", String(!open));
-    document.body.classList.toggle("modal-open", open);
+    setModalLock();
 };
 
+soupOpeners.forEach((opener) => opener.addEventListener("click", () => setSoupState(true, opener)));
+soupClosers.forEach((closer) => closer.addEventListener("click", () => setSoupState(false)));
 videoOpen?.addEventListener("click", () => setVideoState(true));
 videoClosers.forEach((closer) => closer.addEventListener("click", () => setVideoState(false)));
 
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+        setSoupState(false);
         setVideoState(false);
     }
 });

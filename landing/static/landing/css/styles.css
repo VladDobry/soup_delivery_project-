@@ -361,12 +361,26 @@ img {
 }
 
 .soup-card {
+    border: 0;
+    padding: 0;
+    text-align: inherit;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
     min-height: 320px;
     border-radius: 11px;
     overflow: hidden;
     position: relative;
     box-shadow: inset 0 0 0 1px rgba(20, 19, 18, 0.13), var(--shadow);
     background: var(--paper-deep);
+}
+
+.soup-card:focus-visible,
+.gallery-tile:focus-visible,
+.video-close:focus-visible,
+.soup-close:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 4px;
 }
 
 .soup-card::after,
@@ -800,6 +814,114 @@ img {
     translate: -50% 0;
 }
 
+.soup-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.soup-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.soup-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 19, 18, 0.72);
+    backdrop-filter: blur(4px);
+}
+
+.soup-dialog {
+    width: min(920px, 100%);
+    max-height: min(720px, calc(100vh - 48px));
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1fr);
+    overflow: hidden;
+    border: 2px solid rgba(20, 19, 18, 0.2);
+    border-radius: 16px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 44%),
+        var(--paper);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+}
+
+.soup-close {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    z-index: 4;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    color: var(--paper);
+    background: var(--ink);
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.soup-modal-media {
+    min-height: 430px;
+    position: relative;
+    overflow: hidden;
+    background: var(--paper-deep);
+}
+
+.soup-modal-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 62%, rgba(244, 234, 216, 0.78));
+}
+
+.soup-modal-copy {
+    min-width: 0;
+    display: grid;
+    align-content: center;
+    gap: 14px;
+    padding: 58px 44px 48px 38px;
+}
+
+.soup-modal-copy h2 {
+    min-width: 0;
+    margin: 0;
+    color: var(--red);
+    font-size: clamp(38px, 4.2vw, 62px);
+    line-height: 0.9;
+    overflow-wrap: anywhere;
+}
+
+.soup-modal-copy p {
+    min-width: 0;
+    margin: 0;
+    font-size: clamp(18px, 1.62vw, 25px);
+    line-height: 1.02;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.soup-modal-copy p:first-child {
+    color: var(--muted);
+    font-size: clamp(18px, 1.45vw, 24px);
+}
+
+.soup-modal-rule {
+    width: min(260px, 100%);
+    height: 2px;
+    background:
+        radial-gradient(circle, var(--ink) 0 3px, transparent 4px) left center / 34px 10px repeat-x;
+}
+
 .video-modal {
     position: fixed;
     inset: 0;
@@ -1158,6 +1280,24 @@ img {
         padding-inline: 18px;
     }
 
+    .soup-dialog {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+    }
+
+    .soup-modal-media {
+        min-height: 260px;
+        max-height: 42vh;
+    }
+
+    .soup-modal-media::after {
+        background: linear-gradient(180deg, transparent 62%, rgba(244, 234, 216, 0.82));
+    }
+
+    .soup-modal-copy {
+        padding: 28px 28px 34px;
+    }
+
     .footer {
         grid-template-columns: 1fr;
         padding-inline: 20px;
@@ -1210,6 +1350,30 @@ img {
         width: calc(100% - 32px);
         border-radius: 14px;
         text-align: center;
+    }
+
+    .soup-modal {
+        padding: 14px;
+    }
+
+    .soup-dialog {
+        max-height: calc(100vh - 28px);
+    }
+
+    .soup-modal-media {
+        min-height: 230px;
+    }
+
+    .soup-modal-copy {
+        padding: 24px 20px 28px;
+    }
+
+    .soup-modal-copy h2 {
+        font-size: 38px;
+    }
+
+    .soup-modal-copy p {
+        font-size: 20px;
     }
 }
 

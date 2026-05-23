@@ -91,26 +91,26 @@
                     <span></span>
                 </div>
                 <div class="soup-grid">
-                    <article class="soup-card reveal">
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Борщ" data-soup-tagline="На страже твоего желудка" data-soup-image="{% static 'landing/img/soup-borsch.png' %}" data-soup-alt="Борщ в черной чаше" data-soup-description="Плотный, домашний борщ на долгом бульоне с фермерскими овощами. Согревает, насыщает и возвращает ощущение нормальной еды." aria-label="Открыть описание супа Борщ">
                         <div class="soup-label"><h3>Борщ</h3><p>На страже<br>твоего желудка</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-borsch.png' %}" alt="Борщ в черной чаше">
-                    </article>
-                    <article class="soup-card reveal">
+                    </button>
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Солянка" data-soup-tagline="После неправильных решений" data-soup-image="{% static 'landing/img/soup-solyanka.png' %}" data-soup-alt="Солянка с оливками и лимоном" data-soup-description="Яркая, густая солянка с насыщенным вкусом, лимоном и оливками. Для дней, когда нужен горячий перезапуск." aria-label="Открыть описание супа Солянка">
                         <div class="soup-label"><h3>Солянка</h3><p>После неправильных<br>решений</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-solyanka.png' %}" alt="Солянка с оливками и лимоном">
-                    </article>
-                    <article class="soup-card reveal">
+                    </button>
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Уха" data-soup-tagline="На норвежский манер" data-soup-image="{% static 'landing/img/soup-ukha.png' %}" data-soup-alt="Уха с рыбой и картофелем" data-soup-description="Лёгкая уха на норвежский манер с рыбой, картофелем и чистым бульоном. Спокойная, честная, без лишнего шума." aria-label="Открыть описание супа Уха">
                         <div class="soup-label"><h3>Уха</h3><p>На норвежский<br>манер</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-ukha.png' %}" alt="Уха с рыбой и картофелем">
-                    </article>
-                    <article class="soup-card reveal">
+                    </button>
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Тыквенный суп-пюре" data-soup-tagline="С креветкой" data-soup-image="{% static 'landing/img/soup-pumpkin.png' %}" data-soup-alt="Тыквенный суп-пюре с креветкой" data-soup-description="Нежный тыквенный суп-пюре с креветкой, мягкой сладостью и сливочной текстурой. Тёплый баланс пользы и удовольствия." aria-label="Открыть описание супа Тыквенный суп-пюре">
                         <div class="soup-label"><h3>Тыквенный<br>суп-пюре</h3><p>С креветкой</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-pumpkin.png' %}" alt="Тыквенный суп-пюре с креветкой">
-                    </article>
-                    <article class="soup-card reveal">
+                    </button>
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Коллагеновый бульон" data-soup-tagline="Сила внутри" data-soup-image="{% static 'landing/img/soup-broth.png' %}" data-soup-alt="Коллагеновый бульон с овощами" data-soup-description="Долгий коллагеновый бульон, сваренный на живом огне. Чистая основа, сила внутри и глубокий вкус без химии." aria-label="Открыть описание супа Коллагеновый бульон">
                         <div class="soup-label"><h3>Коллагеновый<br>бульон</h3><p>Сила внутри</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-broth.png' %}" alt="Коллагеновый бульон с овощами">
-                    </article>
+                    </button>
                 </div>
                 <p class="section-note">Обновляем и улучшаем рецептуру каждую неделю!</p>
             </section>
@@ -201,6 +201,22 @@
 
     <div class="toast" role="status" aria-live="polite"></div>
 
+    <div class="soup-modal" aria-hidden="true">
+        <div class="soup-backdrop" data-soup-close></div>
+        <div class="soup-dialog" role="dialog" aria-modal="true" aria-labelledby="soup-modal-title">
+            <button class="soup-close" type="button" data-soup-close aria-label="Закрыть">×</button>
+            <div class="soup-modal-media">
+                <img class="asset" data-soup-modal-image src="" alt="">
+            </div>
+            <div class="soup-modal-copy">
+                <p data-soup-modal-tagline></p>
+                <h2 id="soup-modal-title" data-soup-modal-title></h2>
+                <div class="soup-modal-rule" aria-hidden="true"></div>
+                <p data-soup-modal-description></p>
+            </div>
+        </div>
+    </div>
+
     <div class="video-modal" aria-hidden="true">
         <div class="video-backdrop" data-video-close></div>
         <div class="video-dialog" role="dialog" aria-modal="true" aria-labelledby="video-title">
@@ -216,6 +232,6 @@
         </div>
     </div>
 
-    <script src="{% static 'landing/js/main.js' %}"></script>
+    <script src="{% static 'landing/js/main.js' %}?v={{ cache_bust }}"></script>
 </body>
 </html>
