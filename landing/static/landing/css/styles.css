@@ -442,6 +442,186 @@ img {
     margin: 0 18px;
 }
 
+.umami-line {
+    padding: 0 28px 30px;
+}
+
+.umami-teaser {
+    width: 100%;
+    min-height: 350px;
+    display: grid;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1fr);
+    gap: 28px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(20, 19, 18, 0.24);
+    border-radius: 14px;
+    padding: 24px 28px;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 12% 22%, rgba(238, 170, 18, 0.18), transparent 10rem),
+        radial-gradient(circle at 90% 18%, rgba(197, 29, 37, 0.07), transparent 13rem),
+        repeating-linear-gradient(90deg, rgba(20, 19, 18, 0.018) 0 1px, transparent 1px 6px),
+        rgba(255, 248, 236, 0.48);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.umami-teaser:focus-visible,
+.umami-close:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 4px;
+}
+
+.umami-teaser::before,
+.umami-teaser::after {
+    content: "✦";
+    position: absolute;
+    color: var(--ink);
+    font-size: 22px;
+    pointer-events: none;
+}
+
+.umami-teaser::before {
+    left: 24px;
+    bottom: 42px;
+}
+
+.umami-teaser::after {
+    right: 30%;
+    top: 34px;
+}
+
+.umami-teaser-art {
+    min-width: 0;
+    position: relative;
+    display: grid;
+    place-items: end center;
+}
+
+.umami-flag,
+.umami-hero-flag,
+.umami-hero-label {
+    display: inline-grid;
+    place-items: center;
+    padding: 11px 18px;
+    color: var(--paper);
+    background: var(--ink);
+    border-radius: 3px;
+    font-weight: 800;
+    line-height: 0.9;
+    text-align: center;
+    rotate: -8deg;
+    box-shadow: 0 10px 18px rgba(43, 29, 17, 0.14);
+}
+
+.umami-flag {
+    position: absolute;
+    left: 2%;
+    top: 4%;
+    z-index: 3;
+    font-size: clamp(20px, 2.6vw, 35px);
+}
+
+.umami-planet {
+    position: absolute;
+    line-height: 1;
+}
+
+.umami-planet-a {
+    right: 15%;
+    top: 10%;
+    font-size: 42px;
+}
+
+.umami-planet-b {
+    left: 4%;
+    bottom: 18%;
+    color: var(--red);
+    font-size: 42px;
+}
+
+.umami-mascot {
+    width: min(360px, 88%);
+    filter: drop-shadow(0 18px 26px rgba(43, 29, 17, 0.2));
+}
+
+.umami-teaser-copy {
+    min-width: 0;
+    align-self: center;
+    display: grid;
+    gap: 14px;
+}
+
+.umami-teaser-copy h2 {
+    min-width: 0;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(42px, 5vw, 76px);
+    line-height: 0.9;
+    overflow-wrap: anywhere;
+}
+
+.umami-teaser-copy h2 span {
+    display: inline-block;
+    margin-left: 12px;
+    color: var(--yellow);
+    font-size: 0.68em;
+    letter-spacing: 4px;
+    text-shadow: 0 1px 0 var(--ink);
+    white-space: nowrap;
+}
+
+.umami-teaser-copy p {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(17px, 1.35vw, 22px);
+    font-weight: 700;
+    line-height: 1.15;
+    text-transform: none;
+}
+
+.umami-teaser-copy .umami-teaser-lead {
+    color: var(--red);
+    font-size: clamp(19px, 1.55vw, 25px);
+    text-transform: uppercase;
+}
+
+.umami-teaser-stars {
+    color: var(--yellow);
+    font-size: clamp(34px, 4vw, 54px);
+    line-height: 0.9;
+    letter-spacing: 8px;
+    text-shadow: 0 1px 0 var(--ink);
+}
+
+.umami-spoon-badge {
+    width: min(430px, 100%);
+    min-height: 64px;
+    display: grid;
+    place-items: center;
+    justify-self: end;
+    position: relative;
+    border-radius: 12px;
+    color: var(--paper);
+    background: var(--red);
+    font-size: clamp(22px, 2.2vw, 34px);
+    line-height: 1;
+    text-align: center;
+}
+
+.umami-spoon-badge::after {
+    content: "🥄";
+    position: absolute;
+    right: 18px;
+    bottom: 8px;
+    font-size: 36px;
+    rotate: -25deg;
+}
+
 .feature-line {
     padding-bottom: 26px;
 }
@@ -1256,6 +1436,398 @@ img {
     line-height: 1.1;
 }
 
+.umami-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.umami-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.umami-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 19, 18, 0.66);
+    backdrop-filter: blur(3px);
+}
+
+.umami-dialog {
+    width: min(920px, 100%);
+    max-height: calc(100vh - 28px);
+    position: relative;
+    z-index: 1;
+    overflow: auto;
+    border: 1px solid rgba(20, 19, 18, 0.18);
+    border-radius: 8px;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(238, 170, 18, 0.16), transparent 12rem),
+        radial-gradient(circle at 90% 10%, rgba(197, 29, 37, 0.07), transparent 16rem),
+        repeating-linear-gradient(90deg, rgba(20, 19, 18, 0.018) 0 1px, transparent 1px 6px),
+        var(--paper);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.44);
+    scrollbar-width: thin;
+}
+
+.umami-modal-header {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 22px;
+    padding: 18px 26px 4px;
+}
+
+.umami-close {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    color: var(--paper);
+    background: var(--ink);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.umami-hero {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(230px, 0.75fr) minmax(300px, 1fr);
+    gap: 20px;
+    align-items: center;
+    padding: 18px 36px 22px;
+}
+
+.umami-hero-copy {
+    min-width: 0;
+    display: grid;
+    gap: 16px;
+}
+
+.umami-hero-copy h2 {
+    min-width: 0;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(52px, 7vw, 84px);
+    line-height: 0.86;
+    overflow-wrap: normal;
+}
+
+.umami-rating {
+    color: var(--yellow);
+    font-size: clamp(34px, 4.6vw, 55px);
+    line-height: 0.9;
+    letter-spacing: 6px;
+    text-shadow: 0 1px 0 var(--ink);
+}
+
+.umami-hero-copy p {
+    max-width: 25ch;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(20px, 2vw, 30px);
+    font-weight: 800;
+    line-height: 1.02;
+}
+
+.umami-hero-art {
+    min-height: 430px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.umami-hero-art::after {
+    content: "";
+    width: min(430px, 90%);
+    aspect-ratio: 2.6 / 1;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    translate: -50% 0;
+    border-radius: 50% 50% 0 0;
+    background:
+        radial-gradient(circle at 24% 38%, rgba(20, 19, 18, 0.18) 0 11px, transparent 12px),
+        radial-gradient(circle at 64% 30%, rgba(20, 19, 18, 0.14) 0 8px, transparent 9px),
+        radial-gradient(circle at 78% 58%, rgba(20, 19, 18, 0.13) 0 14px, transparent 15px),
+        #bba98f;
+    box-shadow: inset 0 0 0 2px rgba(20, 19, 18, 0.1);
+}
+
+.umami-hero-mascot {
+    width: min(365px, 86%);
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 20px 28px rgba(43, 29, 17, 0.2));
+}
+
+.umami-space-star {
+    position: absolute;
+    color: var(--ink);
+    line-height: 1;
+}
+
+.umami-space-star-a {
+    left: 8%;
+    top: 18%;
+    font-size: 28px;
+}
+
+.umami-space-star-b {
+    right: 11%;
+    top: 6%;
+    font-size: 19px;
+}
+
+.umami-space-star-c {
+    left: 40%;
+    top: 8%;
+    font-size: 22px;
+}
+
+.modal-planet-a {
+    left: 4%;
+    top: 8%;
+    font-size: 48px;
+}
+
+.modal-planet-b {
+    right: 2%;
+    top: 38%;
+    color: var(--red);
+    font-size: 44px;
+}
+
+.umami-hero-flag {
+    position: absolute;
+    right: 4%;
+    top: 10%;
+    z-index: 3;
+    font-size: 26px;
+}
+
+.umami-hero-label {
+    position: absolute;
+    left: 8%;
+    top: 48%;
+    z-index: 3;
+    font-size: 18px;
+    rotate: -7deg;
+}
+
+.umami-hero-label-right {
+    left: auto;
+    right: 0;
+    top: 60%;
+    rotate: 5deg;
+}
+
+.umami-info-grid {
+    display: grid;
+    gap: 18px;
+    padding: 0 22px 24px;
+}
+
+.umami-info-card {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(220px, 0.76fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: center;
+    border: 1px solid rgba(20, 19, 18, 0.22);
+    border-radius: 14px;
+    padding: 22px;
+    background: rgba(255, 248, 236, 0.48);
+}
+
+.umami-info-card h3 {
+    min-width: 0;
+    margin: 0 0 14px;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 0.92;
+    overflow-wrap: anywhere;
+}
+
+.umami-info-card p {
+    margin: 0 0 9px;
+    color: var(--ink);
+    font-size: clamp(15px, 1.6vw, 20px);
+    font-weight: 700;
+    line-height: 1.16;
+    text-transform: none;
+}
+
+.umami-info-card p strong {
+    color: var(--red);
+    text-transform: uppercase;
+}
+
+.umami-info-card mark {
+    display: inline-block;
+    margin: 2px 0 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: var(--paper);
+    background: var(--ink);
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.umami-taste-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+}
+
+.umami-taste-row span {
+    min-width: 0;
+    display: grid;
+    gap: 8px;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.umami-taste-row b {
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    justify-self: center;
+    border: 1px solid rgba(20, 19, 18, 0.28);
+    border-radius: 50%;
+    background: rgba(255, 248, 236, 0.78);
+    font-size: 31px;
+    line-height: 1;
+}
+
+.umami-soup-card {
+    grid-template-columns: minmax(220px, 0.75fr) minmax(280px, 1fr);
+}
+
+.umami-orbit {
+    min-height: 230px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.umami-orbit::before {
+    content: "";
+    position: absolute;
+    inset: 12% 4%;
+    border: 4px solid rgba(238, 170, 18, 0.46);
+    border-radius: 50%;
+    rotate: -9deg;
+}
+
+.umami-orbit img {
+    width: min(210px, 58%);
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 12px 18px rgba(43, 29, 17, 0.16));
+}
+
+.umami-orbit span {
+    position: absolute;
+    z-index: 3;
+    font-size: 33px;
+}
+
+.umami-orbit span:nth-child(1) { left: 13%; top: 14%; }
+.umami-orbit span:nth-child(2) { left: 20%; bottom: 12%; }
+.umami-orbit span:nth-child(3) { left: 42%; bottom: 7%; }
+.umami-orbit span:nth-child(4) { right: 12%; bottom: 16%; }
+.umami-orbit span:nth-child(5) { right: 20%; top: 10%; }
+
+.umami-proof-card {
+    grid-template-columns: minmax(180px, 0.55fr) minmax(260px, 1fr);
+}
+
+.umami-red-stars {
+    margin-bottom: 12px;
+    color: var(--red);
+    font-size: clamp(28px, 4vw, 45px);
+    line-height: 0.9;
+    letter-spacing: 3px;
+}
+
+.umami-proof-stamp {
+    min-height: 190px;
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    border: 1px solid rgba(20, 19, 18, 0.22);
+    border-radius: 12px;
+    padding: 22px;
+    background: rgba(255, 248, 236, 0.66);
+    text-align: center;
+}
+
+.umami-proof-stamp span {
+    color: var(--yellow);
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 0.9;
+    letter-spacing: 6px;
+    text-shadow: 0 1px 0 var(--ink);
+}
+
+.umami-proof-stamp strong {
+    color: var(--red);
+    font-size: clamp(36px, 5vw, 62px);
+    line-height: 0.9;
+}
+
+.umami-proof-stamp small {
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: none;
+}
+
+.umami-modal-footer {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 8px 36px 34px;
+}
+
+.umami-modal-footer .footer-brand {
+    min-height: 0;
+    font-size: clamp(56px, 8vw, 92px);
+    line-height: 0.78;
+}
+
+.umami-modal-footer strong {
+    color: var(--ink);
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: 0.95;
+}
+
+.umami-modal-footer > span {
+    color: var(--yellow);
+    font-size: clamp(24px, 4vw, 44px);
+    letter-spacing: 4px;
+    text-shadow: 0 1px 0 var(--ink);
+}
+
 .video-modal {
     position: fixed;
     inset: 0;
@@ -1479,6 +2051,22 @@ img {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    .umami-teaser {
+        grid-template-columns: 1fr;
+    }
+
+    .umami-teaser-art {
+        min-height: 260px;
+    }
+
+    .umami-teaser-copy {
+        text-align: center;
+    }
+
+    .umami-spoon-badge {
+        justify-self: center;
+    }
+
     .feature-grid {
         grid-template-columns: 1fr;
     }
@@ -1513,6 +2101,37 @@ img {
         grid-column: 1 / -1;
         grid-template-columns: minmax(0, 1fr) minmax(240px, 0.56fr);
         align-items: start;
+    }
+
+    .umami-modal-header {
+        grid-template-columns: auto 1fr;
+    }
+
+    .umami-modal-header .passport-nav {
+        order: 3;
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .umami-modal-header .passport-actions {
+        justify-self: end;
+    }
+
+    .umami-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .umami-hero-copy {
+        justify-items: center;
+    }
+
+    .umami-info-card,
+    .umami-soup-card,
+    .umami-proof-card {
+        grid-template-columns: 1fr;
     }
 
     .footer {
@@ -1634,6 +2253,33 @@ img {
         min-height: 275px;
     }
 
+    .umami-line {
+        padding-inline: 18px;
+    }
+
+    .umami-teaser {
+        min-height: 0;
+        padding: 20px;
+    }
+
+    .umami-teaser-art {
+        min-height: 230px;
+    }
+
+    .umami-flag {
+        font-size: 23px;
+    }
+
+    .umami-teaser-copy h2 span {
+        display: block;
+        margin: 12px 0 0;
+        font-size: 0.7em;
+    }
+
+    .umami-teaser-stars {
+        letter-spacing: 5px;
+    }
+
     .feature-grid {
         padding-inline: 18px;
     }
@@ -1706,6 +2352,70 @@ img {
         justify-self: center;
     }
 
+    .umami-modal {
+        padding: 10px;
+    }
+
+    .umami-dialog {
+        max-height: calc(100vh - 20px);
+    }
+
+    .umami-modal-header {
+        grid-template-columns: auto 1fr;
+        padding: 14px 16px 8px;
+    }
+
+    .umami-modal-header .passport-logo {
+        width: 64px;
+        font-size: 23px;
+    }
+
+    .umami-modal-header .passport-nav,
+    .umami-modal-header .btn {
+        display: none;
+    }
+
+    .umami-modal-header .passport-actions {
+        justify-self: end;
+    }
+
+    .umami-hero {
+        padding: 20px 16px;
+    }
+
+    .umami-hero-art {
+        min-height: 360px;
+    }
+
+    .umami-hero-flag {
+        font-size: 20px;
+        right: 0;
+    }
+
+    .umami-hero-label,
+    .umami-hero-label-right {
+        display: none;
+    }
+
+    .umami-info-grid {
+        padding: 0 12px 20px;
+    }
+
+    .umami-info-card {
+        padding: 18px;
+    }
+
+    .umami-taste-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .umami-modal-footer {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        padding: 8px 18px 28px;
+    }
+
     .footer {
         grid-template-columns: 1fr;
         padding-inline: 20px;
@@ -1748,6 +2458,42 @@ img {
 
     .soup-card {
         min-height: 340px;
+    }
+
+    .umami-line {
+        padding-inline: 14px;
+    }
+
+    .umami-teaser {
+        padding: 18px 14px;
+        border-radius: 10px;
+    }
+
+    .umami-teaser-art {
+        min-height: 205px;
+    }
+
+    .umami-mascot {
+        width: min(260px, 86%);
+    }
+
+    .umami-planet-a,
+    .umami-planet-b {
+        font-size: 32px;
+    }
+
+    .umami-teaser-copy h2 {
+        font-size: 40px;
+    }
+
+    .umami-teaser-copy p {
+        font-size: 16px;
+    }
+
+    .umami-spoon-badge {
+        min-height: 56px;
+        padding: 8px 46px 8px 14px;
+        font-size: 22px;
     }
 
     .gallery-tile {
@@ -1803,6 +2549,51 @@ img {
 
     .soup-secret {
         padding-right: 54px;
+    }
+
+    .umami-dialog {
+        border-radius: 6px;
+    }
+
+    .umami-hero-copy h2 {
+        font-size: 56px;
+    }
+
+    .umami-rating,
+    .umami-proof-stamp span,
+    .umami-modal-footer > span {
+        letter-spacing: 3px;
+    }
+
+    .umami-hero-art {
+        min-height: 310px;
+    }
+
+    .umami-hero-mascot {
+        width: min(250px, 76%);
+    }
+
+    .umami-hero-flag {
+        font-size: 17px;
+    }
+
+    .modal-planet-a,
+    .modal-planet-b {
+        font-size: 34px;
+    }
+
+    .umami-taste-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .umami-taste-row b {
+        width: 56px;
+        height: 56px;
+        font-size: 27px;
+    }
+
+    .umami-proof-stamp strong {
+        font-size: 34px;
     }
 }
 

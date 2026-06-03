@@ -12,10 +12,14 @@ const soupModalNote = document.querySelector("[data-soup-modal-note]");
 const soupModalChips = document.querySelector("[data-soup-modal-chips]");
 const soupModalGroups = document.querySelector("[data-soup-modal-groups]");
 const soupModalSecret = document.querySelector("[data-soup-modal-secret]");
+const umamiModal = document.querySelector(".umami-modal");
+const umamiOpen = document.querySelector("[data-umami-open]");
+const umamiClosers = document.querySelectorAll("[data-umami-close]");
 const videoModal = document.querySelector(".video-modal");
 const videoOpen = document.querySelector("[data-video-open]");
 const videoClosers = document.querySelectorAll("[data-video-close]");
 let activeSoupTrigger = null;
+let activeUmamiTrigger = null;
 
 const soupDetails = {
     borsch: {
@@ -176,7 +180,7 @@ document.querySelectorAll(".gallery-tile[data-demo-toast]").forEach((tile) => {
     });
 });
 
-document.querySelectorAll(".soup-card, .feature-card, .gallery-tile").forEach((card) => {
+document.querySelectorAll(".soup-card, .feature-card, .gallery-tile, .umami-teaser").forEach((card) => {
     card.addEventListener("pointermove", (event) => {
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -194,7 +198,9 @@ document.querySelectorAll(".soup-card, .feature-card, .gallery-tile").forEach((c
 const setModalLock = () => {
     document.body.classList.toggle(
         "modal-open",
-        soupModal?.classList.contains("is-open") || videoModal?.classList.contains("is-open")
+        soupModal?.classList.contains("is-open") ||
+        umamiModal?.classList.contains("is-open") ||
+        videoModal?.classList.contains("is-open")
     );
 };
 
@@ -280,14 +286,34 @@ const setVideoState = (open) => {
     setModalLock();
 };
 
+const setUmamiState = (open, trigger = null) => {
+    if (!umamiModal) return;
+
+    if (open && trigger) {
+        activeUmamiTrigger = trigger;
+    }
+
+    umamiModal.classList.toggle("is-open", open);
+    umamiModal.setAttribute("aria-hidden", String(!open));
+    setModalLock();
+
+    if (!open && activeUmamiTrigger) {
+        activeUmamiTrigger.focus();
+        activeUmamiTrigger = null;
+    }
+};
+
 soupOpeners.forEach((opener) => opener.addEventListener("click", () => setSoupState(true, opener)));
 soupClosers.forEach((closer) => closer.addEventListener("click", () => setSoupState(false)));
+umamiOpen?.addEventListener("click", () => setUmamiState(true, umamiOpen));
+umamiClosers.forEach((closer) => closer.addEventListener("click", () => setUmamiState(false)));
 videoOpen?.addEventListener("click", () => setVideoState(true));
 videoClosers.forEach((closer) => closer.addEventListener("click", () => setVideoState(false)));
 
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         setSoupState(false);
+        setUmamiState(false);
         setVideoState(false);
     }
 });
