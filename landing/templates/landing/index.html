@@ -61,23 +61,33 @@
                     <p class="hero-shout">Я есть суп!</p>
                     <div class="benefits" aria-label="Преимущества">
                         <article>
-                            <span class="benefit-icon">25⏳</span>
+                            <span class="benefit-icon">
+                                <img src="{% static 'landing/img/benefit-25h.png' %}?v={{ cache_bust }}" alt="">
+                            </span>
                             <b>25 часов<br>варки</b>
                         </article>
                         <article>
-                            <span class="benefit-icon benefit-no">NO🐷</span>
+                            <span class="benefit-icon">
+                                <img src="{% static 'landing/img/benefit-no-pork.png' %}?v={{ cache_bust }}" alt="">
+                            </span>
                             <b>Без свинины<br>без химии</b>
                         </article>
                         <article>
-                            <span class="benefit-icon">🥬🐔👨🏻‍🌾</span>
+                            <span class="benefit-icon">
+                                <img src="{% static 'landing/img/benefit-farm.png' %}?v={{ cache_bust }}" alt="">
+                            </span>
                             <b>Фермерские<br>продукты</b>
                         </article>
                         <article>
-                            <span class="benefit-icon">H2O💧</span>
+                            <span class="benefit-icon">
+                                <img src="{% static 'landing/img/benefit-water.png' %}?v={{ cache_bust }}" alt="">
+                            </span>
                             <b>Родниковая<br>вода</b>
                         </article>
                         <article>
-                            <span class="benefit-icon">BUL🐄</span>
+                            <span class="benefit-icon">
+                                <img src="{% static 'landing/img/benefit-broth.png' %}?v={{ cache_bust }}" alt="">
+                            </span>
                             <b>Коллагеновый<br>бульон</b>
                         </article>
                     </div>
