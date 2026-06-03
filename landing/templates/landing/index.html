@@ -101,23 +101,23 @@
                     <span></span>
                 </div>
                 <div class="soup-grid">
-                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Борщ" data-soup-tagline="На страже твоего желудка" data-soup-image="{% static 'landing/img/soup-borsch.png' %}" data-soup-alt="Борщ в черной чаше" data-soup-description="Плотный, домашний борщ на долгом бульоне с фермерскими овощами. Согревает, насыщает и возвращает ощущение нормальной еды." aria-label="Открыть описание супа Борщ">
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-id="borsch" aria-label="Открыть описание супа Борщ">
                         <div class="soup-label"><h3>Борщ</h3><p>На страже<br>твоего желудка</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-borsch.png' %}" alt="Борщ в черной чаше">
                     </button>
-                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Солянка" data-soup-tagline="После неправильных решений" data-soup-image="{% static 'landing/img/soup-solyanka.png' %}" data-soup-alt="Солянка с оливками и лимоном" data-soup-description="Яркая, густая солянка с насыщенным вкусом, лимоном и оливками. Для дней, когда нужен горячий перезапуск." aria-label="Открыть описание супа Солянка">
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-id="solyanka" aria-label="Открыть описание супа Солянка">
                         <div class="soup-label"><h3>Солянка</h3><p>После неправильных<br>решений</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-solyanka.png' %}" alt="Солянка с оливками и лимоном">
                     </button>
-                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Уха" data-soup-tagline="На норвежский манер" data-soup-image="{% static 'landing/img/soup-ukha.png' %}" data-soup-alt="Уха с рыбой и картофелем" data-soup-description="Лёгкая уха на норвежский манер с рыбой, картофелем и чистым бульоном. Спокойная, честная, без лишнего шума." aria-label="Открыть описание супа Уха">
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-id="ukha" aria-label="Открыть описание супа Уха">
                         <div class="soup-label"><h3>Уха</h3><p>На норвежский<br>манер</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-ukha.png' %}" alt="Уха с рыбой и картофелем">
                     </button>
-                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Тыквенный суп-пюре" data-soup-tagline="С креветкой" data-soup-image="{% static 'landing/img/soup-pumpkin.png' %}" data-soup-alt="Тыквенный суп-пюре с креветкой" data-soup-description="Нежный тыквенный суп-пюре с креветкой, мягкой сладостью и сливочной текстурой. Тёплый баланс пользы и удовольствия." aria-label="Открыть описание супа Тыквенный суп-пюре">
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-id="pumpkin" aria-label="Открыть описание супа Тыквенный суп-пюре">
                         <div class="soup-label"><h3>Тыквенный<br>суп-пюре</h3><p>С креветкой</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-pumpkin.png' %}" alt="Тыквенный суп-пюре с креветкой">
                     </button>
-                    <button class="soup-card reveal" type="button" data-soup-open data-soup-title="Коллагеновый бульон" data-soup-tagline="Сила внутри" data-soup-image="{% static 'landing/img/soup-broth.png' %}" data-soup-alt="Коллагеновый бульон с овощами" data-soup-description="Долгий коллагеновый бульон, сваренный на живом огне. Чистая основа, сила внутри и глубокий вкус без химии." aria-label="Открыть описание супа Коллагеновый бульон">
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-id="broth" aria-label="Открыть описание супа Коллагеновый бульон">
                         <div class="soup-label"><h3>Коллагеновый<br>бульон</h3><p>Сила внутри</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-broth.png' %}" alt="Коллагеновый бульон с овощами">
                     </button>
@@ -214,16 +214,57 @@
     <div class="soup-modal" aria-hidden="true">
         <div class="soup-backdrop" data-soup-close></div>
         <div class="soup-dialog" role="dialog" aria-modal="true" aria-labelledby="soup-modal-title">
-            <button class="soup-close" type="button" data-soup-close aria-label="Закрыть">×</button>
-            <div class="soup-modal-media">
-                <img class="asset" data-soup-modal-image src="" alt="">
-            </div>
-            <div class="soup-modal-copy">
-                <p data-soup-modal-tagline></p>
-                <h2 id="soup-modal-title" data-soup-modal-title></h2>
-                <div class="soup-modal-rule" aria-hidden="true"></div>
-                <p data-soup-modal-description></p>
-            </div>
+            <header class="soup-passport-header">
+                <a class="passport-logo" href="#top" data-soup-close aria-label="Я есть суп">
+                    <span>Я</span><span>Есть</span><span>Суп!</span>
+                </a>
+                <nav class="passport-nav" aria-label="Навигация по паспорту супа">
+                    <a href="#soups" data-soup-close>Супы</a>
+                    <a href="#delivery" data-soup-close>Супотерапия</a>
+                    <a href="#about" data-soup-close>О нас</a>
+                    <a href="#buy" data-soup-close>Доставка и оплата</a>
+                    <a href="#contacts" data-soup-close>Контакты</a>
+                </nav>
+                <div class="passport-actions">
+                    <a class="social-link" href="#contacts" data-soup-close aria-label="Telegram">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.8 3.6 18.5 20c-.2 1-1.1 1.2-1.9.7l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3L5.8 13.2.9 11.6c-1-.3-1-1 .2-1.5l19.2-7.4c.9-.3 1.7.2 1.5.9Z"/></svg>
+                    </a>
+                    <a class="btn btn-dark" href="#buy" data-soup-close>Заказать суп</a>
+                    <button class="soup-close" type="button" data-soup-close aria-label="Закрыть">×</button>
+                </div>
+            </header>
+            <button class="soup-back-link" type="button" data-soup-close>← Назад к супам</button>
+            <section class="soup-passport">
+                <div class="soup-passport-visual">
+                    <img class="soup-mascot" src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
+                    <div class="soup-bowl-frame">
+                        <img class="asset" data-soup-modal-image src="" alt="">
+                    </div>
+                    <p class="soup-cook-note"><span aria-hidden="true">✦ 🪐 ✦</span><b data-soup-modal-note></b></p>
+                </div>
+                <div class="soup-passport-main">
+                    <p class="soup-kicker" data-soup-modal-kicker></p>
+                    <h2 id="soup-modal-title" data-soup-modal-title></h2>
+                    <p class="soup-tagline" data-soup-modal-tagline></p>
+                    <p class="soup-description" data-soup-modal-description></p>
+                    <div class="soup-umami" aria-label="Уровень умами: космический">
+                        <span>Уровень умами</span>
+                        <strong aria-hidden="true">★★★★★</strong>
+                        <small>Космический уровень</small>
+                    </div>
+                    <div class="soup-inside">
+                        <h3>Что внутри?</h3>
+                        <div class="soup-chip-list" data-soup-modal-chips></div>
+                    </div>
+                </div>
+                <aside class="soup-passport-panel">
+                    <div class="soup-composition" data-soup-modal-groups></div>
+                    <div class="soup-secret">
+                        <h3>Наш секрет</h3>
+                        <p data-soup-modal-secret></p>
+                    </div>
+                </aside>
+            </section>
         </div>
     </div>
 

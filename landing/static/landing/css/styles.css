@@ -821,12 +821,14 @@ img {
     position: fixed;
     inset: 0;
     z-index: 50;
-    display: grid;
-    place-items: center;
-    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 180ms ease;
+    --soup-accent: var(--red);
 }
 
 .soup-modal.is-open {
@@ -837,92 +839,421 @@ img {
 .soup-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(20, 19, 18, 0.72);
-    backdrop-filter: blur(4px);
+    background: rgba(20, 19, 18, 0.66);
+    backdrop-filter: blur(3px);
 }
 
 .soup-dialog {
-    width: min(920px, 100%);
-    max-height: min(720px, calc(100vh - 48px));
+    width: min(1240px, 100%);
+    max-height: calc(100vh - 28px);
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1fr);
-    overflow: hidden;
-    border: 2px solid rgba(20, 19, 18, 0.2);
-    border-radius: 16px;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    overflow: auto;
+    border: 1px solid rgba(20, 19, 18, 0.18);
+    border-radius: 8px;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 44%),
+        radial-gradient(circle at 6% 24%, rgba(238, 170, 18, 0.15), transparent 12rem),
+        radial-gradient(circle at 90% 12%, rgba(197, 29, 37, 0.08), transparent 14rem),
+        repeating-linear-gradient(90deg, rgba(20, 19, 18, 0.018) 0 1px, transparent 1px 6px),
         var(--paper);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.44);
+    scrollbar-width: thin;
 }
 
 .soup-close {
-    position: absolute;
-    right: 14px;
-    top: 12px;
-    z-index: 4;
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
     border: 0;
     border-radius: 50%;
     color: var(--paper);
     background: var(--ink);
-    font-size: 32px;
+    font-size: 28px;
     line-height: 1;
     cursor: pointer;
 }
 
-.soup-modal-media {
-    min-height: 430px;
-    position: relative;
-    overflow: hidden;
-    background: var(--paper-deep);
-}
-
-.soup-modal-media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent 62%, rgba(244, 234, 216, 0.78));
-}
-
-.soup-modal-copy {
+.soup-passport-header {
     min-width: 0;
     display: grid;
-    align-content: center;
-    gap: 14px;
-    padding: 58px 44px 48px 38px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 28px 8px;
 }
 
-.soup-modal-copy h2 {
-    min-width: 0;
-    margin: 0;
+.passport-logo {
+    width: 82px;
+    color: var(--ink);
+    font-size: 29px;
+    font-weight: 800;
+    line-height: 0.78;
+    rotate: -7deg;
+}
+
+.passport-logo span {
+    display: block;
+}
+
+.passport-logo span:nth-child(3) {
     color: var(--red);
-    font-size: clamp(38px, 4.2vw, 62px);
-    line-height: 0.9;
+}
+
+.passport-nav {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(14px, 2vw, 32px);
+    font-size: 13px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.passport-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.passport-actions .btn {
+    min-height: 42px;
+    padding: 13px 22px;
+    font-size: 12px;
+}
+
+.soup-back-link {
+    justify-self: start;
+    margin: 4px 0 0 28px;
+    padding: 0;
+    border: 0;
+    color: var(--ink);
+    background: transparent;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.soup-passport {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(260px, 0.82fr) minmax(270px, 0.92fr);
+    gap: 26px;
+    padding: 4px 28px 28px;
+}
+
+.soup-passport-visual {
+    min-width: 0;
+    position: relative;
+    display: grid;
+    align-content: end;
+    gap: 14px;
+    padding-top: 28px;
+}
+
+.soup-passport-visual::before,
+.soup-passport-visual::after {
+    content: "✦";
+    position: absolute;
+    color: var(--ink);
+    font-size: 22px;
+    opacity: 0.82;
+}
+
+.soup-passport-visual::before {
+    left: 8%;
+    top: 19%;
+}
+
+.soup-passport-visual::after {
+    right: 10%;
+    top: 11%;
+}
+
+.soup-mascot {
+    position: relative;
+    z-index: 2;
+    width: min(160px, 38%);
+    justify-self: center;
+    margin-bottom: -20px;
+    filter: drop-shadow(0 12px 18px rgba(43, 29, 17, 0.18));
+}
+
+.soup-bowl-frame {
+    aspect-ratio: 1 / 1;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.5), transparent 56%),
+        var(--paper-deep);
+    box-shadow: 0 22px 35px rgba(43, 29, 17, 0.18);
+}
+
+.soup-bowl-frame::before {
+    content: "";
+    position: absolute;
+    inset: 8%;
+    border: 2px solid rgba(20, 19, 18, 0.12);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.soup-bowl-frame img {
+    width: 118%;
+    height: 118%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+}
+
+.soup-cook-note {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0;
+    padding: 12px 18px;
+    border: 1px solid rgba(20, 19, 18, 0.22);
+    border-radius: 8px;
+    background: rgba(255, 248, 236, 0.58);
+    font-size: 15px;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.soup-cook-note span {
+    white-space: nowrap;
+}
+
+.soup-passport-main {
+    min-width: 0;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    padding-top: 42px;
+}
+
+.soup-kicker,
+.soup-tagline,
+.soup-description,
+.soup-umami span,
+.soup-umami small,
+.soup-inside h3,
+.soup-chip small,
+.soup-group h3,
+.soup-group p,
+.soup-secret h3,
+.soup-secret p {
+    min-width: 0;
     overflow-wrap: anywhere;
 }
 
-.soup-modal-copy p {
+.soup-kicker {
+    width: max-content;
+    max-width: 100%;
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(15px, 1.3vw, 20px);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.soup-passport-main h2 {
     min-width: 0;
     margin: 0;
-    font-size: clamp(18px, 1.62vw, 25px);
-    line-height: 1.02;
-    font-weight: 700;
+    color: var(--soup-accent);
+    font-size: clamp(48px, 5.2vw, 88px);
+    font-weight: 800;
+    line-height: 0.82;
     overflow-wrap: anywhere;
 }
 
-.soup-modal-copy p:first-child {
-    color: var(--muted);
-    font-size: clamp(18px, 1.45vw, 24px);
+.soup-tagline {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(22px, 2.1vw, 34px);
+    font-weight: 800;
+    line-height: 0.95;
 }
 
-.soup-modal-rule {
-    width: min(260px, 100%);
-    height: 2px;
-    background:
-        radial-gradient(circle, var(--ink) 0 3px, transparent 4px) left center / 34px 10px repeat-x;
+.soup-description {
+    max-width: 38ch;
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: clamp(16px, 1.35vw, 21px);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.soup-umami {
+    width: min(330px, 100%);
+    display: grid;
+    place-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 15px 18px;
+    border: 1px solid rgba(20, 19, 18, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 248, 236, 0.5);
+    text-align: center;
+}
+
+.soup-umami span,
+.soup-umami small {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.soup-umami strong {
+    color: var(--yellow);
+    font-size: 30px;
+    line-height: 0.9;
+    text-shadow: 0 1px 0 var(--ink);
+    letter-spacing: 4px;
+}
+
+.soup-inside {
+    display: grid;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.soup-inside h3 {
+    margin: 0;
+    font-size: clamp(20px, 2vw, 30px);
+    line-height: 1;
+    text-align: center;
+}
+
+.soup-chip-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.soup-chip {
+    min-width: 0;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    text-align: center;
+}
+
+.soup-chip b {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(20, 19, 18, 0.22);
+    border-radius: 50%;
+    background: rgba(255, 248, 236, 0.72);
+    font-size: 25px;
+    line-height: 1;
+}
+
+.soup-chip small {
+    max-width: 100%;
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.soup-passport-panel {
+    min-width: 0;
+    display: grid;
+    gap: 14px;
+    align-content: start;
+}
+
+.soup-composition,
+.soup-secret {
+    border: 1px solid rgba(20, 19, 18, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 248, 236, 0.52);
+}
+
+.soup-composition {
+    display: grid;
+    padding: 4px 18px;
+}
+
+.soup-group {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(20, 19, 18, 0.14);
+}
+
+.soup-group:last-child {
+    border-bottom: 0;
+}
+
+.soup-group span {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.soup-group h3 {
+    margin: 0 0 4px;
+    color: var(--soup-accent);
+    font-size: 18px;
+    line-height: 1;
+}
+
+.soup-group p {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(13px, 1.05vw, 16px);
+    font-weight: 700;
+    line-height: 1.16;
+    text-transform: none;
+}
+
+.soup-secret {
+    min-height: 86px;
+    position: relative;
+    padding: 16px 64px 16px 18px;
+}
+
+.soup-secret::after {
+    content: "🪐";
+    position: absolute;
+    right: 20px;
+    bottom: 16px;
+    font-size: 34px;
+}
+
+.soup-secret h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    line-height: 1;
+}
+
+.soup-secret p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.1;
 }
 
 .video-modal {
@@ -1156,6 +1487,34 @@ img {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    .soup-passport-header {
+        grid-template-columns: auto 1fr;
+        gap: 18px;
+    }
+
+    .passport-nav {
+        order: 3;
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .passport-actions {
+        justify-self: end;
+    }
+
+    .soup-passport {
+        grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1fr);
+        align-items: start;
+    }
+
+    .soup-passport-panel {
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.56fr);
+        align-items: start;
+    }
+
     .footer {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1283,22 +1642,68 @@ img {
         padding-inline: 18px;
     }
 
+    .soup-modal {
+        padding: 10px;
+    }
+
     .soup-dialog {
+        max-height: calc(100vh - 20px);
+    }
+
+    .soup-passport-header {
+        grid-template-columns: auto 1fr;
+        padding: 14px 16px 8px;
+    }
+
+    .passport-logo {
+        width: 64px;
+        font-size: 23px;
+    }
+
+    .passport-nav {
+        display: none;
+    }
+
+    .passport-actions .social-link,
+    .passport-actions .btn {
+        display: none;
+    }
+
+    .soup-back-link {
+        margin-left: 16px;
+        font-size: 14px;
+    }
+
+    .soup-passport {
         grid-template-columns: 1fr;
-        overflow-y: auto;
+        gap: 20px;
+        padding: 8px 16px 20px;
     }
 
-    .soup-modal-media {
-        min-height: 260px;
-        max-height: 42vh;
+    .soup-passport-visual {
+        padding-top: 4px;
     }
 
-    .soup-modal-media::after {
-        background: linear-gradient(180deg, transparent 62%, rgba(244, 234, 216, 0.82));
+    .soup-mascot {
+        width: min(128px, 32vw);
+        margin-bottom: -16px;
     }
 
-    .soup-modal-copy {
-        padding: 28px 28px 34px;
+    .soup-bowl-frame {
+        width: min(420px, 100%);
+        justify-self: center;
+    }
+
+    .soup-passport-main {
+        padding-top: 0;
+    }
+
+    .soup-passport-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .soup-umami {
+        justify-self: center;
     }
 
     .footer {
@@ -1355,28 +1760,49 @@ img {
         text-align: center;
     }
 
-    .soup-modal {
-        padding: 14px;
-    }
-
     .soup-dialog {
-        max-height: calc(100vh - 28px);
+        border-radius: 6px;
     }
 
-    .soup-modal-media {
-        min-height: 230px;
+    .soup-passport {
+        padding-inline: 12px;
     }
 
-    .soup-modal-copy {
-        padding: 24px 20px 28px;
+    .soup-passport-header {
+        padding-inline: 12px;
     }
 
-    .soup-modal-copy h2 {
-        font-size: 38px;
+    .soup-back-link {
+        margin-left: 12px;
     }
 
-    .soup-modal-copy p {
-        font-size: 20px;
+    .soup-passport-main h2 {
+        font-size: 42px;
+    }
+
+    .soup-tagline {
+        font-size: 24px;
+    }
+
+    .soup-description {
+        font-size: 16px;
+    }
+
+    .soup-chip-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .soup-chip b {
+        width: 50px;
+        height: 50px;
+    }
+
+    .soup-composition {
+        padding-inline: 14px;
+    }
+
+    .soup-secret {
+        padding-right: 54px;
     }
 }
 
