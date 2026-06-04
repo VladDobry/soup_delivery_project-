@@ -564,16 +564,6 @@ img {
     overflow-wrap: anywhere;
 }
 
-.umami-teaser-copy h2 span {
-    display: inline-block;
-    margin-left: 12px;
-    color: var(--yellow);
-    font-size: 0.68em;
-    letter-spacing: 4px;
-    text-shadow: 0 1px 0 var(--ink);
-    white-space: nowrap;
-}
-
 .umami-teaser-copy p {
     max-width: 62ch;
     margin: 0;
@@ -598,7 +588,7 @@ img {
     text-shadow: 0 1px 0 var(--ink);
 }
 
-.umami-spoon-badge {
+.umami-detail-button {
     width: min(430px, 100%);
     min-height: 64px;
     display: grid;
@@ -609,17 +599,18 @@ img {
     color: var(--paper);
     background: var(--red);
     font-size: clamp(22px, 2.2vw, 34px);
+    font-weight: 800;
     line-height: 1;
     text-align: center;
 }
 
-.umami-spoon-badge::after {
-    content: "🥄";
+.umami-detail-button::after {
+    content: "→";
     position: absolute;
-    right: 18px;
-    bottom: 8px;
-    font-size: 36px;
-    rotate: -25deg;
+    right: 20px;
+    top: 50%;
+    translate: 0 -50%;
+    font-size: 0.8em;
 }
 
 .feature-line {
@@ -1123,8 +1114,8 @@ img {
 .soup-passport {
     min-width: 0;
     display: grid;
-    grid-template-columns: minmax(280px, 0.95fr) minmax(260px, 0.82fr) minmax(270px, 0.92fr);
-    gap: 26px;
+    grid-template-columns: minmax(260px, 0.82fr) minmax(270px, 0.78fr) minmax(330px, 1.08fr);
+    gap: 28px;
     padding: 4px 28px 28px;
 }
 
@@ -1166,10 +1157,12 @@ img {
 }
 
 .soup-bowl-frame {
+    width: min(360px, 100%);
     aspect-ratio: 1 / 1;
     position: relative;
     display: grid;
     place-items: center;
+    justify-self: center;
     overflow: hidden;
     border-radius: 50%;
     background:
@@ -1182,17 +1175,21 @@ img {
     content: "";
     position: absolute;
     inset: 8%;
+    z-index: 2;
     border: 2px solid rgba(20, 19, 18, 0.12);
     border-radius: inherit;
     pointer-events: none;
 }
 
 .soup-bowl-frame img {
-    width: 118%;
-    height: 118%;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
     max-width: none;
     object-fit: cover;
-    object-position: center;
+    object-position: center 56%;
 }
 
 .soup-cook-note {
@@ -1223,29 +1220,14 @@ img {
     padding-top: 42px;
 }
 
-.soup-kicker,
 .soup-tagline,
 .soup-description,
 .soup-umami span,
 .soup-umami small,
-.soup-inside h3,
-.soup-chip small,
 .soup-group h3,
-.soup-group p,
-.soup-secret h3,
-.soup-secret p {
+.soup-group p {
     min-width: 0;
     overflow-wrap: anywhere;
-}
-
-.soup-kicker {
-    width: max-content;
-    max-width: 100%;
-    margin: 0;
-    color: var(--muted);
-    font-size: clamp(15px, 1.3vw, 20px);
-    font-weight: 800;
-    line-height: 1;
 }
 
 .soup-passport-main h2 {
@@ -1304,62 +1286,13 @@ img {
     letter-spacing: 4px;
 }
 
-.soup-inside {
-    display: grid;
-    gap: 12px;
-    margin-top: 14px;
-}
-
-.soup-inside h3 {
-    margin: 0;
-    font-size: clamp(20px, 2vw, 30px);
-    line-height: 1;
-    text-align: center;
-}
-
-.soup-chip-list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.soup-chip {
-    min-width: 0;
-    display: grid;
-    justify-items: center;
-    gap: 6px;
-    text-align: center;
-}
-
-.soup-chip b {
-    width: 54px;
-    height: 54px;
-    display: grid;
-    place-items: center;
-    border: 1px solid rgba(20, 19, 18, 0.22);
-    border-radius: 50%;
-    background: rgba(255, 248, 236, 0.72);
-    font-size: 25px;
-    line-height: 1;
-}
-
-.soup-chip small {
-    max-width: 100%;
-    color: var(--ink);
-    font-size: 11px;
-    font-weight: 800;
-    line-height: 1.05;
-}
-
 .soup-passport-panel {
     min-width: 0;
     display: grid;
-    gap: 14px;
     align-content: start;
 }
 
-.soup-composition,
-.soup-secret {
+.soup-composition {
     border: 1px solid rgba(20, 19, 18, 0.18);
     border-radius: 8px;
     background: rgba(255, 248, 236, 0.52);
@@ -1406,34 +1339,6 @@ img {
     font-weight: 700;
     line-height: 1.16;
     text-transform: none;
-}
-
-.soup-secret {
-    min-height: 86px;
-    position: relative;
-    padding: 16px 64px 16px 18px;
-}
-
-.soup-secret::after {
-    content: "🪐";
-    position: absolute;
-    right: 20px;
-    bottom: 16px;
-    font-size: 34px;
-}
-
-.soup-secret h3 {
-    margin: 0 0 6px;
-    font-size: 17px;
-    line-height: 1;
-}
-
-.soup-secret p {
-    margin: 0;
-    color: var(--ink);
-    font-size: 15px;
-    font-weight: 800;
-    line-height: 1.1;
 }
 
 .umami-modal {
@@ -1740,6 +1645,7 @@ img {
     width: min(210px, 58%);
     position: relative;
     z-index: 2;
+    translate: 0 clamp(-24px, -3.2vw, -14px);
     filter: drop-shadow(0 12px 18px rgba(43, 29, 17, 0.16));
 }
 
@@ -1802,26 +1708,32 @@ img {
 }
 
 .umami-modal-footer {
+    min-width: 0;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: minmax(180px, 0.55fr) minmax(190px, 1fr) auto;
     align-items: center;
-    gap: 24px;
+    column-gap: 28px;
+    row-gap: 12px;
     padding: 8px 36px 34px;
 }
 
 .umami-modal-footer .footer-brand {
+    width: min(250px, 100%);
     min-height: 0;
-    font-size: clamp(56px, 8vw, 92px);
+    min-width: 0;
+    font-size: clamp(54px, 6.5vw, 78px);
     line-height: 0.78;
 }
 
 .umami-modal-footer strong {
+    min-width: 0;
     color: var(--ink);
-    font-size: clamp(22px, 3vw, 36px);
+    font-size: clamp(22px, 2.6vw, 34px);
     line-height: 0.95;
 }
 
 .umami-modal-footer > span {
+    min-width: 0;
     color: var(--yellow);
     font-size: clamp(24px, 4vw, 44px);
     letter-spacing: 4px;
@@ -2063,7 +1975,7 @@ img {
         text-align: center;
     }
 
-    .umami-spoon-badge {
+    .umami-detail-button {
         justify-self: center;
     }
 
@@ -2093,14 +2005,13 @@ img {
     }
 
     .soup-passport {
-        grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1fr);
+        grid-template-columns: minmax(180px, 0.72fr) minmax(210px, 0.82fr) minmax(240px, 1fr);
         align-items: start;
+        gap: 18px;
     }
 
     .soup-passport-panel {
-        grid-column: 1 / -1;
-        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.56fr);
-        align-items: start;
+        grid-template-columns: 1fr;
     }
 
     .umami-modal-header {
@@ -2132,6 +2043,28 @@ img {
     .umami-soup-card,
     .umami-proof-card {
         grid-template-columns: 1fr;
+    }
+
+    .umami-modal-footer {
+        grid-template-columns: minmax(160px, 0.65fr) minmax(0, 1fr);
+        align-items: end;
+    }
+
+    .umami-modal-footer .footer-brand {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .umami-modal-footer strong {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        max-width: 16ch;
+    }
+
+    .umami-modal-footer > span {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
     }
 
     .footer {
@@ -2270,12 +2203,6 @@ img {
         font-size: 23px;
     }
 
-    .umami-teaser-copy h2 span {
-        display: block;
-        margin: 12px 0 0;
-        font-size: 0.7em;
-    }
-
     .umami-teaser-stars {
         letter-spacing: 5px;
     }
@@ -2336,7 +2263,7 @@ img {
     }
 
     .soup-bowl-frame {
-        width: min(420px, 100%);
+        width: min(360px, 100%);
         justify-self: center;
     }
 
@@ -2416,6 +2343,21 @@ img {
         padding: 8px 18px 28px;
     }
 
+    .umami-modal-footer .footer-brand,
+    .umami-modal-footer strong,
+    .umami-modal-footer > span {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .umami-modal-footer strong {
+        max-width: none;
+    }
+
+    .umami-modal-footer > span {
+        justify-self: center;
+    }
+
     .footer {
         grid-template-columns: 1fr;
         padding-inline: 20px;
@@ -2490,9 +2432,9 @@ img {
         font-size: 16px;
     }
 
-    .umami-spoon-badge {
+    .umami-detail-button {
         min-height: 56px;
-        padding: 8px 46px 8px 14px;
+        padding: 8px 46px 8px 18px;
         font-size: 22px;
     }
 
@@ -2534,21 +2476,8 @@ img {
         font-size: 16px;
     }
 
-    .soup-chip-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .soup-chip b {
-        width: 50px;
-        height: 50px;
-    }
-
     .soup-composition {
         padding-inline: 14px;
-    }
-
-    .soup-secret {
-        padding-right: 54px;
     }
 
     .umami-dialog {

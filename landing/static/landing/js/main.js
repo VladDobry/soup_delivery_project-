@@ -5,13 +5,10 @@ const soupOpeners = document.querySelectorAll("[data-soup-open]");
 const soupClosers = document.querySelectorAll("[data-soup-close]");
 const soupModalImage = document.querySelector("[data-soup-modal-image]");
 const soupModalTitle = document.querySelector("[data-soup-modal-title]");
-const soupModalKicker = document.querySelector("[data-soup-modal-kicker]");
 const soupModalTagline = document.querySelector("[data-soup-modal-tagline]");
 const soupModalDescription = document.querySelector("[data-soup-modal-description]");
 const soupModalNote = document.querySelector("[data-soup-modal-note]");
-const soupModalChips = document.querySelector("[data-soup-modal-chips]");
 const soupModalGroups = document.querySelector("[data-soup-modal-groups]");
-const soupModalSecret = document.querySelector("[data-soup-modal-secret]");
 const umamiModal = document.querySelector(".umami-modal");
 const umamiOpen = document.querySelector("[data-umami-open]");
 const umamiClosers = document.querySelectorAll("[data-umami-close]");
@@ -24,22 +21,12 @@ let activeUmamiTrigger = null;
 const soupDetails = {
     borsch: {
         title: "Борщ",
-        kicker: "Супотерапия N1",
         tagline: "На страже твоего желудка",
         description: "Настоящий борщ с насыщенным вкусом и глубоким характером. Такой, каким он и должен быть.",
         image: "/static/landing/img/soup-borsch.png",
         alt: "Борщ в черной чаше",
         accent: "#c51d25",
         note: "Готовится с любовью и томлением 25 часов на живом огне",
-        secret: "Несколько ингредиентов мы оставляем в тайне. Иначе это будет уже не наш борщ.",
-        chips: [
-            ["🍲", "Коллагеновый бульон"],
-            ["🥩", "Говядина"],
-            ["🧅", "Свекла"],
-            ["🥬", "Капуста"],
-            ["🍅", "Томаты"],
-            ["🧄", "Чеснок"]
-        ],
         groups: [
             ["🍲", "Основа", "Коллагеновый говяжий бульон. Коллагеновый петуховый бульон"],
             ["🥕", "Овощная база", "Свекла, капуста белокочанная, морковь, репчатый лук, лук-порей, болгарский перец, томат протертый, томатная паста, чеснок, сельдерей"],
@@ -50,22 +37,12 @@ const soupDetails = {
     },
     solyanka: {
         title: "Солянка",
-        kicker: "Супотерапия N2",
         tagline: "После неправильных решений",
         description: "Густая, наваристая, с характером. Солянка — это когда все сложное становится вкусным.",
         image: "/static/landing/img/soup-solyanka.png",
         alt: "Солянка с оливками и лимоном",
         accent: "#c33123",
         note: "Готовится с любовью и томлением 25 часов на живом огне",
-        secret: "Если день пошел не по плану, солянка все исправит.",
-        chips: [
-            ["🦆", "Утка"],
-            ["🥩", "Копченые ребра"],
-            ["🍄", "Грузди"],
-            ["🥒", "Огурцы"],
-            ["⚫", "Оливки"],
-            ["🫒", "Каперсы"]
-        ],
         groups: [
             ["🍲", "Основа", "Коллагеновый петуховый бульон"],
             ["🥩", "Копчености", "Фермерская утка горячего копчения. Говяжьи ребра горячего копчения"],
@@ -77,22 +54,12 @@ const soupDetails = {
     },
     ukha: {
         title: "Уха",
-        kicker: "Супотерапия N3",
         tagline: "На норвежский манер",
         description: "Сливочная, ароматная, с благородной рыбой и нотками Севера. Согревает и вдохновляет.",
         image: "/static/landing/img/soup-ukha.png",
         alt: "Уха с рыбой и картофелем",
         accent: "#1f5c8e",
         note: "Готовится с любовью и томлением 25 часов на живом огне",
-        secret: "Нежность сливочной основы держится на чистом бульоне и правильной рыбе.",
-        chips: [
-            ["🐟", "Семга"],
-            ["🐟", "Тунец"],
-            ["🐟", "Зубатка"],
-            ["🥛", "Кокосовое молоко"],
-            ["🍄", "Шиитаке"],
-            ["🥔", "Картофель"]
-        ],
         groups: [
             ["🍲", "Основа", "Коллагеновый бульон из семги. Коллагеновый петуховый бульон"],
             ["🐟", "Рыба", "Семга, зубатка, тунец"],
@@ -104,22 +71,12 @@ const soupDetails = {
     },
     pumpkin: {
         title: "Тыквенный крем-суп",
-        kicker: "Супотерапия N4",
         tagline: "С лангустинами",
         description: "Нежный, бархатистый, с легкой сладостью тыквы и изысканным ароматом трюфеля.",
         image: "/static/landing/img/soup-pumpkin.png",
         alt: "Тыквенный суп-пюре с креветкой",
         accent: "#e36f16",
         note: "Готовится с любовью и томлением 25 часов на живом огне",
-        secret: "Оливковое масло с ароматом белого трюфеля добавляет тот самый финальный штрих.",
-        chips: [
-            ["🎃", "Тыква"],
-            ["🍠", "Батат"],
-            ["🦐", "Лангустины"],
-            ["🥥", "Кокосовое молоко"],
-            ["🧄", "Белый трюфель"],
-            ["🍲", "Коллагеновый бульон"]
-        ],
         groups: [
             ["🍲", "Основа", "Тыква, батат. Коллагеновый петуховый бульон"],
             ["🥥", "Сливочная база", "Кокосовое молоко, сливочное масло, оливковое масло"],
@@ -131,22 +88,12 @@ const soupDetails = {
     },
     broth: {
         title: "Коллагеновый бульон",
-        kicker: "Супотерапия N5",
         tagline: "Сила внутри",
         description: "Долгий коллагеновый бульон, сваренный на живом огне. Чистая основа, глубокий вкус и спокойная сила без химии.",
         image: "/static/landing/img/soup-broth.png",
         alt: "Коллагеновый бульон с овощами",
         accent: "#b98335",
         note: "Томится 25 часов, чтобы вкус стал глубоким, а основа — честной",
-        secret: "Главный ингредиент здесь — время. Бульон не торопят, его доводят до силы.",
-        chips: [
-            ["🍲", "Долгий бульон"],
-            ["💧", "Родниковая вода"],
-            ["🥕", "Морковь"],
-            ["🧅", "Лук"],
-            ["🌿", "Зелень"],
-            ["🧂", "Специи"]
-        ],
         groups: [
             ["🍲", "Основа", "Коллагеновый бульон долгого томления на живом огне"],
             ["💧", "Вода", "Чистая родниковая вода для мягкого вкуса"],
@@ -204,27 +151,6 @@ const setModalLock = () => {
     );
 };
 
-const renderSoupChips = (chips) => {
-    if (!soupModalChips) return;
-
-    soupModalChips.replaceChildren();
-
-    chips.forEach(([icon, label]) => {
-        const chip = document.createElement("span");
-        chip.className = "soup-chip";
-
-        const iconEl = document.createElement("b");
-        iconEl.textContent = icon;
-        iconEl.setAttribute("aria-hidden", "true");
-
-        const labelEl = document.createElement("small");
-        labelEl.textContent = label;
-
-        chip.append(iconEl, labelEl);
-        soupModalChips.append(chip);
-    });
-};
-
 const renderSoupGroups = (groups) => {
     if (!soupModalGroups) return;
 
@@ -261,12 +187,9 @@ const setSoupState = (open, trigger = null) => {
         soupModalImage.src = detail.image;
         soupModalImage.alt = detail.alt;
         soupModalTitle.textContent = detail.title;
-        soupModalKicker.textContent = detail.kicker;
         soupModalTagline.textContent = detail.tagline;
         soupModalDescription.textContent = detail.description;
         soupModalNote.textContent = detail.note;
-        soupModalSecret.textContent = detail.secret;
-        renderSoupChips(detail.chips);
         renderSoupGroups(detail.groups);
     }
 
