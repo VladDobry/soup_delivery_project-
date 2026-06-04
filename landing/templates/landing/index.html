@@ -154,9 +154,16 @@
                         <div class="feature-copy"><h3>Сет супов</h3><p>Борщ • Солянка • Уха</p></div>
                         <img class="asset" src="{% static 'landing/img/feature-set.png' %}" alt="Сет из трех супов">
                     </article>
-                    <article class="feature-card reveal">
-                        <div class="feature-copy"><h3>Суп дня</h3><p>Секретный</p></div>
-                        <img class="asset" src="{% static 'landing/img/feature-mystery.png' %}" alt="Черный контейнер с секретным супом">
+                    <article class="feature-card feature-size-card reveal">
+                        <div class="feature-copy">
+                            <h3>Размер<br>банок</h3>
+                            <div class="jar-size-list" aria-label="Размерный ряд банок">
+                                <span><b>1 л</b><small>1950 р</small></span>
+                                <span><b>1.5 л</b><small>2850 р</small></span>
+                                <span><b>2 л</b><small>3750 р</small></span>
+                            </div>
+                        </div>
+                        <img class="asset feature-size-image" src="{% static 'landing/img/feature-jars-sizes.png' %}" alt="Банки супа объемом 1 л, 1.5 л и 2 л">
                     </article>
                     <article class="feature-card feature-card-wide reveal">
                         <div class="feature-copy"><h3>С собой</h3><p>Банка, тара, миска — всё готово</p></div>
@@ -167,20 +174,20 @@
 
             <section class="section-band gallery-line" id="buy">
                 <div class="gallery-grid">
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Ингредиенты уже ждут котёл">
-                        <img class="asset" src="{% static 'landing/img/gallery-ingredients.png' %}" alt="Овощи и специи для супа">
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Фасоль и специи уже готовы">
+                        <img class="asset gallery-real-photo gallery-real-photo-beans" src="{% static 'landing/img/gallery-real-beans.jpg' %}" alt="Фасоль, томатная паста, зелень и специи для супа">
                     </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Суп варится на живом огне">
-                        <img class="asset" src="{% static 'landing/img/gallery-pot.png' %}" alt="Котел супа на огне">
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Овощи едут в котёл">
+                        <img class="asset gallery-real-photo gallery-real-photo-vegetables" src="{% static 'landing/img/gallery-real-vegetables.jpg' %}" alt="Овощи, зелень и вода для супа">
                     </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Демо-баночки без реальных этикеток">
-                        <img class="asset" src="{% static 'landing/img/gallery-jars.png' %}" alt="Банки с суповой заготовкой">
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Мясная основа для насыщенного бульона">
+                        <img class="asset gallery-real-photo gallery-real-photo-meat" src="{% static 'landing/img/gallery-real-meat.jpg' %}" alt="Мясо, кости, овощи и специи для бульона">
                     </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Бульон льётся красиво">
-                        <img class="asset" src="{% static 'landing/img/gallery-ladle.png' %}" alt="Половник с бульоном">
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Ингредиенты разложены перед варкой">
+                        <img class="asset gallery-real-photo gallery-real-photo-table" src="{% static 'landing/img/gallery-real-table.jpg' %}" alt="Овощи и зелень на столе перед приготовлением">
                     </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Горячий суп и хлеб">
-                        <img class="asset" src="{% static 'landing/img/gallery-bowl.png' %}" alt="Суп с хлебом и зеленью">
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Котёл ждёт живой огонь">
+                        <img class="asset gallery-real-photo gallery-real-photo-pot" src="{% static 'landing/img/gallery-real-pot.jpg' %}" alt="Котел над кострищем для приготовления супа">
                     </button>
                     <button class="gallery-tile gallery-video reveal" type="button" data-video-open>
                         <img class="asset" src="{% static 'landing/img/gallery-video.png' %}" alt="Видео-превью котла с супом">
