@@ -479,19 +479,19 @@ img {
 
 .umami-teaser {
     width: 100%;
-    min-height: 350px;
+    min-height: 390px;
     display: grid;
-    grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1fr);
-    gap: 28px;
+    grid-template-columns: minmax(420px, 0.9fr) minmax(460px, 1.1fr);
+    gap: 18px;
     position: relative;
     overflow: hidden;
     border: 2px solid rgba(20, 19, 18, 0.24);
     border-radius: 14px;
-    padding: 24px 28px;
+    padding: 18px 30px 22px;
     color: var(--ink);
     background:
-        radial-gradient(circle at 12% 22%, rgba(238, 170, 18, 0.18), transparent 10rem),
-        radial-gradient(circle at 90% 18%, rgba(197, 29, 37, 0.07), transparent 13rem),
+        radial-gradient(circle at 12% 72%, rgba(197, 29, 37, 0.08), transparent 13rem),
+        radial-gradient(circle at 88% 12%, rgba(238, 170, 18, 0.12), transparent 12rem),
         repeating-linear-gradient(90deg, rgba(20, 19, 18, 0.018) 0 1px, transparent 1px 6px),
         rgba(255, 248, 236, 0.48);
     box-shadow: var(--shadow);
@@ -516,17 +516,18 @@ img {
 }
 
 .umami-teaser::before {
-    left: 24px;
-    bottom: 42px;
+    left: 32px;
+    bottom: 28px;
 }
 
 .umami-teaser::after {
-    right: 30%;
-    top: 34px;
+    right: 23%;
+    top: 26px;
 }
 
 .umami-teaser-art {
     min-width: 0;
+    min-height: 346px;
     position: relative;
     display: grid;
     place-items: end center;
@@ -550,10 +551,21 @@ img {
 
 .umami-flag {
     position: absolute;
-    left: 2%;
-    top: 4%;
+    left: 0;
+    top: 8%;
     z-index: 3;
-    font-size: clamp(20px, 2.6vw, 35px);
+    font-size: clamp(19px, 2.15vw, 31px);
+}
+
+.umami-orbit-icon {
+    position: absolute;
+    right: 4%;
+    top: 10%;
+    width: 42px;
+    height: 18px;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    rotate: -18deg;
 }
 
 .umami-planet {
@@ -561,75 +573,135 @@ img {
     line-height: 1;
 }
 
-.umami-planet-a {
-    right: 15%;
-    top: 10%;
-    font-size: 42px;
+.umami-orbit-icon::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    translate: -50% -50%;
+    background: var(--yellow);
 }
 
-.umami-planet-b {
-    left: 4%;
-    bottom: 18%;
+.umami-art-spark {
+    position: absolute;
+    z-index: 2;
+    color: var(--ink);
+    line-height: 1;
+}
+
+.umami-art-spark-a {
+    right: 13%;
+    top: 25%;
+    font-size: 19px;
+}
+
+.umami-art-spark-b {
+    left: 7%;
+    bottom: 16%;
     color: var(--red);
-    font-size: 42px;
+    font-size: 16px;
 }
 
 .umami-mascot {
-    width: min(360px, 88%);
-    filter: drop-shadow(0 18px 26px rgba(43, 29, 17, 0.2));
+    width: min(560px, 112%);
+    max-width: none;
+    margin: 0 -5% -8px;
+    filter: drop-shadow(0 15px 18px rgba(43, 29, 17, 0.16));
 }
 
 .umami-teaser-copy {
     min-width: 0;
     align-self: center;
     display: grid;
-    gap: 14px;
+    gap: 10px;
+    padding: 8px 0;
 }
 
 .umami-teaser-copy h2 {
     min-width: 0;
-    margin: 0;
-    color: var(--ink);
-    font-size: clamp(42px, 5vw, 76px);
-    line-height: 0.9;
+    display: grid;
+    gap: 6px;
+    margin: 0 0 4px;
     overflow-wrap: anywhere;
+    text-transform: uppercase;
+}
+
+.umami-teaser-copy h2 > span,
+.umami-teaser-copy h2 > strong {
+    display: block;
+}
+
+.umami-teaser-copy h2 > span {
+    width: 65%;
+    color: var(--ink);
+    font-size: clamp(46px, 4.6vw, 68px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
+}
+
+.umami-teaser-copy h2 > strong {
+    width: 100%;
+    color: var(--red);
+    font-size: clamp(76px, 7.65vw, 110px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
 }
 
 .umami-teaser-copy p {
-    max-width: 62ch;
+    max-width: 54ch;
     margin: 0;
     color: var(--ink);
-    font-size: clamp(17px, 1.35vw, 22px);
+    font-size: clamp(15px, 1.15vw, 19px);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.18;
     text-transform: none;
 }
 
 .umami-teaser-copy .umami-teaser-lead {
-    color: var(--red);
-    font-size: clamp(19px, 1.55vw, 25px);
+    color: var(--ink);
+    font-size: clamp(18px, 1.45vw, 23px);
     text-transform: uppercase;
+}
+
+.umami-teaser-copy p strong {
+    color: var(--red);
+}
+
+.umami-teaser-actions {
+    display: grid;
+    grid-template-columns: auto minmax(240px, 1fr);
+    align-items: center;
+    gap: 18px;
+    margin-top: 4px;
 }
 
 .umami-teaser-stars {
     color: var(--yellow);
-    font-size: clamp(34px, 4vw, 54px);
+    font-size: clamp(27px, 2.7vw, 40px);
     line-height: 0.9;
-    letter-spacing: 8px;
+    letter-spacing: 3px;
     text-shadow: 0 1px 0 var(--ink);
+    white-space: nowrap;
 }
 
 .umami-detail-button {
-    width: min(430px, 100%);
-    min-height: 64px;
+    width: 100%;
+    min-height: 52px;
     display: grid;
     place-items: center;
-    justify-self: end;
     position: relative;
-    border-radius: 12px;
+    border-radius: 9px;
     color: var(--paper);
     background: var(--red);
-    font-size: clamp(22px, 2.2vw, 34px);
+    box-shadow: 0 8px 16px rgba(43, 29, 17, 0.14);
+    font-size: clamp(18px, 1.55vw, 25px);
     font-weight: 800;
     line-height: 1;
     text-align: center;
@@ -2093,11 +2165,22 @@ img {
     }
 
     .umami-teaser-art {
-        min-height: 260px;
+        min-height: 360px;
     }
 
     .umami-teaser-copy {
+        max-width: 720px;
+        justify-self: center;
         text-align: center;
+    }
+
+    .umami-teaser-copy p {
+        margin-inline: auto;
+    }
+
+    .umami-teaser-actions {
+        width: min(650px, 100%);
+        justify-self: center;
     }
 
     .umami-detail-button {
@@ -2340,11 +2423,15 @@ img {
     }
 
     .umami-teaser-art {
-        min-height: 230px;
+        min-height: 310px;
     }
 
     .umami-flag {
         font-size: 23px;
+    }
+
+    .umami-mascot {
+        width: min(520px, 105%);
     }
 
     .umami-teaser-stars {
@@ -2596,20 +2683,47 @@ img {
     }
 
     .umami-teaser-art {
-        min-height: 205px;
+        min-height: 250px;
     }
 
     .umami-mascot {
-        width: min(260px, 86%);
+        width: min(390px, 112%);
+        margin-bottom: -4px;
     }
 
-    .umami-planet-a,
-    .umami-planet-b {
-        font-size: 32px;
+    .umami-orbit-icon {
+        width: 34px;
+        height: 15px;
+    }
+
+    .umami-flag {
+        left: 2%;
+        top: 4%;
+        padding: 9px 13px;
+        font-size: 18px;
+    }
+
+    .umami-teaser-actions {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .umami-teaser-stars {
+        justify-self: center;
     }
 
     .umami-teaser-copy h2 {
-        font-size: 40px;
+        gap: 4px;
+    }
+
+    .umami-teaser-copy h2 > span {
+        width: auto;
+        font-size: clamp(38px, 11vw, 46px);
+    }
+
+    .umami-teaser-copy h2 > strong {
+        width: auto;
+        font-size: clamp(66px, 19.2vw, 80px);
     }
 
     .umami-teaser-copy p {
@@ -2617,7 +2731,7 @@ img {
     }
 
     .umami-detail-button {
-        min-height: 56px;
+        min-height: 52px;
         padding: 8px 46px 8px 18px;
         font-size: 22px;
     }
@@ -2718,5 +2832,631 @@ img {
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* Umami story modal */
+.umami-dialog {
+    width: min(1080px, 100%);
+    overflow-x: hidden;
+}
+
+.umami-modal-hero {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(300px, 0.72fr) minmax(460px, 1.28fr);
+    align-items: center;
+    gap: 10px;
+    padding: 20px 38px 10px;
+}
+
+.umami-modal-hero-copy {
+    min-width: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.umami-modal-hero-copy h2 {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.umami-modal-hero-copy h2 span,
+.umami-modal-hero-copy h2 strong {
+    display: block;
+    white-space: nowrap;
+}
+
+.umami-modal-hero-copy h2 span {
+    color: var(--ink);
+    font-size: clamp(66px, 7.5vw, 102px);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+}
+
+.umami-modal-hero-copy h2 strong {
+    color: var(--red);
+    font-size: clamp(76px, 8.6vw, 116px);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+}
+
+.umami-secret-label {
+    display: inline-block;
+    margin: 12px 0 20px;
+    padding: 6px 12px;
+    rotate: -2deg;
+    color: var(--paper);
+    background: var(--red);
+    font-size: clamp(15px, 1.7vw, 21px);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.umami-modal-hero-copy p {
+    max-width: 24ch;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(21px, 2.35vw, 31px);
+    font-weight: 800;
+    line-height: 1.08;
+}
+
+.umami-modal-hero-art {
+    min-width: 0;
+    min-height: 430px;
+    position: relative;
+    display: grid;
+    place-items: end center;
+}
+
+.umami-modal-hero-art::after {
+    content: "";
+    width: 78%;
+    height: 24px;
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    translate: -50% 0;
+    border-radius: 50%;
+    background: rgba(20, 19, 18, 0.13);
+    filter: blur(7px);
+}
+
+.umami-modal-hero-art img {
+    width: min(660px, 100%);
+    max-width: 100%;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -4px;
+    filter: drop-shadow(0 18px 20px rgba(43, 29, 17, 0.16));
+}
+
+.umami-modal-spark {
+    position: absolute;
+    z-index: 3;
+    color: var(--ink);
+    line-height: 1;
+}
+
+.umami-modal-spark-a {
+    left: 8%;
+    top: 23%;
+    font-size: 25px;
+}
+
+.umami-modal-spark-b {
+    right: 3%;
+    top: 10%;
+    font-size: 18px;
+}
+
+.umami-modal-orbit {
+    width: 52px;
+    height: 21px;
+    position: absolute;
+    left: 21%;
+    top: 6%;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    rotate: -16deg;
+}
+
+.umami-modal-orbit::after {
+    content: "";
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: var(--yellow);
+}
+
+.umami-modal-flag {
+    position: absolute;
+    z-index: 4;
+    padding: 8px 12px;
+    color: var(--paper);
+    background: var(--ink);
+    box-shadow: 0 6px 12px rgba(43, 29, 17, 0.15);
+    font-size: clamp(14px, 1.6vw, 20px);
+    font-weight: 800;
+    line-height: 0.92;
+    text-align: center;
+}
+
+.umami-modal-flag-top {
+    right: 2%;
+    top: 12%;
+    rotate: -6deg;
+}
+
+.umami-modal-flag-middle {
+    right: 0;
+    top: 38%;
+    rotate: 4deg;
+}
+
+.umami-modal-flag-bottom {
+    right: 3%;
+    bottom: 12%;
+    rotate: -3deg;
+}
+
+.umami-story {
+    display: grid;
+    gap: 16px;
+    padding: 0 26px 20px;
+}
+
+.umami-story-card {
+    min-width: 0;
+    border: 1px solid rgba(20, 19, 18, 0.24);
+    border-radius: 10px;
+    padding: 22px 24px;
+    background: rgba(255, 248, 236, 0.44);
+}
+
+.umami-story-card h3 {
+    margin: 0 0 16px;
+    color: var(--ink);
+    font-size: clamp(34px, 4.2vw, 52px);
+    font-weight: 800;
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+}
+
+.umami-story-card p {
+    margin: 0 0 10px;
+    color: var(--ink);
+    font-size: clamp(16px, 1.55vw, 20px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: none;
+}
+
+.umami-story-card p strong {
+    color: var(--red);
+    text-transform: uppercase;
+}
+
+.umami-tastes-section {
+    display: grid;
+    grid-template-columns: minmax(470px, 1.25fr) minmax(260px, 0.75fr);
+    align-items: center;
+    gap: 24px;
+}
+
+.umami-taste-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    text-align: center;
+}
+
+.umami-taste-row span {
+    min-width: 0;
+    display: grid;
+    gap: 8px;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.umami-taste-row b {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    justify-self: center;
+    border: 1px solid rgba(20, 19, 18, 0.24);
+    border-radius: 50%;
+    background: rgba(255, 248, 236, 0.82);
+    box-shadow: inset 0 0 0 6px rgba(20, 19, 18, 0.025);
+    font-family: Arial, sans-serif;
+    font-size: 34px;
+    line-height: 1;
+}
+
+.umami-taste-row .taste-sweet {
+    color: #c9a0c9;
+    rotate: 45deg;
+}
+
+.umami-taste-row .taste-salty {
+    color: #8b9297;
+    font-size: 30px;
+}
+
+.umami-taste-row .taste-sour {
+    color: var(--yellow);
+}
+
+.umami-taste-row .taste-bitter {
+    color: var(--ink);
+}
+
+.umami-taste-row .is-umami,
+.umami-taste-row .is-umami b {
+    color: var(--red);
+}
+
+.umami-taste-row .is-umami b {
+    font-size: 42px;
+}
+
+.umami-taste-copy {
+    min-width: 0;
+}
+
+.umami-taste-copy mark {
+    display: inline-block;
+    margin: 2px 0 10px;
+    padding: 6px 10px;
+    color: var(--paper);
+    background: var(--red);
+    font-size: clamp(16px, 1.7vw, 21px);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.umami-soup-story,
+.umami-proof-section {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.75fr) minmax(400px, 1.25fr);
+    align-items: center;
+    gap: 24px;
+}
+
+.umami-soup-visual {
+    min-height: 250px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.umami-soup-visual::before {
+    content: "";
+    width: 88%;
+    height: 72%;
+    position: absolute;
+    border: 4px solid rgba(238, 170, 18, 0.56);
+    border-radius: 50%;
+    rotate: -8deg;
+}
+
+.umami-soup-visual img {
+    width: min(390px, 72%);
+    aspect-ratio: 1.5 / 1;
+    position: relative;
+    z-index: 2;
+    border: 5px solid var(--paper);
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 12px 24px rgba(43, 29, 17, 0.18);
+}
+
+.soup-ingredient {
+    position: absolute;
+    z-index: 3;
+    font-size: 34px;
+    filter: drop-shadow(0 3px 2px rgba(43, 29, 17, 0.12));
+}
+
+.ingredient-meat { left: 8%; top: 8%; rotate: -12deg; }
+.ingredient-carrot { left: 15%; bottom: 8%; rotate: 18deg; }
+.ingredient-fish { right: 8%; top: 10%; rotate: 8deg; }
+.ingredient-garlic { right: 12%; bottom: 8%; rotate: -10deg; }
+
+.umami-process-section h3 {
+    margin-bottom: 8px;
+}
+
+.umami-process-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.umami-process-list li {
+    min-width: 0;
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    text-align: center;
+}
+
+.umami-process-list li:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: -13px;
+    top: 62px;
+    color: var(--ink);
+    font-size: 22px;
+}
+
+.umami-process-icon {
+    width: 104px;
+    height: 148px;
+    display: block;
+    background-image: url("../img/umami-process-icons.png");
+    background-repeat: no-repeat;
+    background-size: 500% 100%;
+}
+
+.process-pot { background-position: 0 0; }
+.process-farm { background-position: 25% 0; }
+.process-water { background-position: 50% 0; }
+.process-broth { background-position: 75% 0; }
+.process-search { background-position: 100% 0; }
+
+.umami-process-list p {
+    margin: -4px 0 0;
+    font-size: clamp(13px, 1.2vw, 16px);
+    line-height: 1.12;
+}
+
+.umami-process-note {
+    width: min(760px, 100%);
+    margin: 12px auto 0 !important;
+    padding: 8px 14px;
+    color: var(--paper) !important;
+    background: var(--red);
+    font-size: clamp(15px, 1.65vw, 21px) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    text-align: center;
+    text-transform: uppercase !important;
+}
+
+.umami-proof-section {
+    grid-template-columns: minmax(260px, 0.7fr) minmax(360px, 1.3fr);
+}
+
+.umami-red-stars {
+    margin: 4px 0 12px;
+    color: var(--red);
+    font-size: clamp(38px, 5vw, 60px);
+    line-height: 0.9;
+    letter-spacing: 4px;
+}
+
+.umami-proof-stamp {
+    min-height: 210px;
+    display: grid;
+    place-items: center;
+    gap: 6px;
+    border-left: 1px solid rgba(20, 19, 18, 0.18);
+    padding: 12px 22px;
+    text-align: center;
+}
+
+.umami-proof-stamp span {
+    color: var(--yellow);
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 0.9;
+    letter-spacing: 5px;
+    text-shadow: 0 1px 0 var(--ink);
+}
+
+.umami-proof-stamp strong {
+    color: var(--red);
+    font-size: clamp(45px, 6vw, 74px);
+    line-height: 0.84;
+    letter-spacing: -0.025em;
+}
+
+.umami-proof-stamp small {
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: none;
+}
+
+.umami-modal-footer {
+    display: grid;
+    grid-template-columns: minmax(130px, 0.45fr) minmax(190px, 0.75fr) minmax(260px, 1fr);
+    align-items: center;
+    gap: 26px;
+    padding: 0 38px 30px;
+}
+
+.umami-modal-footer .footer-brand {
+    width: 120px;
+    font-size: 42px;
+}
+
+.umami-modal-footer strong {
+    font-size: clamp(22px, 2.8vw, 34px);
+}
+
+.umami-modal-footer > span {
+    justify-self: end;
+    color: var(--yellow);
+    font-size: clamp(36px, 5vw, 58px);
+    letter-spacing: 4px;
+    text-shadow: 0 1px 0 var(--ink);
+}
+
+@media (max-width: 980px) {
+    .umami-modal-hero {
+        grid-template-columns: minmax(250px, 0.8fr) minmax(350px, 1.2fr);
+        padding-inline: 26px;
+    }
+
+    .umami-modal-hero-art {
+        min-height: 360px;
+    }
+
+    .umami-tastes-section,
+    .umami-soup-story,
+    .umami-proof-section {
+        grid-template-columns: 1fr;
+    }
+
+    .umami-taste-copy {
+        max-width: 68ch;
+    }
+
+    .umami-proof-stamp {
+        border-top: 1px solid rgba(20, 19, 18, 0.18);
+        border-left: 0;
+    }
+
+    .umami-process-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 18px;
+    }
+
+    .umami-process-list li:not(:last-child)::after {
+        display: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .umami-modal-hero {
+        grid-template-columns: 1fr;
+        padding: 18px 16px 8px;
+        text-align: center;
+    }
+
+    .umami-modal-hero-copy {
+        display: grid;
+        justify-items: center;
+    }
+
+    .umami-modal-hero-copy h2 span {
+        font-size: clamp(54px, 16vw, 76px);
+    }
+
+    .umami-modal-hero-copy h2 strong {
+        font-size: clamp(64px, 19vw, 90px);
+    }
+
+    .umami-modal-hero-copy p {
+        max-width: 28ch;
+    }
+
+    .umami-modal-hero-art {
+        min-height: 300px;
+    }
+
+    .umami-modal-hero-art img {
+        width: min(500px, 100%);
+    }
+
+    .umami-modal-flag-middle,
+    .umami-modal-flag-bottom {
+        display: none;
+    }
+
+    .umami-story {
+        gap: 12px;
+        padding: 0 10px 16px;
+    }
+
+    .umami-story-card {
+        padding: 18px 14px;
+    }
+
+    .umami-taste-row {
+        grid-template-columns: repeat(5, minmax(62px, 1fr));
+        gap: 6px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+    }
+
+    .umami-taste-row b {
+        width: 58px;
+        height: 58px;
+        font-size: 28px;
+    }
+
+    .umami-soup-visual {
+        min-height: 220px;
+    }
+
+    .umami-process-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .umami-process-icon {
+        width: 92px;
+        height: 132px;
+    }
+
+    .umami-modal-footer {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 12px;
+        padding: 0 18px 26px;
+        text-align: center;
+    }
+
+    .umami-modal-footer > span {
+        justify-self: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .umami-modal-hero-copy h2 span {
+        font-size: 50px;
+    }
+
+    .umami-modal-hero-copy h2 strong {
+        font-size: 61px;
+    }
+
+    .umami-modal-hero-art {
+        min-height: 250px;
+    }
+
+    .umami-modal-flag-top {
+        right: -4px;
+        font-size: 13px;
+    }
+
+    .umami-story-card h3 {
+        font-size: 32px;
+    }
+
+    .umami-taste-row span {
+        font-size: 12px;
+    }
+
+    .umami-proof-stamp strong {
+        font-size: 46px;
     }
 }

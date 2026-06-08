@@ -12,6 +12,8 @@ const soupModalGroups = document.querySelector("[data-soup-modal-groups]");
 const umamiModal = document.querySelector(".umami-modal");
 const umamiOpen = document.querySelector("[data-umami-open]");
 const umamiClosers = document.querySelectorAll("[data-umami-close]");
+const umamiCloseButton = document.querySelector(".umami-close");
+const umamiDialog = document.querySelector(".umami-dialog");
 const videoModal = document.querySelector(".video-modal");
 const videoOpen = document.querySelector("[data-video-open]");
 const videoClosers = document.querySelectorAll("[data-video-close]");
@@ -220,6 +222,10 @@ const setUmamiState = (open, trigger = null) => {
     umamiModal.setAttribute("aria-hidden", String(!open));
     setModalLock();
 
+    if (open) {
+        umamiCloseButton?.focus({ preventScroll: true });
+    }
+
     if (!open && activeUmamiTrigger) {
         activeUmamiTrigger.focus();
         activeUmamiTrigger = null;
@@ -238,6 +244,27 @@ document.addEventListener("keydown", (event) => {
         setSoupState(false);
         setUmamiState(false);
         setVideoState(false);
+    }
+
+    if (event.key === "Tab" && umamiModal?.classList.contains("is-open") && umamiDialog) {
+        const focusable = Array.from(
+            umamiDialog.querySelectorAll(
+                'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )
+        ).filter((element) => element.getClientRects().length > 0);
+
+        if (!focusable.length) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
     }
 });
 

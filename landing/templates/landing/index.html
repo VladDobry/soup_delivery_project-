@@ -134,16 +134,23 @@
                 <button class="umami-teaser reveal" type="button" data-umami-open aria-label="Открыть описание уровня умами">
                     <div class="umami-teaser-art" aria-hidden="true">
                         <span class="umami-flag">Умами<br>обнаружен</span>
-                        <span class="umami-planet umami-planet-a">🪐</span>
-                        <span class="umami-planet umami-planet-b">☄</span>
-                        <img class="umami-mascot" src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="">
+                        <span class="umami-orbit-icon"></span>
+                        <span class="umami-art-spark umami-art-spark-a">✦</span>
+                        <span class="umami-art-spark umami-art-spark-b">✦</span>
+                        <img class="umami-mascot" src="{% static 'landing/img/umami-ninja.png' %}?v={{ cache_bust }}" alt="">
                     </div>
                     <div class="umami-teaser-copy">
-                        <h2>Уровень умами</h2>
-                        <p class="umami-teaser-lead">Тот самый вкус, ради которого хочется взять ещё одну ложку.</p>
-                        <p>Умами называют пятым вкусом. Именно он делает еду насыщенной, глубокой и по-настоящему вкусной.</p>
-                        <div class="umami-teaser-stars" aria-hidden="true">★★★★★</div>
-                        <span class="umami-detail-button">Узнать подробнее</span>
+                        <h2 aria-label="Уровень умами">
+                            <span>Уровень</span>
+                            <strong>Умами</strong>
+                        </h2>
+                        <p class="umami-teaser-lead">Пятый вкус. <strong>Наш главный секрет.</strong></p>
+                        <p>Умами — это глубина, насыщенность и тот самый вкус, ради которого хочется взять ещё одну ложку.</p>
+                        <p>Мы варим долго, выбираем лучшее и постоянно улучшаем рецептуру, <strong>чтобы вкус был максимально богатым.</strong></p>
+                        <div class="umami-teaser-actions">
+                            <div class="umami-teaser-stars" aria-hidden="true">★★★★★</div>
+                            <span class="umami-detail-button">Узнать подробнее</span>
+                        </div>
                     </div>
                 </button>
             </section>
@@ -308,67 +315,101 @@
                     <button class="umami-close" type="button" data-umami-close aria-label="Закрыть">×</button>
                 </div>
             </header>
-            <section class="umami-hero">
-                <div class="umami-hero-copy">
-                    <h2 id="umami-modal-title">Уровень<br>умами</h2>
-                    <div class="umami-rating" aria-label="Уровень умами: пять звезд">★★★★★</div>
-                    <p>Вкус, из-за которого хочется доесть всё до последней ложки.</p>
+            <section class="umami-modal-hero">
+                <div class="umami-modal-hero-copy">
+                    <h2 id="umami-modal-title" aria-label="Уровень умами">
+                        <span>Уровень</span>
+                        <strong>Умами</strong>
+                    </h2>
+                    <span class="umami-secret-label">Наш главный секрет</span>
+                    <p>Тот самый вкус, ради которого хочется взять ещё одну ложку.</p>
                 </div>
-                <div class="umami-hero-art" aria-hidden="true">
-                    <span class="umami-space-star umami-space-star-a">✦</span>
-                    <span class="umami-space-star umami-space-star-b">✶</span>
-                    <span class="umami-space-star umami-space-star-c">✧</span>
-                    <span class="umami-planet modal-planet-a">🪐</span>
-                    <span class="umami-planet modal-planet-b">☄</span>
-                    <span class="umami-hero-flag">Умами<br>обнаружен</span>
-                    <span class="umami-hero-label">Вкус<br>найден!</span>
-                    <span class="umami-hero-label umami-hero-label-right">Миссия<br>выполнена!</span>
-                    <img class="umami-hero-mascot" src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="">
+                <div class="umami-modal-hero-art" aria-hidden="true">
+                    <span class="umami-modal-spark umami-modal-spark-a">✦</span>
+                    <span class="umami-modal-spark umami-modal-spark-b">✦</span>
+                    <span class="umami-modal-orbit"></span>
+                    <span class="umami-modal-flag umami-modal-flag-top">Умами<br>обнаружен</span>
+                    <span class="umami-modal-flag umami-modal-flag-middle">Вкус<br>найден!</span>
+                    <span class="umami-modal-flag umami-modal-flag-bottom">Миссия<br>выполнена!</span>
+                    <img src="{% static 'landing/img/umami-ninja.png' %}?v={{ cache_bust }}" alt="">
                 </div>
             </section>
-            <section class="umami-info-grid">
-                <article class="umami-info-card umami-info-card-wide">
-                    <div>
-                        <h3>Что такое умами?</h3>
+
+            <main class="umami-story">
+                <section class="umami-story-card umami-tastes-section">
+                    <div class="umami-taste-row" aria-label="Пять вкусов">
+                        <span><b class="taste-sweet" aria-hidden="true">◆</b>Сладкий</span>
+                        <span><b class="taste-salty" aria-hidden="true">▥</b>Солёный</span>
+                        <span><b class="taste-sour" aria-hidden="true">●</b>Кислый</span>
+                        <span><b class="taste-bitter" aria-hidden="true">●</b>Горький</span>
+                        <span class="is-umami"><b aria-hidden="true">★</b>Умами</span>
+                    </div>
+                    <div class="umami-taste-copy">
                         <p><strong>Умами — это пятый вкус.</strong></p>
                         <p>Не сладкий. Не солёный. Не кислый. Не горький.</p>
                         <p>А тот самый вкус, после которого ты говоришь:</p>
                         <mark>«Ещё одну ложку и всё...»</mark>
                         <p>И берёшь ещё пять.</p>
                     </div>
-                    <div class="umami-taste-row" aria-label="Пять вкусов">
-                        <span><b>🍬</b>Сладкий</span>
-                        <span><b>🧂</b>Солёный</span>
-                        <span><b>🍋</b>Кислый</span>
-                        <span><b>⚫</b>Горький</span>
-                        <span><b>⭐</b>Умами</span>
-                    </div>
-                </article>
-                <article class="umami-info-card umami-soup-card">
-                    <div>
+                </section>
+
+                <section class="umami-story-card umami-soup-story">
+                    <div class="umami-story-copy">
                         <h3>Почему это про суп?</h3>
                         <p>Хороший суп — это не просто набор ингредиентов.</p>
                         <p>Это вкус, который собирается в одно целое: <strong>глубокий, насыщенный, тёплый.</strong></p>
                         <p>Тот самый вкус домашней еды, который невозможно спутать ни с чем другим.</p>
                     </div>
-                    <div class="umami-orbit" aria-hidden="true">
-                        <span>🥩</span><span>🥔</span><span>🧄</span><span>🥕</span><span>🐟</span>
-                        <img src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="">
+                    <div class="umami-soup-visual" aria-hidden="true">
+                        <span class="soup-ingredient ingredient-meat">🥩</span>
+                        <span class="soup-ingredient ingredient-carrot">🥕</span>
+                        <span class="soup-ingredient ingredient-fish">🐟</span>
+                        <span class="soup-ingredient ingredient-garlic">🧄</span>
+                        <img src="{% static 'landing/img/gallery-bowl.png' %}" alt="">
                     </div>
-                </article>
-                <article class="umami-info-card umami-proof-card">
-                    <div>
+                </section>
+
+                <section class="umami-story-card umami-process-section">
+                    <h3>Как мы создаём умами?</h3>
+                    <ol class="umami-process-list">
+                        <li>
+                            <span class="umami-process-icon process-pot" aria-hidden="true"></span>
+                            <p>Варим до 25 часов<br>на живом огне</p>
+                        </li>
+                        <li>
+                            <span class="umami-process-icon process-farm" aria-hidden="true"></span>
+                            <p>Используем только<br>фермерские продукты</p>
+                        </li>
+                        <li>
+                            <span class="umami-process-icon process-water" aria-hidden="true"></span>
+                            <p>Добавляем<br>родниковую воду</p>
+                        </li>
+                        <li>
+                            <span class="umami-process-icon process-broth" aria-hidden="true"></span>
+                            <p>Коллагеновый бульон —<br>основа вкуса</p>
+                        </li>
+                        <li>
+                            <span class="umami-process-icon process-search" aria-hidden="true"></span>
+                            <p>Постоянно дорабатываем<br>рецептуры</p>
+                        </li>
+                    </ol>
+                    <p class="umami-process-note">Каждая партия — это результат времени, терпения и любви к вкусу.</p>
+                </section>
+
+                <section class="umami-story-card umami-proof-section">
+                    <div class="umami-story-copy">
                         <h3>Почему у нас?</h3>
-                        <div class="umami-red-stars" aria-hidden="true">★★★★★?</div>
+                        <div class="umami-red-stars" aria-label="Пять звёзд">★★★★★</div>
                         <p>Мы честно поставили себе пять звёзд. Потому что если делать суп — то делать его вкусным.</p>
                     </div>
                     <div class="umami-proof-stamp">
                         <span aria-hidden="true">★★★★★</span>
-                        <strong>Проверено ложкой</strong>
+                        <strong>Проверено<br>ложкой</strong>
                         <small>* Оценка независимой комиссией голодных людей.</small>
                     </div>
-                </article>
-            </section>
+                </section>
+            </main>
+
             <footer class="umami-modal-footer">
                 <div class="footer-brand" aria-label="Я есть суп">
                     <span>Я</span><span>Есть</span><span>Суп!</span>
