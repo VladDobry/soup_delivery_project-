@@ -242,7 +242,7 @@
                     <button class="gallery-tile gallery-video reveal" type="button" data-video-open>
                         <img class="asset" src="{% static 'landing/img/gallery-video.png' %}" alt="Видео-превью котла с супом">
                         <span class="play-button" aria-hidden="true"></span>
-                        <span class="sr-only">Открыть демо-видео</span>
+                        <span class="sr-only">Открыть видео</span>
                     </button>
                 </div>
             </section>
@@ -463,12 +463,11 @@
         <div class="video-dialog" role="dialog" aria-modal="true" aria-labelledby="video-title">
             <button class="video-close" type="button" data-video-close aria-label="Закрыть">×</button>
             <div class="video-stage">
-                <img class="asset" src="{% static 'landing/img/gallery-video.png' %}" alt="">
-                <div class="video-message">
-                    <span class="play-button"></span>
-                    <h2 id="video-title">Демо-видео</h2>
-                    <p>Здесь будет ролик о том, как суп варится 25 часов на живом огне.</p>
-                </div>
+                <h2 class="sr-only" id="video-title">Как мы готовим суп</h2>
+                <video class="soup-video" controls playsinline preload="metadata" poster="{% static 'landing/img/gallery-video.png' %}">
+                    <source src="{% static 'landing/video/soup-cooking.mp4' %}" type="video/mp4">
+                    Ваш браузер не поддерживает воспроизведение видео.
+                </video>
             </div>
         </div>
     </div>

@@ -17,6 +17,7 @@ const umamiDialog = document.querySelector(".umami-dialog");
 const videoModal = document.querySelector(".video-modal");
 const videoOpen = document.querySelector("[data-video-open]");
 const videoClosers = document.querySelectorAll("[data-video-close]");
+const soupVideo = document.querySelector(".soup-video");
 let activeSoupTrigger = null;
 let activeUmamiTrigger = null;
 
@@ -209,6 +210,15 @@ const setVideoState = (open) => {
     videoModal.classList.toggle("is-open", open);
     videoModal.setAttribute("aria-hidden", String(!open));
     setModalLock();
+
+    if (open) {
+        videoModal.querySelector(".video-close")?.focus({ preventScroll: true });
+        soupVideo?.play().catch(() => {});
+    } else if (soupVideo) {
+        soupVideo.pause();
+        soupVideo.currentTime = 0;
+        videoOpen?.focus({ preventScroll: true });
+    }
 };
 
 const setUmamiState = (open, trigger = null) => {
