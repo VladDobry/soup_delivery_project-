@@ -161,25 +161,63 @@
                     <h2>Наши фишки</h2>
                     <span></span>
                 </div>
-                <div class="feature-grid">
-                    <article class="feature-card feature-card-wide reveal">
-                        <div class="feature-copy"><h3>Сет супов</h3><p>Борщ • Солянка • Уха</p></div>
-                        <img class="asset" src="{% static 'landing/img/feature-set.png' %}" alt="Сет из трех супов">
+                <div class="feature-showcase">
+                    <article class="feature-panel feature-set-panel reveal">
+                        <header class="feature-panel-heading">
+                            <h3><span aria-hidden="true">✦</span> Сет супов <span aria-hidden="true">✦</span></h3>
+                            <strong>Попробуй несколько вкусов сразу!</strong>
+                            <p>Идеально для компании, семьи<br>или чтобы найти свой любимый вкус.</p>
+                        </header>
+                        <img class="feature-set-image" src="{% static 'landing/img/feature-set-transparent.png' %}" alt="Сет из борща, солянки и ухи">
+                        <div class="feature-gift feature-gift-light">
+                            <span class="feature-gift-icon" aria-hidden="true"></span>
+                            <p>При заказе сета — <strong>2 дегустационных супа<br>по 0,35 л в подарок!</strong></p>
+                        </div>
                     </article>
-                    <article class="feature-card feature-size-card reveal">
-                        <div class="feature-copy">
-                            <h3>Размер<br>банок</h3>
-                            <div class="jar-size-list" aria-label="Размерный ряд банок">
-                                <span><b>1 л</b><small>1950 р</small></span>
-                                <span><b>1.5 л</b><small>2850 р</small></span>
-                                <span><b>2 л</b><small>3750 р</small></span>
+
+                    <article class="feature-panel feature-volume-panel reveal">
+                        <header class="feature-panel-heading">
+                            <h3><span aria-hidden="true">✦</span> Выбери свой объём <span aria-hidden="true">✦</span></h3>
+                            <strong>Каждый объём — на своё количество людей!</strong>
+                        </header>
+                        <div class="feature-jars-stage">
+                            <div class="feature-volume-grid">
+                                <div class="feature-volume-item">
+                                    <img class="feature-jar-image feature-jar-image-small" src="{% static 'landing/img/feature-jar-1l.png' %}" alt="Банка супа объемом 1 литр">
+                                    <div class="feature-people">
+                                        <span aria-hidden="true">●●</span>
+                                        <small>Для 2<br>человек</small>
+                                    </div>
+                                    <h4>1 л</h4>
+                                    <p>Для двоих<br>сытный обед<br>или ужин</p>
+                                    <strong>1950 ₽</strong>
+                                </div>
+                                <div class="feature-volume-item">
+                                    <img class="feature-jar-image feature-jar-image-medium" src="{% static 'landing/img/feature-jar-15l.png' %}" alt="Банка супа объемом 1,5 литра">
+                                    <div class="feature-people">
+                                        <span aria-hidden="true">●●●</span>
+                                        <small>Для 3–4<br>человек</small>
+                                    </div>
+                                    <h4>1,5 л</h4>
+                                    <p>Для семьи<br>3–4 порции<br>на каждый день</p>
+                                    <strong>2850 ₽</strong>
+                                </div>
+                                <div class="feature-volume-item">
+                                    <img class="feature-jar-image feature-jar-image-large" src="{% static 'landing/img/feature-jar-2l.png' %}" alt="Банка супа объемом 2 литра">
+                                    <div class="feature-people">
+                                        <span aria-hidden="true">●●●</span>
+                                        <small>Для 5–6<br>человек</small>
+                                    </div>
+                                    <h4>2 л</h4>
+                                    <p>Для компании<br>5–6 порций<br>на угощение</p>
+                                    <strong>3750 ₽</strong>
+                                </div>
                             </div>
                         </div>
-                        <img class="asset feature-size-image" src="{% static 'landing/img/feature-jars-sizes.png' %}" alt="Банки супа объемом 1 л, 1.5 л и 2 л">
-                    </article>
-                    <article class="feature-card feature-card-wide reveal">
-                        <div class="feature-copy"><h3>С собой</h3><p>Банка, тара, миска — всё готово</p></div>
-                        <img class="asset" src="{% static 'landing/img/feature-pack.png' %}" alt="Суповая упаковка и банка">
+                        <div class="feature-gift feature-gift-red">
+                            <span class="feature-gift-icon" aria-hidden="true"></span>
+                            <p>При покупке любого супа от 1 литра —<br><strong>2 дегустационных супа по 0,35 л в подарок!</strong></p>
+                        </div>
                     </article>
                 </div>
             </section>
