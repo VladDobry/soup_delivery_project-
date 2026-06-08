@@ -3080,36 +3080,21 @@ img {
     border-radius: 50%;
     background: rgba(255, 248, 236, 0.82);
     box-shadow: inset 0 0 0 6px rgba(20, 19, 18, 0.025);
-    font-family: Arial, sans-serif;
-    font-size: 34px;
     line-height: 1;
 }
 
-.umami-taste-row .taste-sweet {
-    color: #c9a0c9;
-    rotate: 45deg;
+.umami-taste-row b img {
+    width: 86%;
+    height: 86%;
+    object-fit: contain;
 }
 
-.umami-taste-row .taste-salty {
-    color: #8b9297;
-    font-size: 30px;
-}
-
-.umami-taste-row .taste-sour {
-    color: var(--yellow);
-}
-
-.umami-taste-row .taste-bitter {
-    color: var(--ink);
-}
-
-.umami-taste-row .is-umami,
-.umami-taste-row .is-umami b {
+.umami-taste-row .is-umami {
     color: var(--red);
 }
 
 .umami-taste-row .is-umami b {
-    font-size: 42px;
+    border-color: rgba(197, 29, 37, 0.34);
 }
 
 .umami-taste-copy {
@@ -3210,16 +3195,8 @@ img {
     width: 104px;
     height: 148px;
     display: block;
-    background-image: url("../img/umami-process-icons.png");
-    background-repeat: no-repeat;
-    background-size: 500% 100%;
+    object-fit: contain;
 }
-
-.process-pot { background-position: 0 0; }
-.process-farm { background-position: 25% 0; }
-.process-water { background-position: 50% 0; }
-.process-broth { background-position: 75% 0; }
-.process-search { background-position: 100% 0; }
 
 .umami-process-list p {
     margin: -4px 0 0;
@@ -3392,16 +3369,15 @@ img {
     }
 
     .umami-taste-row {
-        grid-template-columns: repeat(5, minmax(62px, 1fr));
-        gap: 6px;
-        overflow-x: auto;
-        padding-bottom: 6px;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 4px;
+        overflow: visible;
+        padding-bottom: 0;
     }
 
     .umami-taste-row b {
-        width: 58px;
-        height: 58px;
-        font-size: 28px;
+        width: clamp(46px, 14vw, 58px);
+        height: clamp(46px, 14vw, 58px);
     }
 
     .umami-soup-visual {
