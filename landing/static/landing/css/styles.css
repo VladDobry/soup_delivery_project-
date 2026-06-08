@@ -1003,6 +1003,24 @@ img {
     object-position: center 46%;
 }
 
+.gallery-video-preview {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+}
+
+.gallery-video .play-button {
+    transition: scale 180ms ease, background 180ms ease;
+}
+
+.gallery-video:hover .play-button {
+    scale: 1.07;
+    background: rgba(20, 19, 18, 0.42);
+}
+
 .play-button {
     width: 72px;
     height: 72px;

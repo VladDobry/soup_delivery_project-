@@ -240,7 +240,9 @@
                         <img class="asset gallery-real-photo gallery-real-photo-pot" src="{% static 'landing/img/gallery-real-pot.jpg' %}" alt="Котел над кострищем для приготовления супа">
                     </button>
                     <button class="gallery-tile gallery-video reveal" type="button" data-video-open>
-                        <img class="asset" src="{% static 'landing/img/gallery-video.png' %}" alt="Видео-превью котла с супом">
+                        <video class="gallery-video-preview" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                            <source src="{% static 'landing/video/soup-cooking.mp4' %}" type="video/mp4">
+                        </video>
                         <span class="play-button" aria-hidden="true"></span>
                         <span class="sr-only">Открыть видео</span>
                     </button>

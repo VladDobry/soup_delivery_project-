@@ -18,8 +18,10 @@ const videoModal = document.querySelector(".video-modal");
 const videoOpen = document.querySelector("[data-video-open]");
 const videoClosers = document.querySelectorAll("[data-video-close]");
 const soupVideo = document.querySelector(".soup-video");
+const videoPreview = document.querySelector(".gallery-video-preview");
 let activeSoupTrigger = null;
 let activeUmamiTrigger = null;
+let videoPreviewInView = false;
 
 const soupDetails = {
     borsch: {
@@ -207,19 +209,58 @@ const setSoupState = (open, trigger = null) => {
 };
 
 const setVideoState = (open) => {
+    if (!videoModal) return;
+
+    const wasOpen = videoModal.classList.contains("is-open");
     videoModal.classList.toggle("is-open", open);
     videoModal.setAttribute("aria-hidden", String(!open));
     setModalLock();
 
     if (open) {
+        if (videoPreview && soupVideo) {
+            const previewTime = videoPreview.currentTime;
+            if (soupVideo.readyState > 0) {
+                soupVideo.currentTime = previewTime;
+            } else {
+                soupVideo.addEventListener("loadedmetadata", () => {
+                    soupVideo.currentTime = previewTime;
+                    soupVideo.play().catch(() => {});
+                }, { once: true });
+            }
+            videoPreview.pause();
+        }
         videoModal.querySelector(".video-close")?.focus({ preventScroll: true });
         soupVideo?.play().catch(() => {});
-    } else if (soupVideo) {
+    } else if (wasOpen && soupVideo) {
+        if (videoPreview?.readyState > 0) {
+            videoPreview.currentTime = soupVideo.currentTime;
+        }
         soupVideo.pause();
-        soupVideo.currentTime = 0;
+        if (videoPreviewInView) {
+            videoPreview?.play().catch(() => {});
+        }
         videoOpen?.focus({ preventScroll: true });
     }
 };
+
+if (videoPreview) {
+    videoPreview.muted = true;
+
+    const videoPreviewObserver = new IntersectionObserver(([entry]) => {
+        videoPreviewInView = entry.isIntersecting;
+
+        if (entry.isIntersecting && !videoModal?.classList.contains("is-open")) {
+            videoPreview.play().catch(() => {});
+        } else {
+            videoPreview.pause();
+        }
+    }, {
+        rootMargin: "180px 0px",
+        threshold: 0.05,
+    });
+
+    videoPreviewObserver.observe(videoPreview);
+}
 
 const setUmamiState = (open, trigger = null) => {
     if (!umamiModal) return;
