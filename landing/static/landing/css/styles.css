@@ -429,6 +429,37 @@ img {
     font-weight: 700;
 }
 
+.soup-composition-cta {
+    position: absolute;
+    z-index: 3;
+    bottom: 12px;
+    left: 50%;
+    width: 80%;
+    min-height: 34px;
+    translate: -50% 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    background: var(--red);
+    box-shadow: 0 7px 16px rgba(20, 19, 18, 0.18);
+    font-size: clamp(16px, 1.35vw, 20px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.soup-card:hover .soup-composition-cta,
+.soup-card:focus-visible .soup-composition-cta {
+    transform: translateY(-3px);
+    background: var(--ink);
+    box-shadow: 0 10px 20px rgba(20, 19, 18, 0.24);
+}
+
 .section-note {
     margin: 22px 0 0;
     text-align: center;
