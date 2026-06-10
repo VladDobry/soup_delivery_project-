@@ -22,6 +22,7 @@ const soupVideo = document.querySelector(".soup-video");
 const videoPreview = document.querySelector(".gallery-video-preview");
 let activeSoupTrigger = null;
 let activeSoupId = null;
+let previousScrollRestoration = null;
 let activeUmamiTrigger = null;
 let videoPreviewInView = false;
 
@@ -206,7 +207,7 @@ const setSoupState = (open, trigger = null) => {
     setModalLock();
 
     if (!open && activeSoupTrigger) {
-        activeSoupTrigger.focus();
+        activeSoupTrigger.focus({ preventScroll: true });
         activeSoupTrigger = null;
     }
 
@@ -294,6 +295,46 @@ const findSoupOpener = (soupId) => (
     Array.from(soupOpeners).find((opener) => opener.dataset.soupId === soupId) || null
 );
 
+const restoreSoupScrollRestoration = () => {
+    if (previousScrollRestoration === null) return;
+
+    window.history.scrollRestoration = previousScrollRestoration;
+    previousScrollRestoration = null;
+};
+
+const scrollToSoups = (repeat = false) => {
+    const soupsSection = document.querySelector("#soups");
+    if (!soupsSection) return;
+
+    const scroll = () => {
+        const previousBehavior = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = "auto";
+        soupsSection.scrollIntoView({ block: "start" });
+        document.documentElement.style.scrollBehavior = previousBehavior;
+    };
+
+    scroll();
+
+    if (repeat) {
+        window.requestAnimationFrame(() => {
+            scroll();
+            window.setTimeout(() => {
+                scroll();
+                restoreSoupScrollRestoration();
+            }, 150);
+        });
+    }
+};
+
+const disableSoupScrollRestoration = () => {
+    if (!("scrollRestoration" in window.history) || previousScrollRestoration !== null) {
+        return;
+    }
+
+    previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+};
+
 const showSoupFromUrl = (useInitialSoup = false) => {
     const match = window.location.pathname.match(/^\/soup\/([^/]+)\/$/);
     const soupId = match?.[1] || (useInitialSoup ? document.body.dataset.initialSoup : "");
@@ -303,6 +344,7 @@ const showSoupFromUrl = (useInitialSoup = false) => {
         setSoupState(true, opener);
     } else if (soupModal?.classList.contains("is-open")) {
         setSoupState(false);
+        scrollToSoups(true);
     }
 };
 
@@ -314,12 +356,13 @@ const closeSoupWithNavigation = () => {
 
     window.history.replaceState({}, "", "/#soups");
     setSoupState(false);
-    document.querySelector("#soups")?.scrollIntoView();
+    scrollToSoups(true);
 };
 
 soupOpeners.forEach((opener) => opener.addEventListener("click", () => {
     if (activeSoupId === opener.dataset.soupId) return;
 
+    disableSoupScrollRestoration();
     window.history.pushState(
         { soupId: opener.dataset.soupId },
         "",
@@ -331,6 +374,7 @@ soupOpeners.forEach((opener) => opener.addEventListener("click", () => {
 soupClosers.forEach((closer) => closer.addEventListener("click", (event) => {
     if (closer.matches("a[href]")) {
         setSoupState(false);
+        restoreSoupScrollRestoration();
         return;
     }
 
@@ -342,7 +386,7 @@ soupSiteLink?.addEventListener("click", (event) => {
     event.preventDefault();
     window.history.replaceState({}, "", soupSiteLink.href);
     setSoupState(false);
-    document.querySelector("#soups")?.scrollIntoView();
+    scrollToSoups(true);
 });
 
 window.addEventListener("popstate", () => showSoupFromUrl());
