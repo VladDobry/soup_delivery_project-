@@ -1490,6 +1490,7 @@ img {
     min-width: 0;
     position: relative;
     display: grid;
+    grid-row: 1 / span 2;
     align-content: end;
     gap: 14px;
     padding-top: 28px;
@@ -1706,6 +1707,30 @@ img {
     font-weight: 700;
     line-height: 1.16;
     text-transform: none;
+}
+
+.soup-passport-benefits {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-self: end;
+    gap: 12px;
+    padding-top: 10px;
+}
+
+.soup-passport-benefits article {
+    min-width: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.05;
+    text-transform: uppercase;
+}
+
+.soup-passport-benefits .benefit-icon {
+    width: 72px;
+    height: 64px;
+    margin-bottom: 7px;
 }
 
 .umami-modal {
@@ -2388,6 +2413,19 @@ img {
         grid-template-columns: 1fr;
     }
 
+    .soup-passport-benefits {
+        gap: 8px;
+    }
+
+    .soup-passport-benefits article {
+        font-size: 10px;
+    }
+
+    .soup-passport-benefits .benefit-icon {
+        width: 58px;
+        height: 52px;
+    }
+
     .umami-modal-header {
         grid-template-columns: auto 1fr;
     }
@@ -2689,6 +2727,7 @@ img {
     }
 
     .soup-passport-visual {
+        grid-row: auto;
         padding-top: 4px;
     }
 
@@ -2708,6 +2747,23 @@ img {
 
     .soup-passport-panel {
         grid-template-columns: 1fr;
+    }
+
+    .soup-passport-benefits {
+        grid-column: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px 12px;
+        padding-top: 0;
+    }
+
+    .soup-passport-benefits article {
+        font-size: 12px;
+    }
+
+    .soup-passport-benefits .benefit-icon {
+        width: 82px;
+        height: 74px;
+        margin-bottom: 8px;
     }
 
     .soup-umami {
