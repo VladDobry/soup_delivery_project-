@@ -9,6 +9,7 @@ const soupModalTagline = document.querySelector("[data-soup-modal-tagline]");
 const soupModalDescription = document.querySelector("[data-soup-modal-description]");
 const soupModalNote = document.querySelector("[data-soup-modal-note]");
 const soupModalGroups = document.querySelector("[data-soup-modal-groups]");
+const soupSiteLink = document.querySelector("[data-soup-site-link]");
 const umamiModal = document.querySelector(".umami-modal");
 const umamiOpen = document.querySelector("[data-umami-open]");
 const umamiClosers = document.querySelectorAll("[data-umami-close]");
@@ -20,6 +21,7 @@ const videoClosers = document.querySelectorAll("[data-video-close]");
 const soupVideo = document.querySelector(".soup-video");
 const videoPreview = document.querySelector(".gallery-video-preview");
 let activeSoupTrigger = null;
+let activeSoupId = null;
 let activeUmamiTrigger = null;
 let videoPreviewInView = false;
 
@@ -188,6 +190,7 @@ const setSoupState = (open, trigger = null) => {
         const detail = soupDetails[trigger.dataset.soupId] || soupDetails.borsch;
 
         activeSoupTrigger = trigger;
+        activeSoupId = trigger.dataset.soupId;
         soupModal.style.setProperty("--soup-accent", detail.accent);
         soupModalImage.src = detail.image;
         soupModalImage.alt = detail.alt;
@@ -205,6 +208,10 @@ const setSoupState = (open, trigger = null) => {
     if (!open && activeSoupTrigger) {
         activeSoupTrigger.focus();
         activeSoupTrigger = null;
+    }
+
+    if (!open) {
+        activeSoupId = null;
     }
 };
 
@@ -283,8 +290,63 @@ const setUmamiState = (open, trigger = null) => {
     }
 };
 
-soupOpeners.forEach((opener) => opener.addEventListener("click", () => setSoupState(true, opener)));
-soupClosers.forEach((closer) => closer.addEventListener("click", () => setSoupState(false)));
+const findSoupOpener = (soupId) => (
+    Array.from(soupOpeners).find((opener) => opener.dataset.soupId === soupId) || null
+);
+
+const showSoupFromUrl = (useInitialSoup = false) => {
+    const match = window.location.pathname.match(/^\/soup\/([^/]+)\/$/);
+    const soupId = match?.[1] || (useInitialSoup ? document.body.dataset.initialSoup : "");
+    const opener = soupId ? findSoupOpener(soupId) : null;
+
+    if (opener) {
+        setSoupState(true, opener);
+    } else if (soupModal?.classList.contains("is-open")) {
+        setSoupState(false);
+    }
+};
+
+const closeSoupWithNavigation = () => {
+    if (window.history.state?.soupId) {
+        window.history.back();
+        return;
+    }
+
+    window.history.replaceState({}, "", "/#soups");
+    setSoupState(false);
+    document.querySelector("#soups")?.scrollIntoView();
+};
+
+soupOpeners.forEach((opener) => opener.addEventListener("click", () => {
+    if (activeSoupId === opener.dataset.soupId) return;
+
+    window.history.pushState(
+        { soupId: opener.dataset.soupId },
+        "",
+        opener.dataset.soupUrl
+    );
+    setSoupState(true, opener);
+}));
+
+soupClosers.forEach((closer) => closer.addEventListener("click", (event) => {
+    if (closer.matches("a[href]")) {
+        setSoupState(false);
+        return;
+    }
+
+    event.preventDefault();
+    closeSoupWithNavigation();
+}));
+
+soupSiteLink?.addEventListener("click", (event) => {
+    event.preventDefault();
+    window.history.replaceState({}, "", soupSiteLink.href);
+    setSoupState(false);
+    document.querySelector("#soups")?.scrollIntoView();
+});
+
+window.addEventListener("popstate", () => showSoupFromUrl());
+showSoupFromUrl(true);
 umamiOpen?.addEventListener("click", () => setUmamiState(true, umamiOpen));
 umamiClosers.forEach((closer) => closer.addEventListener("click", () => setUmamiState(false)));
 videoOpen?.addEventListener("click", () => setVideoState(true));
@@ -292,7 +354,9 @@ videoClosers.forEach((closer) => closer.addEventListener("click", () => setVideo
 
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-        setSoupState(false);
+        if (soupModal?.classList.contains("is-open")) {
+            closeSoupWithNavigation();
+        }
         setUmamiState(false);
         setVideoState(false);
     }
