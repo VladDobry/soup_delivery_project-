@@ -130,6 +130,33 @@
                 <p class="section-note">Обновляем и улучшаем рецептуру каждую неделю!</p>
             </section>
 
+            <section class="section-band gallery-line" id="buy">
+                <div class="gallery-grid">
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Фасоль и специи уже готовы">
+                        <img class="asset gallery-real-photo gallery-real-photo-beans" src="{% static 'landing/img/gallery-real-beans.jpg' %}" alt="Фасоль, томатная паста, зелень и специи для супа">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Овощи едут в котёл">
+                        <img class="asset gallery-real-photo gallery-real-photo-vegetables" src="{% static 'landing/img/gallery-real-vegetables.jpg' %}" alt="Овощи, зелень и вода для супа">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Мясная основа для насыщенного бульона">
+                        <img class="asset gallery-real-photo gallery-real-photo-meat" src="{% static 'landing/img/gallery-real-meat.jpg' %}" alt="Мясо, кости, овощи и специи для бульона">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Ингредиенты разложены перед варкой">
+                        <img class="asset gallery-real-photo gallery-real-photo-table" src="{% static 'landing/img/gallery-real-table.jpg' %}" alt="Овощи и зелень на столе перед приготовлением">
+                    </button>
+                    <button class="gallery-tile reveal" type="button" data-demo-toast="Котёл ждёт живой огонь">
+                        <img class="asset gallery-real-photo gallery-real-photo-pot" src="{% static 'landing/img/gallery-real-pot.jpg' %}" alt="Котел над кострищем для приготовления супа">
+                    </button>
+                    <button class="gallery-tile gallery-video reveal" type="button" data-video-open>
+                        <video class="gallery-video-preview" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                            <source src="{% static 'landing/video/soup-cooking.mp4' %}" type="video/mp4">
+                        </video>
+                        <span class="play-button" aria-hidden="true"></span>
+                        <span class="sr-only">Открыть видео</span>
+                    </button>
+                </div>
+            </section>
+
             <section class="section-band umami-line" id="umami">
                 <button class="umami-teaser reveal" type="button" data-umami-open aria-label="Открыть описание уровня умами">
                     <div class="umami-teaser-art" aria-hidden="true">
@@ -191,9 +218,8 @@
                                             </svg>
                                             <small>Для 2<br>человек</small>
                                         </div>
-                                        <img class="feature-jar-image feature-jar-image-small" src="{% static 'landing/img/feature-jar-1l.png' %}" alt="Банка супа объемом 1 литр">
+                                        <img class="feature-jar-image feature-jar-image-small" src="{% static 'landing/img/feature-jar-solyanka-1l.png' %}" alt="Банка солянки объемом 1 литр">
                                     </div>
-                                    <h4>1 л</h4>
                                     <p>Для двоих<br>сытный обед<br>или ужин</p>
                                     <strong>1950 ₽</strong>
                                 </div>
@@ -206,9 +232,8 @@
                                             </svg>
                                             <small>Для 3–4<br>человек</small>
                                         </div>
-                                        <img class="feature-jar-image feature-jar-image-medium" src="{% static 'landing/img/feature-jar-15l.png' %}" alt="Банка супа объемом 1,5 литра">
+                                        <img class="feature-jar-image feature-jar-image-medium" src="{% static 'landing/img/feature-jar-ukha-15l.png' %}" alt="Банка ухи объемом 1,5 литра">
                                     </div>
-                                    <h4>1,5 л</h4>
                                     <p>Для семьи<br>3–4 порции<br>на каждый день</p>
                                     <strong>2850 ₽</strong>
                                 </div>
@@ -221,9 +246,8 @@
                                             </svg>
                                             <small>Для 5–6<br>человек</small>
                                         </div>
-                                        <img class="feature-jar-image feature-jar-image-large" src="{% static 'landing/img/feature-jar-2l.png' %}" alt="Банка супа объемом 2 литра">
+                                        <img class="feature-jar-image feature-jar-image-large" src="{% static 'landing/img/feature-jar-borsch-2l.png' %}" alt="Банка борща объемом 2 литра">
                                     </div>
-                                    <h4>2 л</h4>
                                     <p>Для компании<br>5–6 порций<br>на угощение</p>
                                     <strong>3750 ₽</strong>
                                 </div>
@@ -237,32 +261,6 @@
                 </div>
             </section>
 
-            <section class="section-band gallery-line" id="buy">
-                <div class="gallery-grid">
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Фасоль и специи уже готовы">
-                        <img class="asset gallery-real-photo gallery-real-photo-beans" src="{% static 'landing/img/gallery-real-beans.jpg' %}" alt="Фасоль, томатная паста, зелень и специи для супа">
-                    </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Овощи едут в котёл">
-                        <img class="asset gallery-real-photo gallery-real-photo-vegetables" src="{% static 'landing/img/gallery-real-vegetables.jpg' %}" alt="Овощи, зелень и вода для супа">
-                    </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Мясная основа для насыщенного бульона">
-                        <img class="asset gallery-real-photo gallery-real-photo-meat" src="{% static 'landing/img/gallery-real-meat.jpg' %}" alt="Мясо, кости, овощи и специи для бульона">
-                    </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Ингредиенты разложены перед варкой">
-                        <img class="asset gallery-real-photo gallery-real-photo-table" src="{% static 'landing/img/gallery-real-table.jpg' %}" alt="Овощи и зелень на столе перед приготовлением">
-                    </button>
-                    <button class="gallery-tile reveal" type="button" data-demo-toast="Котёл ждёт живой огонь">
-                        <img class="asset gallery-real-photo gallery-real-photo-pot" src="{% static 'landing/img/gallery-real-pot.jpg' %}" alt="Котел над кострищем для приготовления супа">
-                    </button>
-                    <button class="gallery-tile gallery-video reveal" type="button" data-video-open>
-                        <video class="gallery-video-preview" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-                            <source src="{% static 'landing/video/soup-cooking.mp4' %}" type="video/mp4">
-                        </video>
-                        <span class="play-button" aria-hidden="true"></span>
-                        <span class="sr-only">Открыть видео</span>
-                    </button>
-                </div>
-            </section>
         </main>
 
         <footer class="footer section-band" id="contacts">

@@ -23,6 +23,27 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-soup-umami-open")
         self.assertContains(response, "Что за умами")
 
+    def test_gallery_is_between_soups_and_umami(self):
+        response = self.client.get(reverse("index"))
+        content = response.content.decode()
+
+        soups_position = content.index('id="soups"')
+        gallery_position = content.index('class="section-band gallery-line"')
+        umami_position = content.index('id="umami"')
+
+        self.assertLess(soups_position, gallery_position)
+        self.assertLess(gallery_position, umami_position)
+
+    def test_volume_cards_use_branded_jar_images(self):
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, "feature-jar-solyanka-1l.png")
+        self.assertContains(response, "feature-jar-ukha-15l.png")
+        self.assertContains(response, "feature-jar-borsch-2l.png")
+        self.assertNotContains(response, "<h4>1 л</h4>", html=True)
+        self.assertNotContains(response, "<h4>1,5 л</h4>", html=True)
+        self.assertNotContains(response, "<h4>2 л</h4>", html=True)
+
     def test_each_soup_url_renders_its_slug(self):
         for slug in SOUP_SLUGS:
             with self.subTest(slug=slug):
