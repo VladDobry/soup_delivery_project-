@@ -1654,6 +1654,30 @@ img {
     letter-spacing: 4px;
 }
 
+.soup-umami-info {
+    width: min(330px, 100%);
+    min-height: 42px;
+    border: 1px solid var(--ink);
+    border-radius: 8px;
+    color: var(--paper);
+    background: var(--ink);
+    font: 800 13px/1 var(--font-display);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.soup-umami-info:hover {
+    color: var(--ink);
+    background: var(--yellow);
+    transform: translateY(-1px);
+}
+
+.soup-umami-info:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 3px;
+}
+
 .soup-passport-panel {
     min-width: 0;
     display: grid;
@@ -2766,7 +2790,8 @@ img {
         margin-bottom: 8px;
     }
 
-    .soup-umami {
+    .soup-umami,
+    .soup-umami-info {
         justify-self: center;
     }
 

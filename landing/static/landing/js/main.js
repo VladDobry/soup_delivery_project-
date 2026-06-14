@@ -10,6 +10,7 @@ const soupModalDescription = document.querySelector("[data-soup-modal-descriptio
 const soupModalNote = document.querySelector("[data-soup-modal-note]");
 const soupModalGroups = document.querySelector("[data-soup-modal-groups]");
 const soupSiteLink = document.querySelector("[data-soup-site-link]");
+const soupUmamiOpen = document.querySelector("[data-soup-umami-open]");
 const umamiModal = document.querySelector(".umami-modal");
 const umamiOpen = document.querySelector("[data-umami-open]");
 const umamiClosers = document.querySelectorAll("[data-umami-close]");
@@ -24,6 +25,7 @@ let activeSoupTrigger = null;
 let activeSoupId = null;
 let previousScrollRestoration = null;
 let activeUmamiTrigger = null;
+let returnToSoupFromUmami = false;
 let videoPreviewInView = false;
 
 const soupDetails = {
@@ -279,6 +281,12 @@ const setUmamiState = (open, trigger = null) => {
 
     umamiModal.classList.toggle("is-open", open);
     umamiModal.setAttribute("aria-hidden", String(!open));
+
+    if (!open && returnToSoupFromUmami && activeSoupId) {
+        soupModal?.classList.add("is-open");
+        soupModal?.setAttribute("aria-hidden", "false");
+    }
+
     setModalLock();
 
     if (open) {
@@ -286,9 +294,22 @@ const setUmamiState = (open, trigger = null) => {
     }
 
     if (!open && activeUmamiTrigger) {
-        activeUmamiTrigger.focus();
+        activeUmamiTrigger.focus({ preventScroll: true });
         activeUmamiTrigger = null;
     }
+
+    if (!open) {
+        returnToSoupFromUmami = false;
+    }
+};
+
+const openUmamiFromSoup = () => {
+    if (!soupModal || !activeSoupId || !soupUmamiOpen) return;
+
+    returnToSoupFromUmami = true;
+    soupModal.classList.remove("is-open");
+    soupModal.setAttribute("aria-hidden", "true");
+    setUmamiState(true, soupUmamiOpen);
 };
 
 const findSoupOpener = (soupId) => (
@@ -392,7 +413,18 @@ soupSiteLink?.addEventListener("click", (event) => {
 window.addEventListener("popstate", () => showSoupFromUrl());
 showSoupFromUrl(true);
 umamiOpen?.addEventListener("click", () => setUmamiState(true, umamiOpen));
-umamiClosers.forEach((closer) => closer.addEventListener("click", () => setUmamiState(false)));
+soupUmamiOpen?.addEventListener("click", openUmamiFromSoup);
+umamiClosers.forEach((closer) => closer.addEventListener("click", () => {
+    if (closer.matches("a[href]") && returnToSoupFromUmami) {
+        returnToSoupFromUmami = false;
+        activeUmamiTrigger = null;
+        activeSoupTrigger = null;
+        setSoupState(false);
+        restoreSoupScrollRestoration();
+    }
+
+    setUmamiState(false);
+}));
 videoOpen?.addEventListener("click", () => setVideoState(true));
 videoClosers.forEach((closer) => closer.addEventListener("click", () => setVideoState(false)));
 

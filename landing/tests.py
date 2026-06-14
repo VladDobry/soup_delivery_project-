@@ -16,6 +16,13 @@ class SoupPageTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'data-initial-soup=""')
 
+    def test_soup_modal_has_umami_details_button(self):
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, 'class="soup-umami-info"')
+        self.assertContains(response, "data-soup-umami-open")
+        self.assertContains(response, "Что за умами")
+
     def test_each_soup_url_renders_its_slug(self):
         for slug in SOUP_SLUGS:
             with self.subTest(slug=slug):
@@ -28,6 +35,7 @@ class SoupPageTests(TestCase):
                     response,
                     f'data-initial-soup="{slug}"',
                 )
+                self.assertContains(response, "data-soup-umami-open")
 
     def test_unknown_soup_returns_404(self):
         response = self.client.get(

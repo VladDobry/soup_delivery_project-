@@ -343,6 +343,9 @@
                         <strong aria-hidden="true">★★★★★</strong>
                         <small>Космический уровень</small>
                     </div>
+                    <button class="soup-umami-info" type="button" data-soup-umami-open>
+                        Что за умами?
+                    </button>
                 </div>
                 <aside class="soup-passport-panel">
                     <div class="soup-composition" data-soup-modal-groups></div>
@@ -387,18 +390,18 @@
         <div class="umami-backdrop" data-umami-close></div>
         <div class="umami-dialog" role="dialog" aria-modal="true" aria-labelledby="umami-modal-title">
             <header class="umami-modal-header">
-                <a class="passport-logo" href="#top" data-umami-close aria-label="Я есть суп">
+                <a class="passport-logo" href="{% url 'index' %}#top" data-umami-close aria-label="Я есть суп">
                     <span>Я</span><span>Есть</span><span>Суп!</span>
                 </a>
                 <nav class="passport-nav" aria-label="Навигация по уровню умами">
-                    <a href="#soups" data-umami-close>Наши супы</a>
-                    <a href="#umami" data-umami-close>Супотерапия</a>
-                    <a href="#about" data-umami-close>О нас</a>
-                    <a href="#buy" data-umami-close>Доставка и оплата</a>
-                    <a href="#contacts" data-umami-close>Контакты</a>
+                    <a href="{% url 'index' %}#soups" data-umami-close>Наши супы</a>
+                    <a href="{% url 'index' %}#umami" data-umami-close>Супотерапия</a>
+                    <a href="{% url 'index' %}#about" data-umami-close>О нас</a>
+                    <a href="{% url 'index' %}#buy" data-umami-close>Доставка и оплата</a>
+                    <a href="{% url 'index' %}#contacts" data-umami-close>Контакты</a>
                 </nav>
                 <div class="passport-actions">
-                    <a class="btn btn-dark" href="#buy" data-umami-close>Заказать суп</a>
+                    <a class="btn btn-dark" href="{% url 'index' %}#buy" data-umami-close>Заказать суп</a>
                     <button class="umami-close" type="button" data-umami-close aria-label="Закрыть">×</button>
                 </div>
             </header>
