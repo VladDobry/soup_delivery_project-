@@ -1728,6 +1728,130 @@ img {
     text-transform: none;
 }
 
+.soup-offer {
+    min-width: 0;
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(340px, 1.2fr);
+    border: 1px solid rgba(20, 19, 18, 0.18);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 248, 236, 0.66);
+}
+
+.soup-offer-heading {
+    min-width: 0;
+    display: grid;
+    align-content: center;
+    gap: 12px;
+    padding: 16px 18px;
+}
+
+.soup-offer-heading h3 {
+    margin: 0;
+    color: var(--soup-accent);
+    font-size: 20px;
+    line-height: 1;
+}
+
+.soup-offer-prices {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.soup-offer-prices span {
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+    text-align: center;
+}
+
+.soup-offer-prices span + span {
+    border-left: 1px solid rgba(20, 19, 18, 0.18);
+}
+
+.soup-offer-prices small {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.soup-offer-prices strong {
+    color: var(--ink);
+    font-size: clamp(18px, 1.6vw, 25px);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.soup-offer-promo {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    color: var(--paper);
+    background: var(--red);
+}
+
+.soup-offer-promo p {
+    margin: 0;
+    font-size: clamp(12px, 1vw, 15px);
+    font-weight: 800;
+    line-height: 1.12;
+}
+
+.soup-offer-promo strong {
+    color: var(--paper);
+}
+
+.soup-offer-gift {
+    width: 30px;
+    height: 27px;
+    position: relative;
+    border: 3px solid currentColor;
+    border-radius: 2px;
+}
+
+.soup-offer-gift::before {
+    content: "";
+    width: 4px;
+    position: absolute;
+    inset: -3px auto -3px 50%;
+    translate: -50% 0;
+    background: currentColor;
+}
+
+.soup-offer-gift::after {
+    content: "";
+    width: 18px;
+    height: 9px;
+    position: absolute;
+    left: 50%;
+    top: -11px;
+    translate: -50% 0;
+    border: 3px solid currentColor;
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+.soup-offer-button {
+    min-height: 42px;
+    padding: 12px 17px;
+    border: 1px solid var(--paper);
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.soup-offer-button:hover {
+    color: var(--paper);
+    background: var(--ink);
+}
+
 .soup-passport-benefits {
     grid-column: 2 / -1;
     display: grid;
@@ -2168,6 +2292,141 @@ img {
     pointer-events: auto;
 }
 
+.order-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.order-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.order-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 19, 18, 0.72);
+    backdrop-filter: blur(4px);
+}
+
+.order-dialog {
+    width: min(460px, 100%);
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    padding: 34px;
+    overflow: hidden;
+    border: 1px solid rgba(20, 19, 18, 0.18);
+    border-radius: 14px;
+    text-align: center;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(238, 170, 18, 0.18), transparent 11rem),
+        radial-gradient(circle at 92% 18%, rgba(197, 29, 37, 0.09), transparent 12rem),
+        repeating-linear-gradient(90deg, rgba(20, 19, 18, 0.018) 0 1px, transparent 1px 6px),
+        var(--paper);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.44);
+}
+
+.order-dialog::after {
+    content: "";
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    right: -56px;
+    bottom: -58px;
+    border: 18px solid rgba(238, 170, 18, 0.16);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.order-close {
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    color: var(--paper);
+    background: var(--ink);
+    font-size: 29px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.order-brand {
+    display: grid;
+    justify-items: start;
+    color: var(--ink);
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 0.72;
+    text-transform: uppercase;
+    rotate: -3deg;
+}
+
+.order-brand span:last-child {
+    color: var(--red);
+}
+
+.order-dialog h2 {
+    margin: 2px 0 0;
+    color: var(--red);
+    font-size: clamp(38px, 6vw, 56px);
+    line-height: 0.88;
+    text-transform: uppercase;
+}
+
+.order-dialog > p {
+    max-width: 32ch;
+    margin: 0;
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.order-phone {
+    width: 100%;
+    min-height: 76px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 5px;
+    padding: 14px 20px;
+    color: var(--paper);
+    background: var(--red);
+    box-shadow: 0 8px 0 rgba(20, 19, 18, 0.1);
+}
+
+.order-phone:hover {
+    transform: translateY(-3px);
+    background: var(--ink);
+}
+
+.order-phone span {
+    font-size: clamp(22px, 5vw, 30px);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.order-phone strong {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+}
+
 .video-backdrop {
     position: absolute;
     inset: 0;
@@ -2438,6 +2697,23 @@ img {
 
     .soup-passport-panel {
         grid-template-columns: 1fr;
+    }
+
+    .soup-offer {
+        grid-template-columns: minmax(230px, 0.8fr) minmax(300px, 1.2fr);
+    }
+
+    .soup-offer-heading {
+        padding-inline: 14px;
+    }
+
+    .soup-offer-promo {
+        gap: 10px;
+        padding-inline: 12px;
+    }
+
+    .soup-offer-button {
+        padding-inline: 12px;
     }
 
     .soup-passport-benefits {
@@ -2750,6 +3026,7 @@ img {
 
     .soup-passport {
         grid-template-columns: 1fr;
+        align-self: start;
         gap: 20px;
         padding: 8px 16px 20px;
     }
@@ -2775,6 +3052,30 @@ img {
 
     .soup-passport-panel {
         grid-template-columns: 1fr;
+    }
+
+    .soup-offer {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .soup-offer-heading {
+        padding: 16px;
+    }
+
+    .soup-offer-heading h3 {
+        text-align: center;
+    }
+
+    .soup-offer-promo {
+        grid-template-columns: auto minmax(0, 1fr);
+        padding: 16px;
+    }
+
+    .soup-offer-button {
+        grid-column: 1 / -1;
+        width: 100%;
+        justify-content: center;
     }
 
     .soup-passport-benefits {
@@ -3078,6 +3379,25 @@ img {
         text-align: center;
     }
 
+    .order-modal {
+        padding: 12px;
+    }
+
+    .order-dialog {
+        width: 100%;
+        gap: 16px;
+        padding: 30px 20px 24px;
+        border-radius: 10px;
+    }
+
+    .order-dialog > p {
+        font-size: 16px;
+    }
+
+    .order-phone {
+        min-height: 72px;
+    }
+
     .soup-dialog {
         border-radius: 6px;
     }
@@ -3108,6 +3428,24 @@ img {
 
     .soup-composition {
         padding-inline: 14px;
+    }
+
+    .soup-offer-prices strong {
+        font-size: 20px;
+    }
+
+    .soup-offer-promo {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .soup-offer-gift {
+        margin-top: 5px;
+    }
+
+    .soup-offer-button {
+        grid-column: auto;
     }
 
     .umami-dialog {

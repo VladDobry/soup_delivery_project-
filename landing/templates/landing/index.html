@@ -28,7 +28,7 @@
                 <a class="social-link" href="#contacts" aria-label="Instagram">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 2h9.2A5.4 5.4 0 0 1 22 7.4v9.2a5.4 5.4 0 0 1-5.4 5.4H7.4A5.4 5.4 0 0 1 2 16.6V7.4A5.4 5.4 0 0 1 7.4 2Zm0 2A3.4 3.4 0 0 0 4 7.4v9.2A3.4 3.4 0 0 0 7.4 20h9.2a3.4 3.4 0 0 0 3.4-3.4V7.4A3.4 3.4 0 0 0 16.6 4H7.4Zm4.6 3.4A4.6 4.6 0 1 1 7.4 12 4.6 4.6 0 0 1 12 7.4Zm0 2A2.6 2.6 0 1 0 14.6 12 2.6 2.6 0 0 0 12 9.4ZM17.3 6.5a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"/></svg>
                 </a>
-                <a class="btn btn-dark" href="#buy">Заказать</a>
+                <button class="btn btn-dark" type="button" data-order-open>Заказать</button>
             </div>
         </header>
 
@@ -273,7 +273,7 @@
                 <h2>Заказать</h2>
                 <p>+7 (928) 851-2525</p>
                 <p>@YA_EST_SUP_BOT</p>
-                <a class="btn btn-dark" href="#top">Заказать</a>
+                <button class="btn btn-dark" type="button" data-order-open>Заказать</button>
             </div>
             <div class="footer-column reveal">
                 <h2>Где купить</h2>
@@ -319,7 +319,7 @@
                     <a class="social-link" href="https://t.me/yaestsup" target="_blank" rel="noopener noreferrer" data-soup-close aria-label="Telegram">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.8 3.6 18.5 20c-.2 1-1.1 1.2-1.9.7l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3L5.8 13.2.9 11.6c-1-.3-1-1 .2-1.5l19.2-7.4c.9-.3 1.7.2 1.5.9Z"/></svg>
                     </a>
-                    <a class="btn btn-dark" href="{% url 'index' %}#buy" data-soup-close>Заказать суп</a>
+                    <button class="btn btn-dark" type="button" data-order-open>Заказать суп</button>
                     <button class="soup-close" type="button" data-soup-close aria-label="Закрыть">×</button>
                 </div>
             </header>
@@ -348,6 +348,21 @@
                 <aside class="soup-passport-panel">
                     <div class="soup-composition" data-soup-modal-groups></div>
                 </aside>
+                <section class="soup-offer" aria-labelledby="soup-offer-title">
+                    <div class="soup-offer-heading">
+                        <h3 id="soup-offer-title">Цены на банки</h3>
+                        <div class="soup-offer-prices" aria-label="Цены по объёмам">
+                            <span><small>1 л</small><strong>1950 ₽</strong></span>
+                            <span><small>1,5 л</small><strong>2850 ₽</strong></span>
+                            <span><small>2 л</small><strong>3750 ₽</strong></span>
+                        </div>
+                    </div>
+                    <div class="soup-offer-promo">
+                        <span class="soup-offer-gift" aria-hidden="true"></span>
+                        <p>При покупке любого супа от 1 литра — <strong>2 дегустационных супа по 0,35 л в подарок!</strong></p>
+                        <button class="btn soup-offer-button" type="button" data-order-open>Заказать суп</button>
+                    </div>
+                </section>
                 <div class="soup-passport-benefits" aria-label="Преимущества">
                     <article>
                         <span class="benefit-icon">
@@ -399,7 +414,7 @@
                     <a href="{% url 'index' %}#contacts" data-umami-close>Контакты</a>
                 </nav>
                 <div class="passport-actions">
-                    <a class="btn btn-dark" href="{% url 'index' %}#buy" data-umami-close>Заказать суп</a>
+                    <button class="btn btn-dark" type="button" data-order-open>Заказать суп</button>
                     <button class="umami-close" type="button" data-umami-close aria-label="Закрыть">×</button>
                 </div>
             </header>
@@ -519,6 +534,22 @@
                     Ваш браузер не поддерживает воспроизведение видео.
                 </video>
             </div>
+        </div>
+    </div>
+
+    <div class="order-modal" aria-hidden="true">
+        <div class="order-backdrop" data-order-close></div>
+        <div class="order-dialog" role="dialog" aria-modal="true" aria-labelledby="order-modal-title" aria-describedby="order-modal-description">
+            <button class="order-close" type="button" data-order-close aria-label="Закрыть">×</button>
+            <div class="order-brand" aria-hidden="true">
+                <span>Я</span><span>Есть</span><span>Суп!</span>
+            </div>
+            <h2 id="order-modal-title">Заказать суп</h2>
+            <p id="order-modal-description">Позвоните нам — расскажем о супах, поможем выбрать объём и оформим заказ.</p>
+            <a class="btn order-phone" href="tel:+79288512525">
+                <span>+7 (928) 851-2525</span>
+                <strong>Позвонить</strong>
+            </a>
         </div>
     </div>
 

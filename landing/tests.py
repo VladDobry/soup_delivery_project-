@@ -23,6 +23,30 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-soup-umami-open")
         self.assertContains(response, "Что за умами")
 
+    def test_soup_modal_has_prices_promotion_and_order_link(self):
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, "Цены на банки")
+        self.assertContains(response, "1950 ₽")
+        self.assertContains(response, "2850 ₽")
+        self.assertContains(response, "3750 ₽")
+        self.assertContains(
+            response,
+            "2 дегустационных супа по 0,35 л в подарок!",
+        )
+        self.assertContains(response, 'class="btn soup-offer-button"')
+
+    def test_order_buttons_open_phone_modal(self):
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, "data-order-open", count=5)
+        self.assertContains(response, 'class="order-modal"')
+        self.assertContains(response, 'id="order-modal-title"')
+        self.assertContains(response, 'aria-describedby="order-modal-description"')
+        self.assertContains(response, "+7 (928) 851-2525")
+        self.assertContains(response, 'href="tel:+79288512525"')
+        self.assertContains(response, "data-order-close", count=2)
+
     def test_gallery_is_between_soups_and_umami(self):
         response = self.client.get(reverse("index"))
         content = response.content.decode()
@@ -57,6 +81,8 @@ class SoupPageTests(TestCase):
                     f'data-initial-soup="{slug}"',
                 )
                 self.assertContains(response, "data-soup-umami-open")
+                self.assertContains(response, "Цены на банки")
+                self.assertContains(response, "data-order-open")
 
     def test_unknown_soup_returns_404(self):
         response = self.client.get(

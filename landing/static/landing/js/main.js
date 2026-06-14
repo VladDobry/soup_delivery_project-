@@ -21,12 +21,19 @@ const videoOpen = document.querySelector("[data-video-open]");
 const videoClosers = document.querySelectorAll("[data-video-close]");
 const soupVideo = document.querySelector(".soup-video");
 const videoPreview = document.querySelector(".gallery-video-preview");
+const orderModal = document.querySelector(".order-modal");
+const orderDialog = document.querySelector(".order-dialog");
+const orderOpeners = document.querySelectorAll("[data-order-open]");
+const orderClosers = document.querySelectorAll("[data-order-close]");
+const orderCloseButton = document.querySelector(".order-close");
 let activeSoupTrigger = null;
 let activeSoupId = null;
 let previousScrollRestoration = null;
 let activeUmamiTrigger = null;
 let returnToSoupFromUmami = false;
 let videoPreviewInView = false;
+let activeOrderTrigger = null;
+let orderReturnTarget = null;
 
 const soupDetails = {
     borsch: {
@@ -157,7 +164,8 @@ const setModalLock = () => {
         "modal-open",
         soupModal?.classList.contains("is-open") ||
         umamiModal?.classList.contains("is-open") ||
-        videoModal?.classList.contains("is-open")
+        videoModal?.classList.contains("is-open") ||
+        orderModal?.classList.contains("is-open")
     );
 };
 
@@ -312,6 +320,47 @@ const openUmamiFromSoup = () => {
     setUmamiState(true, soupUmamiOpen);
 };
 
+const setOrderState = (open, trigger = null) => {
+    if (!orderModal) return;
+
+    if (open && trigger) {
+        activeOrderTrigger = trigger;
+
+        if (soupModal?.classList.contains("is-open")) {
+            orderReturnTarget = "soup";
+            soupModal.classList.remove("is-open");
+            soupModal.setAttribute("aria-hidden", "true");
+        } else if (umamiModal?.classList.contains("is-open")) {
+            orderReturnTarget = "umami";
+            umamiModal.classList.remove("is-open");
+            umamiModal.setAttribute("aria-hidden", "true");
+        } else {
+            orderReturnTarget = null;
+        }
+    }
+
+    orderModal.classList.toggle("is-open", open);
+    orderModal.setAttribute("aria-hidden", String(!open));
+
+    if (!open && orderReturnTarget === "soup" && activeSoupId) {
+        soupModal?.classList.add("is-open");
+        soupModal?.setAttribute("aria-hidden", "false");
+    } else if (!open && orderReturnTarget === "umami") {
+        umamiModal?.classList.add("is-open");
+        umamiModal?.setAttribute("aria-hidden", "false");
+    }
+
+    setModalLock();
+
+    if (open) {
+        orderCloseButton?.focus({ preventScroll: true });
+    } else {
+        activeOrderTrigger?.focus({ preventScroll: true });
+        activeOrderTrigger = null;
+        orderReturnTarget = null;
+    }
+};
+
 const findSoupOpener = (soupId) => (
     Array.from(soupOpeners).find((opener) => opener.dataset.soupId === soupId) || null
 );
@@ -427,9 +476,18 @@ umamiClosers.forEach((closer) => closer.addEventListener("click", () => {
 }));
 videoOpen?.addEventListener("click", () => setVideoState(true));
 videoClosers.forEach((closer) => closer.addEventListener("click", () => setVideoState(false)));
+orderOpeners.forEach((opener) => opener.addEventListener("click", () => {
+    setOrderState(true, opener);
+}));
+orderClosers.forEach((closer) => closer.addEventListener("click", () => setOrderState(false)));
 
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+        if (orderModal?.classList.contains("is-open")) {
+            setOrderState(false);
+            return;
+        }
+
         if (soupModal?.classList.contains("is-open")) {
             closeSoupWithNavigation();
         }
@@ -437,9 +495,15 @@ document.addEventListener("keydown", (event) => {
         setVideoState(false);
     }
 
-    if (event.key === "Tab" && umamiModal?.classList.contains("is-open") && umamiDialog) {
+    const activeDialog = orderModal?.classList.contains("is-open")
+        ? orderDialog
+        : umamiModal?.classList.contains("is-open")
+            ? umamiDialog
+            : null;
+
+    if (event.key === "Tab" && activeDialog) {
         const focusable = Array.from(
-            umamiDialog.querySelectorAll(
+            activeDialog.querySelectorAll(
                 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
             )
         ).filter((element) => element.getClientRects().length > 0);
