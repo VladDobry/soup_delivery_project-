@@ -2181,7 +2181,8 @@ img {
 }
 
 .video-dialog {
-    width: min(860px, 100%);
+    width: min(100%, calc((100vh - 48px) * 9 / 16));
+    max-height: calc(100vh - 48px);
     position: relative;
     z-index: 1;
     border-radius: 18px;
@@ -2207,7 +2208,7 @@ img {
 }
 
 .video-stage {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 9 / 16;
     position: relative;
     display: grid;
     background: #000;
@@ -2219,6 +2220,13 @@ img {
     display: block;
     object-fit: contain;
     background: #000;
+}
+
+@supports (height: 100dvh) {
+    .video-dialog {
+        width: min(100%, calc((100dvh - 48px) * 9 / 16));
+        max-height: calc(100dvh - 48px);
+    }
 }
 
 .modal-open {
