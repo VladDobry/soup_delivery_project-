@@ -47,6 +47,39 @@ class SoupPageTests(TestCase):
         self.assertContains(response, 'href="tel:+79288512525"')
         self.assertContains(response, "data-order-close", count=2)
 
+    def test_footer_has_no_store_links(self):
+        response = self.client.get(reverse("index"))
+
+        self.assertNotContains(response, "Где купить")
+        self.assertNotContains(response, "Показать магазины")
+        self.assertContains(response, '<footer class="footer section-band"')
+        self.assertContains(response, "+7 (928) 851-2525")
+        self.assertContains(response, "Мы в соцсетях")
+        self.assertContains(response, "Суп спасёт")
+
+    def test_benefit_icons_have_consistent_order(self):
+        response = self.client.get(reverse("index"))
+        content = response.content.decode()
+        expected_images = [
+            "benefit-25h.png",
+            "benefit-broth.png",
+            "benefit-no-pork.png",
+            "benefit-water.png",
+            "benefit-farm.png",
+        ]
+
+        hero_start = content.index('<div class="benefits"')
+        hero_end = content.index("</div>", hero_start)
+        hero_benefits = content[hero_start:hero_end]
+
+        passport_start = content.index('<div class="soup-passport-benefits"')
+        passport_end = content.index("</div>", passport_start)
+        passport_benefits = content[passport_start:passport_end]
+
+        for benefits in (hero_benefits, passport_benefits):
+            positions = [benefits.index(image) for image in expected_images]
+            self.assertEqual(positions, sorted(positions))
+
     def test_gallery_is_between_soups_and_umami(self):
         response = self.client.get(reverse("index"))
         content = response.content.decode()

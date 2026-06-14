@@ -1060,7 +1060,7 @@ img {
 
 .footer {
     display: grid;
-    grid-template-columns: 1fr 1.05fr 1.08fr 0.98fr 1.7fr;
+    grid-template-columns: 0.8fr 1.2fr 1fr 2fr;
     gap: 26px;
     align-items: center;
     padding: 26px 32px 34px;
@@ -2787,7 +2787,7 @@ img {
     }
 
     .space-banner {
-        grid-column: 1 / -1;
+        grid-column: auto;
     }
 }
 

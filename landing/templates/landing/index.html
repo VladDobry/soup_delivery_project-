@@ -18,7 +18,6 @@
                 <a href="#soups">Супы</a>
                 <a href="#about">О нас</a>
                 <a href="#delivery">Доставка</a>
-                <a href="#buy">Где купить</a>
                 <a href="#contacts">Контакты</a>
             </nav>
             <div class="header-actions">
@@ -55,7 +54,7 @@
                 </div>
                 <div class="hero-copy reveal">
                     <p class="hero-kicker">Я есть суп!</p>
-                    <h1>Настоящий, домашний суп, и здоровая степень <span>кулинарного</span> фанатизма!</h1>
+                    <h1>Настоящий, домашний суп и здоровая степень <span>кулинарного</span> фанатизма!</h1>
                     <p class="copy-lead"><strong>Что у меня внутри?</strong><br>Коллагеновый бульон, родниковая вода, фермерские продукты и мясо!</p>
                     <p class="copy-lead"><strong>Я не “быстрый перекус” и не “готовая еда”.</strong><br>Я — суп, после которого тебе хорошо!</p>
                     <p class="hero-shout">Я есть суп!</p>
@@ -64,7 +63,13 @@
                             <span class="benefit-icon">
                                 <img src="{% static 'landing/img/benefit-25h.png' %}?v={{ cache_bust }}" alt="">
                             </span>
-                            <b>варим<br>суп</b>
+                            <b>готовим<br>суп</b>
+                        </article>
+                        <article>
+                            <span class="benefit-icon">
+                                <img src="{% static 'landing/img/benefit-broth.png' %}?v={{ cache_bust }}" alt="">
+                            </span>
+                            <b>Коллагеновый<br>бульон</b>
                         </article>
                         <article>
                             <span class="benefit-icon">
@@ -74,21 +79,15 @@
                         </article>
                         <article>
                             <span class="benefit-icon">
-                                <img src="{% static 'landing/img/benefit-farm.png' %}?v={{ cache_bust }}" alt="">
-                            </span>
-                            <b>Фермерские<br>продукты</b>
-                        </article>
-                        <article>
-                            <span class="benefit-icon">
                                 <img src="{% static 'landing/img/benefit-water.png' %}?v={{ cache_bust }}" alt="">
                             </span>
                             <b>Родниковая<br>вода</b>
                         </article>
                         <article>
                             <span class="benefit-icon">
-                                <img src="{% static 'landing/img/benefit-broth.png' %}?v={{ cache_bust }}" alt="">
+                                <img src="{% static 'landing/img/benefit-farm.png' %}?v={{ cache_bust }}" alt="">
                             </span>
-                            <b>Коллагеновый<br>бульон</b>
+                            <b>Фермерские<br>продукты</b>
                         </article>
                     </div>
                 </div>
@@ -276,11 +275,6 @@
                 <button class="btn btn-dark" type="button" data-order-open>Заказать</button>
             </div>
             <div class="footer-column reveal">
-                <h2>Где купить</h2>
-                <p>Смотрите в разделе<br>«Где купить»</p>
-                <a class="btn btn-dark" href="#buy">Показать магазины</a>
-            </div>
-            <div class="footer-column reveal">
                 <h2>Мы в соцсетях</h2>
                 <p>@yaestsup</p>
                 <div class="footer-socials">
@@ -372,15 +366,15 @@
                     </article>
                     <article>
                         <span class="benefit-icon">
-                            <img src="{% static 'landing/img/benefit-no-pork.png' %}?v={{ cache_bust }}" alt="">
+                            <img src="{% static 'landing/img/benefit-broth.png' %}?v={{ cache_bust }}" alt="">
                         </span>
-                        <b>Без свинины<br>без лактозы</b>
+                        <b>Коллагеновый<br>бульон</b>
                     </article>
                     <article>
                         <span class="benefit-icon">
-                            <img src="{% static 'landing/img/benefit-farm.png' %}?v={{ cache_bust }}" alt="">
+                            <img src="{% static 'landing/img/benefit-no-pork.png' %}?v={{ cache_bust }}" alt="">
                         </span>
-                        <b>Фермерские<br>продукты</b>
+                        <b>Без свинины<br>без лактозы</b>
                     </article>
                     <article>
                         <span class="benefit-icon">
@@ -390,9 +384,9 @@
                     </article>
                     <article>
                         <span class="benefit-icon">
-                            <img src="{% static 'landing/img/benefit-broth.png' %}?v={{ cache_bust }}" alt="">
+                            <img src="{% static 'landing/img/benefit-farm.png' %}?v={{ cache_bust }}" alt="">
                         </span>
-                        <b>Коллагеновый<br>бульон</b>
+                        <b>Фермерские<br>продукты</b>
                     </article>
                 </div>
             </section>
