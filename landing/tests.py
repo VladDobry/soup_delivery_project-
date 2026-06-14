@@ -23,6 +23,15 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-soup-umami-open")
         self.assertContains(response, "Что за умами")
 
+    def test_home_page_has_no_umami_teaser(self):
+        response = self.client.get(reverse("index"))
+
+        self.assertNotContains(response, 'id="umami"')
+        self.assertNotContains(response, 'class="umami-teaser')
+        self.assertNotContains(response, "data-umami-open")
+        self.assertContains(response, 'class="umami-modal"')
+        self.assertContains(response, 'id="umami-modal-title"')
+
     def test_umami_modal_header_has_no_navigation(self):
         response = self.client.get(reverse("index"))
         content = response.content.decode()
@@ -94,16 +103,16 @@ class SoupPageTests(TestCase):
             positions = [benefits.index(image) for image in expected_images]
             self.assertEqual(positions, sorted(positions))
 
-    def test_gallery_is_between_soups_and_umami(self):
+    def test_gallery_is_between_soups_and_features(self):
         response = self.client.get(reverse("index"))
         content = response.content.decode()
 
         soups_position = content.index('id="soups"')
         gallery_position = content.index('class="section-band gallery-line"')
-        umami_position = content.index('id="umami"')
+        features_position = content.index('id="delivery"')
 
         self.assertLess(soups_position, gallery_position)
-        self.assertLess(gallery_position, umami_position)
+        self.assertLess(gallery_position, features_position)
 
     def test_volume_cards_use_branded_jar_images(self):
         response = self.client.get(reverse("index"))

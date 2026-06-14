@@ -473,67 +473,11 @@ img {
     margin: 0 18px;
 }
 
-.umami-line {
-    padding: 0 28px 30px;
-}
-
-.umami-teaser {
-    width: 100%;
-    min-height: 390px;
-    display: grid;
-    grid-template-columns: minmax(420px, 0.9fr) minmax(460px, 1.1fr);
-    gap: 18px;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid rgba(20, 19, 18, 0.24);
-    border-radius: 14px;
-    padding: 18px 30px 22px;
-    color: var(--ink);
-    background:
-        radial-gradient(circle at 12% 72%, rgba(197, 29, 37, 0.08), transparent 13rem),
-        radial-gradient(circle at 88% 12%, rgba(238, 170, 18, 0.12), transparent 12rem),
-        repeating-linear-gradient(90deg, rgba(20, 19, 18, 0.018) 0 1px, transparent 1px 6px),
-        rgba(255, 248, 236, 0.48);
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    text-align: left;
-    text-transform: uppercase;
-}
-
-.umami-teaser:focus-visible,
 .umami-close:focus-visible {
     outline: 3px solid var(--yellow);
     outline-offset: 4px;
 }
 
-.umami-teaser::before,
-.umami-teaser::after {
-    content: "✦";
-    position: absolute;
-    color: var(--ink);
-    font-size: 22px;
-    pointer-events: none;
-}
-
-.umami-teaser::before {
-    left: 32px;
-    bottom: 28px;
-}
-
-.umami-teaser::after {
-    right: 23%;
-    top: 26px;
-}
-
-.umami-teaser-art {
-    min-width: 0;
-    min-height: 346px;
-    position: relative;
-    display: grid;
-    place-items: end center;
-}
-
-.umami-flag,
 .umami-hero-flag,
 .umami-hero-label {
     display: inline-grid;
@@ -547,173 +491,6 @@ img {
     text-align: center;
     rotate: -8deg;
     box-shadow: 0 10px 18px rgba(43, 29, 17, 0.14);
-}
-
-.umami-flag {
-    position: absolute;
-    left: 0;
-    top: 8%;
-    z-index: 3;
-    font-size: clamp(19px, 2.15vw, 31px);
-}
-
-.umami-orbit-icon {
-    position: absolute;
-    right: 4%;
-    top: 10%;
-    width: 42px;
-    height: 18px;
-    border: 3px solid var(--ink);
-    border-radius: 50%;
-    rotate: -18deg;
-}
-
-.umami-planet {
-    position: absolute;
-    line-height: 1;
-}
-
-.umami-orbit-icon::before {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    left: 50%;
-    top: 50%;
-    border-radius: 50%;
-    translate: -50% -50%;
-    background: var(--yellow);
-}
-
-.umami-art-spark {
-    position: absolute;
-    z-index: 2;
-    color: var(--ink);
-    line-height: 1;
-}
-
-.umami-art-spark-a {
-    right: 13%;
-    top: 25%;
-    font-size: 19px;
-}
-
-.umami-art-spark-b {
-    left: 7%;
-    bottom: 16%;
-    color: var(--red);
-    font-size: 16px;
-}
-
-.umami-mascot {
-    width: min(560px, 112%);
-    max-width: none;
-    margin: 0 -5% -8px;
-    filter: drop-shadow(0 15px 18px rgba(43, 29, 17, 0.16));
-}
-
-.umami-teaser-copy {
-    min-width: 0;
-    align-self: center;
-    display: grid;
-    gap: 10px;
-    padding: 8px 0;
-}
-
-.umami-teaser-copy h2 {
-    min-width: 0;
-    display: grid;
-    gap: 6px;
-    margin: 0 0 4px;
-    overflow-wrap: anywhere;
-    text-transform: uppercase;
-}
-
-.umami-teaser-copy h2 > span,
-.umami-teaser-copy h2 > strong {
-    display: block;
-}
-
-.umami-teaser-copy h2 > span {
-    width: 65%;
-    color: var(--ink);
-    font-size: clamp(46px, 4.6vw, 68px);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.045em;
-    white-space: nowrap;
-}
-
-.umami-teaser-copy h2 > strong {
-    width: 100%;
-    color: var(--red);
-    font-size: clamp(76px, 7.65vw, 110px);
-    font-weight: 800;
-    line-height: 0.9;
-    letter-spacing: -0.035em;
-    white-space: nowrap;
-}
-
-.umami-teaser-copy p {
-    max-width: 54ch;
-    margin: 0;
-    color: var(--ink);
-    font-size: clamp(15px, 1.15vw, 19px);
-    font-weight: 700;
-    line-height: 1.18;
-    text-transform: none;
-}
-
-.umami-teaser-copy .umami-teaser-lead {
-    color: var(--ink);
-    font-size: clamp(18px, 1.45vw, 23px);
-    text-transform: uppercase;
-}
-
-.umami-teaser-copy p strong {
-    color: var(--red);
-}
-
-.umami-teaser-actions {
-    display: grid;
-    grid-template-columns: auto minmax(240px, 1fr);
-    align-items: center;
-    gap: 18px;
-    margin-top: 4px;
-}
-
-.umami-teaser-stars {
-    color: var(--yellow);
-    font-size: clamp(27px, 2.7vw, 40px);
-    line-height: 0.9;
-    letter-spacing: 3px;
-    text-shadow: 0 1px 0 var(--ink);
-    white-space: nowrap;
-}
-
-.umami-detail-button {
-    width: 100%;
-    min-height: 52px;
-    display: grid;
-    place-items: center;
-    position: relative;
-    border-radius: 9px;
-    color: var(--paper);
-    background: var(--red);
-    box-shadow: 0 8px 16px rgba(43, 29, 17, 0.14);
-    font-size: clamp(18px, 1.55vw, 25px);
-    font-weight: 800;
-    line-height: 1;
-    text-align: center;
-}
-
-.umami-detail-button::after {
-    content: "→";
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    translate: 0 -50%;
-    font-size: 0.8em;
 }
 
 .feature-line {
@@ -1382,7 +1159,7 @@ img {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
     overflow: auto;
     border: 1px solid rgba(20, 19, 18, 0.18);
     border-radius: 8px;
@@ -2616,33 +2393,6 @@ img {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .umami-teaser {
-        grid-template-columns: 1fr;
-    }
-
-    .umami-teaser-art {
-        min-height: 360px;
-    }
-
-    .umami-teaser-copy {
-        max-width: 720px;
-        justify-self: center;
-        text-align: center;
-    }
-
-    .umami-teaser-copy p {
-        margin-inline: auto;
-    }
-
-    .umami-teaser-actions {
-        width: min(650px, 100%);
-        justify-self: center;
-    }
-
-    .umami-detail-button {
-        justify-self: center;
-    }
-
     .feature-showcase {
         grid-template-columns: 1fr;
     }
@@ -2887,31 +2637,6 @@ img {
 
     .soup-card {
         min-height: 275px;
-    }
-
-    .umami-line {
-        padding-inline: 18px;
-    }
-
-    .umami-teaser {
-        min-height: 0;
-        padding: 20px;
-    }
-
-    .umami-teaser-art {
-        min-height: 310px;
-    }
-
-    .umami-flag {
-        font-size: 23px;
-    }
-
-    .umami-mascot {
-        width: min(520px, 105%);
-    }
-
-    .umami-teaser-stars {
-        letter-spacing: 5px;
     }
 
     .feature-showcase {
@@ -3287,69 +3012,6 @@ img {
 
     .soup-card {
         min-height: 340px;
-    }
-
-    .umami-line {
-        padding-inline: 14px;
-    }
-
-    .umami-teaser {
-        padding: 18px 14px;
-        border-radius: 10px;
-    }
-
-    .umami-teaser-art {
-        min-height: 250px;
-    }
-
-    .umami-mascot {
-        width: min(390px, 112%);
-        margin-bottom: -4px;
-    }
-
-    .umami-orbit-icon {
-        width: 34px;
-        height: 15px;
-    }
-
-    .umami-flag {
-        left: 2%;
-        top: 4%;
-        padding: 9px 13px;
-        font-size: 18px;
-    }
-
-    .umami-teaser-actions {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .umami-teaser-stars {
-        justify-self: center;
-    }
-
-    .umami-teaser-copy h2 {
-        gap: 4px;
-    }
-
-    .umami-teaser-copy h2 > span {
-        width: auto;
-        font-size: clamp(38px, 11vw, 46px);
-    }
-
-    .umami-teaser-copy h2 > strong {
-        width: auto;
-        font-size: clamp(66px, 19.2vw, 80px);
-    }
-
-    .umami-teaser-copy p {
-        font-size: 16px;
-    }
-
-    .umami-detail-button {
-        min-height: 52px;
-        padding: 8px 46px 8px 18px;
-        font-size: 22px;
     }
 
     .gallery-tile {

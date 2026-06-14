@@ -122,7 +122,7 @@
                     </button>
                     <button class="soup-card reveal" type="button" data-soup-open data-soup-id="broth" data-soup-url="{% url 'soup-detail' 'broth' %}" aria-label="Открыть описание супа Коллагеновый бульон">
                         <div class="soup-label"><h3>Коллагеновый<br>бульон</h3><p>Сила в тебе</p></div>
-                        <img class="asset" src="{% static 'landing/img/soup-broth.png' %}" alt="Коллагеновый бульон с овощами">
+                        <img class="asset" src="{% static 'landing/img/soup-broth.png' %}?v={{ cache_bust }}" alt="Коллагеновый бульон">
                         <span class="soup-composition-cta">Состав</span>
                     </button>
                 </div>
@@ -154,31 +154,6 @@
                         <span class="sr-only">Открыть видео</span>
                     </button>
                 </div>
-            </section>
-
-            <section class="section-band umami-line" id="umami">
-                <button class="umami-teaser reveal" type="button" data-umami-open aria-label="Открыть описание уровня умами">
-                    <div class="umami-teaser-art" aria-hidden="true">
-                        <span class="umami-flag">Умами<br>обнаружен</span>
-                        <span class="umami-orbit-icon"></span>
-                        <span class="umami-art-spark umami-art-spark-a">✦</span>
-                        <span class="umami-art-spark umami-art-spark-b">✦</span>
-                        <img class="umami-mascot" src="{% static 'landing/img/asian-souphead.png' %}?v={{ cache_bust }}" alt="">
-                    </div>
-                    <div class="umami-teaser-copy">
-                        <h2 aria-label="Уровень умами">
-                            <span>Уровень</span>
-                            <strong>Умами</strong>
-                        </h2>
-                        <p class="umami-teaser-lead">Пятый вкус. <strong>Наш главный секрет.</strong></p>
-                        <p>Умами — это глубина, насыщенность и тот самый вкус, ради которого хочется взять ещё одну ложку.</p>
-                        <p>Мы варим долго, выбираем лучшее и постоянно улучшаем рецептуру, <strong>чтобы вкус был максимально богатым.</strong></p>
-                        <div class="umami-teaser-actions">
-                            <div class="umami-teaser-stars" aria-hidden="true">★★★★★</div>
-                            <span class="umami-detail-button">Узнать подробнее</span>
-                        </div>
-                    </div>
-                </button>
             </section>
 
             <section class="section-band feature-line" id="delivery">

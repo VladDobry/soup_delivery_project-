@@ -1,4 +1,6 @@
 const revealItems = document.querySelectorAll(".reveal");
+const assetVersion = new URL(document.currentScript.src).searchParams.get("v");
+const versionAsset = (path) => `${path}${assetVersion ? `?v=${assetVersion}` : ""}`;
 const toast = document.querySelector(".toast");
 const soupModal = document.querySelector(".soup-modal");
 const soupOpeners = document.querySelectorAll("[data-soup-open]");
@@ -12,7 +14,6 @@ const soupModalGroups = document.querySelector("[data-soup-modal-groups]");
 const soupSiteLink = document.querySelector("[data-soup-site-link]");
 const soupUmamiOpen = document.querySelector("[data-soup-umami-open]");
 const umamiModal = document.querySelector(".umami-modal");
-const umamiOpen = document.querySelector("[data-umami-open]");
 const umamiClosers = document.querySelectorAll("[data-umami-close]");
 const umamiCloseButton = document.querySelector(".umami-close");
 const umamiDialog = document.querySelector(".umami-dialog");
@@ -107,8 +108,8 @@ const soupDetails = {
         title: "Коллагеновый бульон",
         tagline: "Сила в тебе",
         description: "Для витаминно - минерального эффекта галактического масштаба.",
-        image: "/static/landing/img/soup-broth.png",
-        alt: "Коллагеновый бульон с овощами",
+        image: versionAsset("/static/landing/img/soup-broth.png"),
+        alt: "Коллагеновый бульон",
         accent: "#b98335",
         note: "Томится 25 часов, чтобы вкус стал глубоким, а основа — честной",
         groups: [
@@ -144,7 +145,7 @@ document.querySelectorAll(".gallery-tile[data-demo-toast]").forEach((tile) => {
     });
 });
 
-document.querySelectorAll(".soup-card, .feature-card, .gallery-tile, .umami-teaser").forEach((card) => {
+document.querySelectorAll(".soup-card, .feature-card, .gallery-tile").forEach((card) => {
     card.addEventListener("pointermove", (event) => {
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -461,7 +462,6 @@ soupSiteLink?.addEventListener("click", (event) => {
 
 window.addEventListener("popstate", () => showSoupFromUrl());
 showSoupFromUrl(true);
-umamiOpen?.addEventListener("click", () => setUmamiState(true, umamiOpen));
 soupUmamiOpen?.addEventListener("click", openUmamiFromSoup);
 umamiClosers.forEach((closer) => closer.addEventListener("click", () => {
     if (closer.matches("a[href]") && returnToSoupFromUmami) {
