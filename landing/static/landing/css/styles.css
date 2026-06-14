@@ -1921,10 +1921,14 @@ img {
 .umami-modal-header {
     min-width: 0;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto 1fr;
     align-items: center;
     gap: 22px;
     padding: 18px 26px 4px;
+}
+
+.umami-modal-header .passport-actions {
+    justify-self: end;
 }
 
 .umami-close {
@@ -2729,22 +2733,6 @@ img {
         height: 52px;
     }
 
-    .umami-modal-header {
-        grid-template-columns: auto 1fr;
-    }
-
-    .umami-modal-header .passport-nav {
-        order: 3;
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 4px;
-    }
-
-    .umami-modal-header .passport-actions {
-        justify-self: end;
-    }
-
     .umami-hero {
         grid-template-columns: 1fr;
         text-align: center;
@@ -3118,13 +3106,8 @@ img {
         font-size: 23px;
     }
 
-    .umami-modal-header .passport-nav,
     .umami-modal-header .btn {
         display: none;
-    }
-
-    .umami-modal-header .passport-actions {
-        justify-self: end;
     }
 
     .umami-hero {

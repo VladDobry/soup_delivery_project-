@@ -23,6 +23,20 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-soup-umami-open")
         self.assertContains(response, "Что за умами")
 
+    def test_umami_modal_header_has_no_navigation(self):
+        response = self.client.get(reverse("index"))
+        content = response.content.decode()
+
+        header_start = content.index('<header class="umami-modal-header">')
+        header_end = content.index("</header>", header_start)
+        header = content[header_start:header_end]
+
+        self.assertNotIn("<nav", header)
+        self.assertNotIn("Наши супы", header)
+        self.assertNotIn("Супотерапия", header)
+        self.assertIn("data-order-open", header)
+        self.assertIn("data-umami-close", header)
+
     def test_soup_modal_has_prices_promotion_and_order_link(self):
         response = self.client.get(reverse("index"))
 
