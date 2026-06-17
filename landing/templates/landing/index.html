@@ -503,8 +503,11 @@
         <div class="order-backdrop" data-order-close></div>
         <div class="order-dialog" role="dialog" aria-modal="true" aria-labelledby="order-modal-title" aria-describedby="order-modal-description">
             <button class="order-close" type="button" data-order-close aria-label="Закрыть">×</button>
-            <div class="order-brand" aria-hidden="true">
-                <span>Я</span><span>Есть</span><span>Суп!</span>
+            <div class="order-brand-lockup">
+                <span class="order-wordmark-frame">
+                    <img class="order-wordmark" src="{% static 'landing/img/hero-logo.png' %}?v={{ cache_bust }}" alt="Я ЕСТЬ СУП!">
+                </span>
+                <img class="order-logo" src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="Супхэд">
             </div>
             <h2 id="order-modal-title">Заказать суп</h2>
             <p id="order-modal-description">Позвоните нам — расскажем о супах, поможем выбрать объём и оформим заказ.</p>

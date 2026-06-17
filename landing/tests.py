@@ -66,6 +66,8 @@ class SoupPageTests(TestCase):
         self.assertContains(response, 'class="order-modal"')
         self.assertContains(response, 'id="order-modal-title"')
         self.assertContains(response, 'aria-describedby="order-modal-description"')
+        self.assertContains(response, "landing/img/hero-logo.png")
+        self.assertContains(response, "landing/img/hero-mascot.png")
         self.assertContains(response, "+7 (928) 851-2525")
         self.assertContains(response, 'href="tel:+79288512525"')
         self.assertContains(response, "data-order-close", count=2)

@@ -2147,19 +2147,37 @@ img {
     cursor: pointer;
 }
 
-.order-brand {
+.order-brand-lockup {
     display: grid;
-    justify-items: start;
-    color: var(--ink);
-    font-size: 27px;
-    font-weight: 800;
-    line-height: 0.72;
-    text-transform: uppercase;
-    rotate: -3deg;
+    justify-items: center;
+    margin-top: -4px;
 }
 
-.order-brand span:last-child {
-    color: var(--red);
+.order-wordmark-frame {
+    width: min(170px, 48vw);
+    aspect-ratio: 860 / 620;
+    position: relative;
+    z-index: 2;
+    display: block;
+    overflow: hidden;
+    margin-bottom: -44px;
+}
+
+.order-wordmark {
+    width: 100%;
+    height: auto;
+    display: block;
+    mix-blend-mode: multiply;
+}
+
+.order-logo {
+    width: min(130px, 36vw);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    rotate: -3deg;
 }
 
 .order-dialog h2 {
@@ -3041,6 +3059,15 @@ img {
 
     .order-phone {
         min-height: 72px;
+    }
+
+    .order-wordmark-frame {
+        width: min(150px, 46vw);
+        margin-bottom: -38px;
+    }
+
+    .order-logo {
+        width: min(118px, 34vw);
     }
 
     .soup-dialog {
