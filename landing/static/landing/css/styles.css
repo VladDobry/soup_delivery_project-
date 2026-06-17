@@ -1189,7 +1189,7 @@ img {
 .soup-passport-header {
     min-width: 0;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
     gap: 24px;
     padding: 18px 28px 8px;
@@ -1210,17 +1210,6 @@ img {
 
 .passport-logo span:nth-child(3) {
     color: var(--red);
-}
-
-.passport-nav {
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(14px, 2vw, 32px);
-    font-size: 13px;
-    font-weight: 800;
-    white-space: nowrap;
 }
 
 .passport-actions {
@@ -2449,14 +2438,6 @@ img {
         gap: 18px;
     }
 
-    .passport-nav {
-        order: 3;
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 4px;
-    }
-
     .passport-actions {
         justify-self: end;
     }
@@ -2739,10 +2720,6 @@ img {
     .passport-logo {
         width: 64px;
         font-size: 23px;
-    }
-
-    .passport-nav {
-        display: none;
     }
 
     .passport-actions .social-link,
