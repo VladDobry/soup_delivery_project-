@@ -27,6 +27,7 @@ const orderDialog = document.querySelector(".order-dialog");
 const orderOpeners = document.querySelectorAll("[data-order-open]");
 const orderClosers = document.querySelectorAll("[data-order-close]");
 const orderCloseButton = document.querySelector(".order-close");
+const soupPriceItems = document.querySelectorAll("[data-soup-price]");
 let activeSoupTrigger = null;
 let activeSoupId = null;
 let previousScrollRestoration = null;
@@ -35,6 +36,12 @@ let returnToSoupFromUmami = false;
 let videoPreviewInView = false;
 let activeOrderTrigger = null;
 let orderReturnTarget = null;
+
+const defaultSoupPrices = {
+    "1l": "1950 ₽",
+    "15l": "2850 ₽",
+    "2l": "3750 ₽"
+};
 
 const soupDetails = {
     borsch: {
@@ -78,6 +85,11 @@ const soupDetails = {
         alt: "Уха с рыбой и картофелем",
         accent: "#1f5c8e",
         note: "Готовится с любовью и томлением 25 часов на живом огне",
+        prices: {
+            "1l": "2450 ₽",
+            "15l": "3350 ₽",
+            "2l": "4250 ₽"
+        },
         groups: [
             ["🍲", "Основа", "Коллагеновый бульон из семги. Коллагеновый петуховый бульон"],
             ["🐟", "Рыба", "Семга, зубатка, тунец"],
@@ -121,6 +133,15 @@ const soupDetails = {
             ["✨", "Польза", "Насыщенная основа для супов и самостоятельный горячий бульон"]
         ]
     }
+};
+
+const renderSoupPrices = (prices = defaultSoupPrices) => {
+    soupPriceItems.forEach((item) => {
+        const price = prices[item.dataset.soupPrice] || defaultSoupPrices[item.dataset.soupPrice];
+        if (price) {
+            item.textContent = price;
+        }
+    });
 };
 
 const revealObserver = new IntersectionObserver((entries) => {
@@ -210,6 +231,7 @@ const setSoupState = (open, trigger = null) => {
         soupModalTagline.textContent = detail.tagline;
         soupModalDescription.textContent = detail.description;
         soupModalNote.textContent = detail.note;
+        renderSoupPrices(detail.prices);
         renderSoupGroups(detail.groups);
     }
 

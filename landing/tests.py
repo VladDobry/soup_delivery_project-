@@ -65,11 +65,24 @@ class SoupPageTests(TestCase):
 
     def test_soup_modal_has_prices_promotion_and_order_link(self):
         response = self.client.get(reverse("index"))
+        script = (
+            Path(__file__).resolve().parent
+            / "static"
+            / "landing"
+            / "js"
+            / "main.js"
+        ).read_text()
 
         self.assertContains(response, "Цены на банки")
         self.assertContains(response, "1950 ₽")
         self.assertContains(response, "2850 ₽")
         self.assertContains(response, "3750 ₽")
+        self.assertContains(response, 'data-soup-price="1l"')
+        self.assertContains(response, 'data-soup-price="15l"')
+        self.assertContains(response, 'data-soup-price="2l"')
+        self.assertIn('"1l": "2450 ₽"', script)
+        self.assertIn('"15l": "3350 ₽"', script)
+        self.assertIn('"2l": "4250 ₽"', script)
         self.assertContains(
             response,
             "2 дегустационных супа по 0,35 л в подарок!",
@@ -139,6 +152,7 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "feature-jar-solyanka-1l.png")
         self.assertContains(response, "feature-jar-ukha-15l.png")
         self.assertContains(response, "feature-jar-borsch-2l.png")
+        self.assertContains(response, "3350 ₽")
         self.assertNotContains(response, "<h4>1 л</h4>", html=True)
         self.assertNotContains(response, "<h4>1,5 л</h4>", html=True)
         self.assertNotContains(response, "<h4>2 л</h4>", html=True)
