@@ -274,12 +274,41 @@ img {
     margin: 0 0 28px;
     font-size: clamp(33px, 3.35vw, 52px);
     line-height: 0.98;
-    max-width: 540px;
+    max-width: min(640px, 100%);
 }
 
-.hero-copy h1 span,
+.hero-title {
+    display: grid;
+    gap: clamp(4px, 0.55vw, 9px);
+    justify-items: start;
+}
+
+.hero-title-line {
+    display: block;
+    color: var(--ink);
+    max-width: 100%;
+    font-size: inherit;
+    font-weight: 700;
+    line-height: 0.98;
+    text-wrap: balance;
+}
+
+.hero-title-accent,
 .copy-lead strong {
     color: var(--red);
+}
+
+.hero-title-top {
+    translate: 8px 0;
+}
+
+.hero-title-main {
+    translate: -6px 0;
+}
+
+.hero-title-audience {
+    margin-top: 4px;
+    translate: 0 0;
 }
 
 .copy-lead {
@@ -2457,6 +2486,16 @@ img {
         text-align: center;
     }
 
+    .hero-title {
+        justify-items: center;
+        max-width: 680px;
+        margin-inline: auto;
+    }
+
+    .hero-title-line {
+        translate: 0 0;
+    }
+
     .benefits {
         max-width: 720px;
         margin-inline: auto;
@@ -2669,6 +2708,11 @@ img {
 
     .hero-copy h1 {
         font-size: 31px;
+        margin-bottom: 22px;
+    }
+
+    .hero-title {
+        gap: 4px;
     }
 
     .hero .decor-planet {
