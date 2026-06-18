@@ -1456,6 +1456,10 @@ img {
     padding: 4px 18px;
 }
 
+.soup-composition[hidden] {
+    display: none;
+}
+
 .soup-group {
     min-width: 0;
     display: grid;
@@ -1492,6 +1496,68 @@ img {
     font-weight: 700;
     line-height: 1.16;
     text-transform: none;
+}
+
+.broth-passport {
+    min-width: 0;
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 8px;
+    background: rgba(255, 248, 236, 0.54);
+}
+
+.broth-passport[hidden] {
+    display: none;
+}
+
+.broth-passport-section {
+    min-width: 0;
+    display: grid;
+    gap: 8px;
+    padding: 14px;
+    border: 1px solid rgba(20, 19, 18, 0.14);
+    border-radius: 8px;
+    background: rgba(255, 248, 236, 0.54);
+}
+
+.broth-passport-section h3 {
+    margin: 0;
+    color: var(--soup-accent);
+    font-size: clamp(20px, 1.8vw, 28px);
+    line-height: 0.95;
+}
+
+.broth-passport-section p {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(15px, 1.1vw, 18px);
+    font-weight: 800;
+    line-height: 1.16;
+}
+
+.broth-type-list {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.broth-type-list span {
+    min-width: 0;
+    display: grid;
+    place-items: center;
+    min-height: 44px;
+    padding: 9px 10px;
+    border: 1px solid var(--soup-accent);
+    border-radius: 8px;
+    color: var(--soup-accent);
+    background: rgba(255, 248, 236, 0.72);
+    font-size: clamp(14px, 1vw, 17px);
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .soup-offer {
@@ -3077,6 +3143,14 @@ img {
 
     .soup-composition {
         padding-inline: 14px;
+    }
+
+    .broth-passport {
+        padding: 14px;
+    }
+
+    .broth-type-list {
+        grid-template-columns: 1fr;
     }
 
     .soup-offer-prices strong {

@@ -73,7 +73,7 @@ class SoupPageTests(TestCase):
             / "main.js"
         ).read_text()
 
-        self.assertContains(response, "Цены на банки")
+        self.assertContains(response, "Цены")
         self.assertContains(response, "1950 ₽")
         self.assertContains(response, "2850 ₽")
         self.assertContains(response, "3750 ₽")
@@ -88,6 +88,23 @@ class SoupPageTests(TestCase):
             "2 дегустационных супа по 0,35 л в подарок!",
         )
         self.assertContains(response, 'class="btn soup-offer-button"')
+
+    def test_broth_modal_uses_special_passport(self):
+        response = self.client.get(reverse("index"))
+        script = (
+            Path(__file__).resolve().parent
+            / "static"
+            / "landing"
+            / "js"
+            / "main.js"
+        ).read_text()
+
+        self.assertContains(response, "data-broth-passport")
+        self.assertIn('types: ["Говяжий", "Петух", "Сёмга"]', script)
+        self.assertIn('water: "Горная кристально чистая"', script)
+        self.assertIn("Гвоздика, корень сельдерея, лук-порей", script)
+        self.assertIn("renderBrothPassport(detail.passport)", script)
+        self.assertIn("renderSoupGroups(detail.groups || [])", script)
 
     def test_order_buttons_open_phone_modal(self):
         response = self.client.get(reverse("index"))
@@ -150,9 +167,12 @@ class SoupPageTests(TestCase):
         response = self.client.get(reverse("index"))
 
         self.assertContains(response, "feature-jar-solyanka-1l.png")
-        self.assertContains(response, "feature-jar-ukha-15l.png")
+        self.assertContains(response, "feature-jar-pumpkin-15l.png")
         self.assertContains(response, "feature-jar-borsch-2l.png")
-        self.assertContains(response, "3350 ₽")
+        self.assertContains(response, "Банка тыквенного супа-пюре объемом 1,5 литра")
+        self.assertNotContains(response, "feature-jar-ukha-15l.png")
+        self.assertNotContains(response, "feature-jars-volumes-pumpkin.png")
+        self.assertNotContains(response, "3350 ₽")
         self.assertNotContains(response, "<h4>1 л</h4>", html=True)
         self.assertNotContains(response, "<h4>1,5 л</h4>", html=True)
         self.assertNotContains(response, "<h4>2 л</h4>", html=True)
@@ -170,7 +190,7 @@ class SoupPageTests(TestCase):
                     f'data-initial-soup="{slug}"',
                 )
                 self.assertContains(response, "data-soup-umami-open")
-                self.assertContains(response, "Цены на банки")
+                self.assertContains(response, "Цены")
                 self.assertContains(response, "data-order-open")
 
     def test_unknown_soup_returns_404(self):

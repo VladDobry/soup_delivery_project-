@@ -11,6 +11,7 @@ const soupModalTagline = document.querySelector("[data-soup-modal-tagline]");
 const soupModalDescription = document.querySelector("[data-soup-modal-description]");
 const soupModalNote = document.querySelector("[data-soup-modal-note]");
 const soupModalGroups = document.querySelector("[data-soup-modal-groups]");
+const brothPassport = document.querySelector("[data-broth-passport]");
 const soupSiteLink = document.querySelector("[data-soup-site-link]");
 const soupUmamiOpen = document.querySelector("[data-soup-umami-open]");
 const umamiModal = document.querySelector(".umami-modal");
@@ -124,14 +125,11 @@ const soupDetails = {
         alt: "Коллагеновый бульон",
         accent: "#b98335",
         note: "Томится 25 часов, чтобы вкус стал глубоким, а основа — честной",
-        groups: [
-            ["🍲", "Основа", "Коллагеновый бульон долгого томления на живом огне"],
-            ["💧", "Вода", "Чистая родниковая вода для мягкого вкуса"],
-            ["🥕", "Овощная база", "Морковь, репчатый лук, лук-порей, сельдерей, чеснок"],
-            ["🌿", "Зелень", "Укроп, петрушка"],
-            ["🧂", "Специи и вкус", "Лавровый лист, черный перец горошком, морская соль, натуральные специи"],
-            ["✨", "Польза", "Насыщенная основа для супов и самостоятельный горячий бульон"]
-        ]
+        passport: {
+            types: ["Говяжий", "Петух", "Сёмга"],
+            water: "Горная кристально чистая",
+            aromatherapy: "Гвоздика, корень сельдерея, лук-порей, укроп, петрушка, розмарин, лук репчатый, морковь, черный перец (горошек), лавровый лист"
+        }
     }
 };
 
@@ -195,6 +193,7 @@ const renderSoupGroups = (groups) => {
     if (!soupModalGroups) return;
 
     soupModalGroups.replaceChildren();
+    soupModalGroups.hidden = false;
 
     groups.forEach(([icon, title, text]) => {
         const group = document.createElement("article");
@@ -216,6 +215,52 @@ const renderSoupGroups = (groups) => {
     });
 };
 
+const renderBrothPassport = (passport) => {
+    if (!brothPassport) return;
+
+    brothPassport.replaceChildren();
+    brothPassport.hidden = !passport;
+
+    if (soupModalGroups) {
+        soupModalGroups.hidden = Boolean(passport);
+    }
+
+    if (!passport) return;
+
+    const typesSection = document.createElement("section");
+    typesSection.className = "broth-passport-section broth-passport-types";
+
+    const typesTitle = document.createElement("h3");
+    typesTitle.textContent = "Виды";
+
+    const typeList = document.createElement("div");
+    typeList.className = "broth-type-list";
+    passport.types.forEach((type) => {
+        const item = document.createElement("span");
+        item.textContent = type;
+        typeList.append(item);
+    });
+    typesSection.append(typesTitle, typeList);
+
+    const waterSection = document.createElement("section");
+    waterSection.className = "broth-passport-section";
+    const waterTitle = document.createElement("h3");
+    waterTitle.textContent = "Вода";
+    const waterText = document.createElement("p");
+    waterText.textContent = passport.water;
+    waterSection.append(waterTitle, waterText);
+
+    const aromaSection = document.createElement("section");
+    aromaSection.className = "broth-passport-section";
+    const aromaTitle = document.createElement("h3");
+    aromaTitle.textContent = "Ароматерапия";
+    const aromaText = document.createElement("p");
+    aromaText.textContent = passport.aromatherapy;
+    aromaSection.append(aromaTitle, aromaText);
+
+    brothPassport.append(typesSection, waterSection, aromaSection);
+};
+
 const setSoupState = (open, trigger = null) => {
     if (!soupModal) return;
 
@@ -232,7 +277,8 @@ const setSoupState = (open, trigger = null) => {
         soupModalDescription.textContent = detail.description;
         soupModalNote.textContent = detail.note;
         renderSoupPrices(detail.prices);
-        renderSoupGroups(detail.groups);
+        renderSoupGroups(detail.groups || []);
+        renderBrothPassport(detail.passport);
     }
 
     soupModal.classList.toggle("is-open", open);
