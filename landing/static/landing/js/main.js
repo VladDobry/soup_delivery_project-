@@ -57,7 +57,7 @@ const soupDetails = {
         title: "Солянка",
         tagline: "Идеальный завтрак после веселого ужина",
         description: "Густая, яркая и насыщенная. Суп, который собирает весь вкус в одной тарелке.",
-        image: "/static/landing/img/soup-solyanka.png",
+        image: versionAsset("/static/landing/img/soup-solyanka.png"),
         alt: "Солянка с оливками и лимоном",
         accent: "#c33123",
         note: "Готовится с любовью и томлением 25 часов на живом огне",
