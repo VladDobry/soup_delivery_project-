@@ -270,45 +270,131 @@ img {
     line-height: 0.98;
 }
 
-.hero-copy h1 {
-    margin: 0 0 28px;
-    font-size: clamp(33px, 3.35vw, 52px);
-    line-height: 0.98;
-    max-width: min(640px, 100%);
-}
-
-.hero-title {
-    display: grid;
-    gap: clamp(4px, 0.55vw, 9px);
-    justify-items: start;
-}
-
-.hero-title-line {
-    display: block;
-    color: var(--ink);
-    max-width: 100%;
-    font-size: inherit;
-    font-weight: 700;
-    line-height: 0.98;
-    text-wrap: balance;
-}
-
-.hero-title-accent,
+.hero-poster,
 .copy-lead strong {
     color: var(--red);
 }
 
-.hero-title-top {
-    translate: 8px 0;
+.hero-poster {
+    width: min(520px, 100%);
+    margin: 0 0 18px;
+    display: grid;
+    justify-items: center;
+    color: var(--ink);
+    text-align: center;
+    line-height: 0.86;
+    filter: drop-shadow(0 8px 0 rgba(20, 19, 18, 0.04));
 }
 
-.hero-title-main {
-    translate: -6px 0;
+.hero-poster-kicker {
+    color: var(--red);
+    font-size: clamp(33px, 3.2vw, 51px);
+    line-height: 0.88;
+    font-weight: 700;
+    white-space: nowrap;
+    rotate: -1deg;
 }
 
-.hero-title-audience {
+.hero-poster-rule,
+.hero-poster-flourish {
+    display: block;
+    width: 72%;
+    height: 8px;
+    margin: 8px 0 5px;
+    position: relative;
+}
+
+.hero-poster-rule::before,
+.hero-poster-flourish::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--ink);
+    transform: translateY(-50%) rotate(-1.4deg);
+}
+
+.hero-poster-flourish {
+    width: 82%;
+    height: 14px;
+    margin: 14px 0 10px;
+}
+
+.hero-poster-flourish::before {
+    height: 3px;
+    transform: translateY(-50%) rotate(0.8deg);
+}
+
+.hero-poster-home {
     margin-top: 4px;
-    translate: 0 0;
+    color: var(--ink);
+    font-size: clamp(55px, 5.65vw, 91px);
+    line-height: 0.82;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.hero-poster-soup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: var(--red);
+    font-size: clamp(84px, 8.35vw, 136px);
+    line-height: 1;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: visible;
+    padding-bottom: 14px;
+}
+
+.hero-poster-soup strong {
+    display: block;
+    font: inherit;
+    color: inherit;
+    letter-spacing: -0.02em;
+    overflow: visible;
+}
+
+.hero-poster-small {
+    display: grid;
+    justify-items: start;
+    width: 82%;
+    color: var(--ink);
+    text-align: left;
+    font-size: clamp(18px, 1.55vw, 25px);
+    line-height: 0.98;
+    font-weight: 700;
+}
+
+.hero-poster-small span {
+    display: block;
+    white-space: nowrap;
+}
+
+.hero-poster-banner {
+    display: block;
+    margin-top: 10px;
+    padding: 9px 14px 11px;
+    color: var(--paper);
+    background: var(--red);
+    border-radius: 3px;
+    font-size: clamp(19px, 1.68vw, 27px);
+    line-height: 0.98;
+    font-weight: 700;
+    white-space: nowrap;
+    rotate: -1.2deg;
+    box-shadow: 0 5px 0 rgba(153, 21, 28, 0.22);
+}
+
+.hero-poster-banner::selection,
+.hero-poster-kicker::selection,
+.hero-poster-soup strong::selection {
+    color: var(--paper);
+    background: var(--ink);
 }
 
 .copy-lead {
@@ -327,7 +413,7 @@ img {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 14px;
-    margin-top: 28px;
+    margin-top: 20px;
 }
 
 .benefits article {
@@ -2486,14 +2572,9 @@ img {
         text-align: center;
     }
 
-    .hero-title {
-        justify-items: center;
-        max-width: 680px;
+    .hero-poster {
+        width: min(620px, 100%);
         margin-inline: auto;
-    }
-
-    .hero-title-line {
-        translate: 0 0;
     }
 
     .benefits {
@@ -2706,13 +2787,17 @@ img {
         transform: translateX(-50%);
     }
 
-    .hero-copy h1 {
-        font-size: 31px;
-        margin-bottom: 22px;
+    .hero-poster {
+        width: min(420px, 100%);
+        margin-bottom: 20px;
     }
 
-    .hero-title {
-        gap: 4px;
+    .hero-poster-small {
+        width: 88%;
+    }
+
+    .hero-poster-banner {
+        max-width: 100%;
     }
 
     .hero .decor-planet {
