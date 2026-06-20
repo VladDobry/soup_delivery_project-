@@ -288,50 +288,17 @@ img {
 
 .hero-poster-kicker {
     color: var(--red);
-    font-size: clamp(33px, 3.2vw, 51px);
+    font-size: clamp(29.7px, 2.88vw, 45.9px);
     line-height: 0.88;
     font-weight: 700;
     white-space: nowrap;
     rotate: -1deg;
 }
 
-.hero-poster-rule,
-.hero-poster-flourish {
-    display: block;
-    width: 72%;
-    height: 8px;
-    margin: 8px 0 5px;
-    position: relative;
-}
-
-.hero-poster-rule::before,
-.hero-poster-flourish::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: 4px;
-    border-radius: 999px;
-    background: var(--ink);
-    transform: translateY(-50%) rotate(-1.4deg);
-}
-
-.hero-poster-flourish {
-    width: 82%;
-    height: 14px;
-    margin: 14px 0 10px;
-}
-
-.hero-poster-flourish::before {
-    height: 3px;
-    transform: translateY(-50%) rotate(0.8deg);
-}
-
 .hero-poster-home {
     margin-top: 4px;
     color: var(--ink);
-    font-size: clamp(55px, 5.65vw, 91px);
+    font-size: clamp(49.5px, 5.085vw, 81.9px);
     line-height: 0.82;
     font-weight: 700;
     white-space: nowrap;
@@ -343,7 +310,7 @@ img {
     justify-content: center;
     width: 100%;
     color: var(--red);
-    font-size: clamp(84px, 8.35vw, 136px);
+    font-size: clamp(75.6px, 7.515vw, 122.4px);
     line-height: 1;
     font-weight: 700;
     white-space: nowrap;
@@ -365,7 +332,7 @@ img {
     width: 82%;
     color: var(--ink);
     text-align: left;
-    font-size: clamp(18px, 1.55vw, 25px);
+    font-size: clamp(27px, 2.325vw, 37.5px);
     line-height: 0.98;
     font-weight: 700;
 }
@@ -382,7 +349,7 @@ img {
     color: var(--paper);
     background: var(--red);
     border-radius: 3px;
-    font-size: clamp(19px, 1.68vw, 27px);
+    font-size: clamp(28.5px, 2.52vw, 40.5px);
     line-height: 0.98;
     font-weight: 700;
     white-space: nowrap;
