@@ -18,6 +18,7 @@ staticfiles/
 # Local config
 .env
 .env.*
+!.env.example
 
 # Tooling
 .pytest_cache/
