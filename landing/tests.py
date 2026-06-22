@@ -105,10 +105,10 @@ class SoupPageTests(TestCase):
         self.assertIn('"1l": "3000 ₽"', script)
         self.assertIn('"15l": "4250 ₽"', script)
         self.assertIn('"2l": "5000 ₽"', script)
-        self.assertContains(
-            response,
-            "2 дегустационных супа по 0,35 л в подарок!",
-        )
+        self.assertNotContains(response, "дегустационных супа")
+        self.assertNotContains(response, "0,35 л в подарок")
+        self.assertNotContains(response, 'class="feature-gift')
+        self.assertNotContains(response, 'class="soup-offer-promo"')
         self.assertContains(response, 'class="btn soup-offer-button"')
 
     def test_broth_modal_uses_special_passport(self):
@@ -162,6 +162,11 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "+7 (928) 851-2525")
         self.assertContains(response, "Мы в соцсетях")
         self.assertContains(response, "Суп спасёт")
+        self.assertContains(response, 'class="footer-mascot"')
+        self.assertRegex(
+            response.content.decode(),
+            r"landing/img/hero-mascot(?:\.[0-9a-f]+)?\.png",
+        )
 
     def test_benefit_icons_have_consistent_order(self):
         response = self.client.get(reverse("index"))
@@ -216,6 +221,9 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "На троих")
         self.assertContains(response, "На пятерых")
         self.assertContains(response, "На семерых")
+        self.assertIn("<small>На троих</small>\n                                            <b>1000гр</b>", content)
+        self.assertIn("<small>На пятерых</small>\n                                            <b>1600гр</b>", content)
+        self.assertIn("<small>На семерых</small>\n                                            <b>2200гр</b>", content)
         self.assertNotContains(response, "feature-jar-ukha-15l.png")
         self.assertNotContains(response, "feature-jars-volumes-pumpkin.png")
         self.assertNotContains(response, "3350 ₽")

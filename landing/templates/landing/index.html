@@ -178,10 +178,6 @@
                             <p>Идеально для компании, семьи<br>или чтобы найти свой любимый вкус.</p>
                         </header>
                         <img class="feature-set-image" src="{% static 'landing/img/feature-set-transparent.png' %}" alt="Сет из борща, солянки и ухи">
-                        <div class="feature-gift feature-gift-light">
-                            <span class="feature-gift-icon" aria-hidden="true"></span>
-                            <p>При заказе сета — <strong>2 дегустационных супа<br>по 0,35 л в подарок!</strong></p>
-                        </div>
                     </article>
 
                     <article class="feature-panel feature-volume-panel reveal">
@@ -199,6 +195,7 @@
                                                 <path d="M32 16a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-13 7a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm26 0a6 6 0 1 1 0 12 6 6 0 0 1 0-12ZM17 38c5.4 0 9.8 3.6 10.8 8.5H8.2C9.2 41.6 13.6 38 19 38h-2Zm30 0c5.4 0 9.8 3.6 10.8 8.5H38.2C39.2 41.6 43.6 38 49 38h-2Zm-15-3c7.1 0 13 4.8 14.5 11.5h-29C19 39.8 24.9 35 32 35Z"></path>
                                             </svg>
                                             <small>На троих</small>
+                                            <b>1000гр</b>
                                         </div>
                                         <img class="feature-jar-image feature-jar-image-small" src="{% static 'landing/img/feature-jar-solyanka-1000g.png' %}" alt="Банка солянки весом 1000гр">
                                     </div>
@@ -213,6 +210,7 @@
                                                 <path d="M32 16a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-13 7a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm26 0a6 6 0 1 1 0 12 6 6 0 0 1 0-12ZM17 38c5.4 0 9.8 3.6 10.8 8.5H8.2C9.2 41.6 13.6 38 19 38h-2Zm30 0c5.4 0 9.8 3.6 10.8 8.5H38.2C39.2 41.6 43.6 38 49 38h-2Zm-15-3c7.1 0 13 4.8 14.5 11.5h-29C19 39.8 24.9 35 32 35Z"></path>
                                             </svg>
                                             <small>На пятерых</small>
+                                            <b>1600гр</b>
                                         </div>
                                         <img class="feature-jar-image feature-jar-image-medium" src="{% static 'landing/img/feature-jar-pumpkin-1600g.png' %}" alt="Банка тыквенного супа-пюре весом 1600гр">
                                     </div>
@@ -227,6 +225,7 @@
                                                 <path d="M32 16a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-13 7a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm26 0a6 6 0 1 1 0 12 6 6 0 0 1 0-12ZM17 38c5.4 0 9.8 3.6 10.8 8.5H8.2C9.2 41.6 13.6 38 19 38h-2Zm30 0c5.4 0 9.8 3.6 10.8 8.5H38.2C39.2 41.6 43.6 38 49 38h-2Zm-15-3c7.1 0 13 4.8 14.5 11.5h-29C19 39.8 24.9 35 32 35Z"></path>
                                             </svg>
                                             <small>На семерых</small>
+                                            <b>2200гр</b>
                                         </div>
                                         <img class="feature-jar-image feature-jar-image-large" src="{% static 'landing/img/feature-jar-borsch-2200g.png' %}" alt="Банка борща весом 2200гр">
                                     </div>
@@ -234,10 +233,6 @@
                                     <strong>4500 ₽</strong>
                                 </div>
                             </div>
-                        </div>
-                        <div class="feature-gift feature-gift-red">
-                            <span class="feature-gift-icon" aria-hidden="true"></span>
-                            <p>При покупке любого супа от 1000гр —<br><strong>2 дегустационных супа по 0,35 л в подарок!</strong></p>
                         </div>
                     </article>
                 </div>
@@ -250,6 +245,7 @@
                 <div class="footer-brand" aria-label="Я есть суп">
                     <span>Я</span><span>Есть</span><span>Суп!</span>
                 </div>
+                <img class="footer-mascot" src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
             </div>
             <div class="footer-column reveal">
                 <h2>Заказать</h2>
@@ -324,9 +320,7 @@
                             <span><small>2200гр</small><strong data-soup-price="2l">4500 ₽</strong></span>
                         </div>
                     </div>
-                    <div class="soup-offer-promo">
-                        <span class="soup-offer-gift" aria-hidden="true"></span>
-                        <p>При покупке любого супа от 1000гр — <strong>2 дегустационных супа по 0,35 л в подарок!</strong></p>
+                    <div class="soup-offer-action">
                         <button class="btn soup-offer-button" type="button" data-order-open>Заказать суп</button>
                     </div>
                 </section>

@@ -731,6 +731,13 @@ img {
     text-transform: uppercase;
 }
 
+.feature-people b {
+    color: var(--ink);
+    font-size: clamp(13px, 0.95vw, 16px);
+    line-height: 1;
+    font-weight: 800;
+}
+
 .feature-volume-item p {
     align-self: center;
     margin: 0;
@@ -748,84 +755,6 @@ img {
     color: var(--ink);
     font-size: clamp(20px, 1.7vw, 28px);
     line-height: 1;
-}
-
-.feature-gift {
-    min-height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 12px;
-    padding: 12px 20px;
-    border-radius: 9px;
-}
-
-.feature-gift p {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(13px, 1vw, 16px);
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: 0.015em;
-    text-align: left;
-    text-transform: uppercase;
-}
-
-.feature-gift strong {
-    color: var(--red);
-}
-
-.feature-gift-light {
-    border: 1px solid rgba(20, 19, 18, 0.14);
-    background: rgba(255, 248, 236, 0.92);
-    box-shadow: 0 8px 20px rgba(43, 29, 17, 0.1);
-}
-
-.feature-gift-red {
-    color: var(--paper);
-    background: var(--red);
-    box-shadow: 0 8px 20px rgba(113, 20, 22, 0.18);
-}
-
-.feature-gift-red strong {
-    color: var(--paper);
-}
-
-.feature-gift-icon {
-    width: 34px;
-    height: 30px;
-    flex: 0 0 auto;
-    position: relative;
-    border: 3px solid currentColor;
-    border-radius: 2px;
-    color: var(--red);
-}
-
-.feature-gift-red .feature-gift-icon {
-    color: var(--paper);
-}
-
-.feature-gift-icon::before {
-    content: "";
-    width: 4px;
-    position: absolute;
-    inset: -3px auto -3px 50%;
-    translate: -50% 0;
-    background: currentColor;
-}
-
-.feature-gift-icon::after {
-    content: "";
-    width: 20px;
-    height: 11px;
-    position: absolute;
-    left: 50%;
-    top: -13px;
-    translate: -50% 0;
-    border: 3px solid currentColor;
-    border-bottom: 0;
-    border-radius: 12px 12px 0 0;
 }
 
 .gallery-line {
@@ -927,6 +856,9 @@ img {
 
 .footer-logo {
     min-width: 140px;
+    display: grid;
+    justify-items: start;
+    gap: 10px;
 }
 
 .footer-brand {
@@ -943,6 +875,14 @@ img {
 
 .footer-brand span:last-child {
     color: var(--red);
+}
+
+.footer-mascot {
+    width: min(112px, 100%);
+    height: auto;
+    display: block;
+    margin-left: 6px;
+    rotate: -4deg;
 }
 
 .footer-column {
@@ -1699,64 +1639,18 @@ img {
     white-space: nowrap;
 }
 
-.soup-offer-promo {
+.soup-offer-action {
     min-width: 0;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 14px;
     padding: 14px 16px;
-    color: var(--paper);
-    background: var(--red);
-}
-
-.soup-offer-promo p {
-    margin: 0;
-    font-size: clamp(12px, 1vw, 15px);
-    font-weight: 800;
-    line-height: 1.12;
-}
-
-.soup-offer-promo strong {
-    color: var(--paper);
-}
-
-.soup-offer-gift {
-    width: 30px;
-    height: 27px;
-    position: relative;
-    border: 3px solid currentColor;
-    border-radius: 2px;
-}
-
-.soup-offer-gift::before {
-    content: "";
-    width: 4px;
-    position: absolute;
-    inset: -3px auto -3px 50%;
-    translate: -50% 0;
-    background: currentColor;
-}
-
-.soup-offer-gift::after {
-    content: "";
-    width: 18px;
-    height: 9px;
-    position: absolute;
-    left: 50%;
-    top: -11px;
-    translate: -50% 0;
-    border: 3px solid currentColor;
-    border-bottom: 0;
-    border-radius: 10px 10px 0 0;
+    place-items: center;
 }
 
 .soup-offer-button {
     min-height: 42px;
     padding: 12px 17px;
-    border: 1px solid var(--paper);
-    color: var(--ink);
-    background: var(--paper);
+    color: var(--paper);
+    background: var(--red);
     font-size: 12px;
     white-space: nowrap;
 }
@@ -2636,11 +2530,6 @@ img {
         padding-inline: 14px;
     }
 
-    .soup-offer-promo {
-        gap: 10px;
-        padding-inline: 12px;
-    }
-
     .soup-offer-button {
         padding-inline: 12px;
     }
@@ -2881,10 +2770,6 @@ img {
         height: 210px;
     }
 
-    .feature-gift {
-        margin-top: 18px;
-    }
-
     .gallery-line {
         padding-inline: 18px;
     }
@@ -2960,13 +2845,7 @@ img {
         text-align: center;
     }
 
-    .soup-offer-promo {
-        grid-template-columns: auto minmax(0, 1fr);
-        padding: 16px;
-    }
-
     .soup-offer-button {
-        grid-column: 1 / -1;
         width: 100%;
         justify-content: center;
     }
@@ -3070,6 +2949,16 @@ img {
     .footer {
         grid-template-columns: 1fr;
         padding-inline: 20px;
+    }
+
+    .footer-logo {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .footer-mascot {
+        margin-left: 0;
+        width: 104px;
     }
 
     .footer-column {
@@ -3181,15 +3070,6 @@ img {
         text-align: center;
     }
 
-    .feature-gift {
-        gap: 13px;
-        padding-inline: 14px;
-    }
-
-    .feature-gift p {
-        font-size: 12px;
-    }
-
     .soup-card {
         min-height: 340px;
     }
@@ -3286,14 +3166,9 @@ img {
         font-size: 20px;
     }
 
-    .soup-offer-promo {
-        grid-template-columns: 1fr;
+    .soup-offer-action {
         justify-items: center;
         text-align: center;
-    }
-
-    .soup-offer-gift {
-        margin-top: 5px;
     }
 
     .soup-offer-button {
