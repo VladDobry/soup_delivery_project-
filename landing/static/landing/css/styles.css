@@ -2334,6 +2334,29 @@ img {
     line-height: 1.25;
 }
 
+.order-delivery {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border: 1px solid rgba(20, 19, 18, 0.14);
+    border-radius: 10px;
+    color: var(--ink);
+    background: rgba(255, 248, 236, 0.72);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+.order-delivery strong {
+    color: var(--red);
+    font-size: 18px;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
 .order-phone {
     width: 100%;
     min-height: 76px;
@@ -3194,6 +3217,16 @@ img {
 
     .order-dialog > p {
         font-size: 16px;
+    }
+
+    .order-delivery {
+        gap: 5px;
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+
+    .order-delivery strong {
+        font-size: 17px;
     }
 
     .order-phone {

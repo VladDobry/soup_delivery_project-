@@ -1,3 +1,4 @@
+import re
 import tempfile
 from pathlib import Path
 
@@ -31,6 +32,21 @@ class SoupPageTests(TestCase):
         self.assertNotContains(response, "data-umami-open")
         self.assertContains(response, 'class="umami-modal"')
         self.assertContains(response, 'id="umami-modal-title"')
+
+    def test_header_navigation_has_no_delivery_link(self):
+        response = self.client.get(reverse("index"))
+        content = response.content.decode()
+
+        nav_start = content.index('<nav class="main-nav">')
+        nav_end = content.index("</nav>", nav_start)
+        nav = content[nav_start:nav_end]
+
+        self.assertIn("Супы", nav)
+        self.assertIn("О нас", nav)
+        self.assertIn("Контакты", nav)
+        self.assertNotIn("Доставка", nav)
+        self.assertNotIn('href="#delivery"', nav)
+        self.assertIn('id="delivery"', content)
 
     def test_umami_modal_header_has_no_navigation(self):
         response = self.client.get(reverse("index"))
@@ -74,15 +90,21 @@ class SoupPageTests(TestCase):
         ).read_text()
 
         self.assertContains(response, "Цены")
-        self.assertContains(response, "1950 ₽")
-        self.assertContains(response, "2850 ₽")
+        self.assertContains(response, "2500 ₽")
         self.assertContains(response, "3750 ₽")
+        self.assertContains(response, "4500 ₽")
+        self.assertContains(response, "1000гр")
+        self.assertContains(response, "1600гр")
+        self.assertContains(response, "2200гр")
+        self.assertNotContains(response, "1950 ₽")
+        self.assertNotContains(response, "2850 ₽")
+        self.assertNotContains(response, "При покупке любого супа от 1 литра")
         self.assertContains(response, 'data-soup-price="1l"')
         self.assertContains(response, 'data-soup-price="15l"')
         self.assertContains(response, 'data-soup-price="2l"')
-        self.assertIn('"1l": "2450 ₽"', script)
-        self.assertIn('"15l": "3350 ₽"', script)
-        self.assertIn('"2l": "4250 ₽"', script)
+        self.assertIn('"1l": "3000 ₽"', script)
+        self.assertIn('"15l": "4250 ₽"', script)
+        self.assertIn('"2l": "5000 ₽"', script)
         self.assertContains(
             response,
             "2 дегустационных супа по 0,35 л в подарок!",
@@ -112,9 +134,21 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-order-open", count=5)
         self.assertContains(response, 'class="order-modal"')
         self.assertContains(response, 'id="order-modal-title"')
-        self.assertContains(response, 'aria-describedby="order-modal-description"')
-        self.assertContains(response, "landing/img/hero-logo.png")
-        self.assertContains(response, "landing/img/hero-mascot.png")
+        self.assertContains(
+            response,
+            'aria-describedby="order-modal-description order-delivery-info"',
+        )
+        self.assertContains(response, 'id="order-delivery-info"')
+        self.assertContains(response, "Адлер, Сириус — бесплатно")
+        self.assertContains(response, "Сочи, Красная Поляна — бесплатно от 2200гр")
+        self.assertRegex(
+            response.content.decode(),
+            r"landing/img/hero-logo(?:\.[0-9a-f]+)?\.png",
+        )
+        self.assertRegex(
+            response.content.decode(),
+            r"landing/img/hero-mascot(?:\.[0-9a-f]+)?\.png",
+        )
         self.assertContains(response, "+7 (928) 851-2525")
         self.assertContains(response, 'href="tel:+79288512525"')
         self.assertContains(response, "data-order-close", count=2)
@@ -141,15 +175,20 @@ class SoupPageTests(TestCase):
         ]
 
         hero_start = content.index('<div class="benefits"')
-        hero_end = content.index("</div>", hero_start)
+        hero_end = content.index('<section class="section-band soup-line"', hero_start)
         hero_benefits = content[hero_start:hero_end]
 
         passport_start = content.index('<div class="soup-passport-benefits"')
-        passport_end = content.index("</div>", passport_start)
+        passport_end = content.index("</section>", passport_start)
         passport_benefits = content[passport_start:passport_end]
 
         for benefits in (hero_benefits, passport_benefits):
-            positions = [benefits.index(image) for image in expected_images]
+            positions = []
+            for image in expected_images:
+                stem = image.removesuffix(".png")
+                match = re.search(rf"{re.escape(stem)}(?:\.[0-9a-f]+)?\.png", benefits)
+                self.assertIsNotNone(match)
+                positions.append(match.start())
             self.assertEqual(positions, sorted(positions))
 
     def test_gallery_is_between_soups_and_features(self):
@@ -165,11 +204,18 @@ class SoupPageTests(TestCase):
 
     def test_volume_cards_use_branded_jar_images(self):
         response = self.client.get(reverse("index"))
+        content = response.content.decode()
 
-        self.assertContains(response, "feature-jar-solyanka-1l.png")
-        self.assertContains(response, "feature-jar-pumpkin-15l.png")
-        self.assertContains(response, "feature-jar-borsch-2l.png")
-        self.assertContains(response, "Банка тыквенного супа-пюре объемом 1,5 литра")
+        self.assertRegex(content, r"feature-jar-solyanka-1000g(?:\.[0-9a-f]+)?\.png")
+        self.assertRegex(content, r"feature-jar-pumpkin-1600g(?:\.[0-9a-f]+)?\.png")
+        self.assertRegex(content, r"feature-jar-borsch-2200g(?:\.[0-9a-f]+)?\.png")
+        self.assertNotContains(response, "feature-jar-solyanka-1l.png")
+        self.assertNotContains(response, "feature-jar-pumpkin-15l.png")
+        self.assertNotContains(response, "feature-jar-borsch-2l.png")
+        self.assertContains(response, "Банка тыквенного супа-пюре весом 1600гр")
+        self.assertContains(response, "На троих")
+        self.assertContains(response, "На пятерых")
+        self.assertContains(response, "На семерых")
         self.assertNotContains(response, "feature-jar-ukha-15l.png")
         self.assertNotContains(response, "feature-jars-volumes-pumpkin.png")
         self.assertNotContains(response, "3350 ₽")
