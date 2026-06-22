@@ -107,11 +107,13 @@ DJANGO_SECRET_KEY=PASTE_GENERATED_SECRET_HERE
 DJANGO_DEBUG=False
 DJANGO_ALLOWED_HOSTS=example.ru,www.example.ru
 DJANGO_CSRF_TRUSTED_ORIGINS=https://example.ru,https://www.example.ru
-DJANGO_SECURE_SSL_REDIRECT=True
+DJANGO_SECURE_SSL_REDIRECT=False
 DJANGO_SECURE_HSTS_SECONDS=0
 DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=False
 DJANGO_SECURE_HSTS_PRELOAD=False
 ```
+
+Keep `DJANGO_SECURE_SSL_REDIRECT=False` for the first HTTP launch. Turn it on only after Certbot has successfully configured HTTPS.
 
 Protect the file:
 
@@ -233,6 +235,24 @@ sudo certbot --nginx -d example.ru -d www.example.ru
 ```
 
 Choose redirect to HTTPS when Certbot asks.
+
+After Certbot succeeds, enable Django's HTTPS redirect too:
+
+```bash
+sudo nano /etc/soup.env
+```
+
+Change:
+
+```dotenv
+DJANGO_SECURE_SSL_REDIRECT=True
+```
+
+Then restart the app:
+
+```bash
+sudo systemctl restart soup
+```
 
 Check renewal:
 
