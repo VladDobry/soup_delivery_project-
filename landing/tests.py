@@ -105,6 +105,12 @@ class SoupPageTests(TestCase):
         self.assertIn('"1l": "3000 ₽"', script)
         self.assertIn('"15l": "4250 ₽"', script)
         self.assertIn('"2l": "5000 ₽"', script)
+        self.assertIn('prices: {\n            "2l": "2500 ₽"\n        },\n        passport:', script)
+        self.assertIn('const priceRow = item.closest("span");', script)
+        self.assertIn("priceRow.hidden = true;", script)
+        self.assertIn('priceRow.style.display = "none";', script)
+        self.assertIn("priceGrid.style.gridTemplateColumns", script)
+        self.assertIn('row.style.borderLeft = "0";', script)
         self.assertNotContains(response, "дегустационных супа")
         self.assertNotContains(response, "0,35 л в подарок")
         self.assertNotContains(response, 'class="feature-gift')
@@ -203,6 +209,9 @@ class SoupPageTests(TestCase):
                 self.assertIsNotNone(match)
                 positions.append(match.start())
             self.assertEqual(positions, sorted(positions))
+
+        self.assertIn("<b>готовим<br>суп</b>", passport_benefits)
+        self.assertNotIn("<b>варим<br>суп</b>", passport_benefits)
 
     def test_gallery_is_between_soups_and_features(self):
         response = self.client.get(reverse("index"))

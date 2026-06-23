@@ -125,6 +125,9 @@ const soupDetails = {
         alt: "Коллагеновый бульон",
         accent: "#b98335",
         note: "Томится 25 часов, чтобы вкус стал глубоким, а основа — честной",
+        prices: {
+            "2l": "2500 ₽"
+        },
         passport: {
             types: ["Говяжий", "Петух", "Сёмга"],
             water: "Горная родниковая",
@@ -134,10 +137,36 @@ const soupDetails = {
 };
 
 const renderSoupPrices = (prices = defaultSoupPrices) => {
+    const visibleRows = [];
+
     soupPriceItems.forEach((item) => {
-        const price = prices[item.dataset.soupPrice] || defaultSoupPrices[item.dataset.soupPrice];
+        const price = prices[item.dataset.soupPrice];
+        const priceRow = item.closest("span");
+
         if (price) {
             item.textContent = price;
+            if (priceRow) {
+                priceRow.hidden = false;
+                priceRow.style.display = "";
+                priceRow.style.borderLeft = "";
+                visibleRows.push(priceRow);
+            }
+        } else if (priceRow) {
+            priceRow.hidden = true;
+            priceRow.style.display = "none";
+            priceRow.style.borderLeft = "0";
+        }
+    });
+
+    const priceGrid = soupPriceItems[0]?.closest(".soup-offer-prices");
+    if (priceGrid) {
+        const columnCount = Math.max(visibleRows.length, 1);
+        priceGrid.style.gridTemplateColumns = `repeat(${columnCount}, minmax(0, 1fr))`;
+    }
+
+    visibleRows.forEach((row, index) => {
+        if (index === 0) {
+            row.style.borderLeft = "0";
         }
     });
 };

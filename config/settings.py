@@ -51,7 +51,8 @@ DEBUG = env_bool("DJANGO_DEBUG", True)
 
 ALLOWED_HOSTS = env_list(
     "DJANGO_ALLOWED_HOSTS",
-    ["127.0.0.1", "localhost", ".ngrok-free.app", ".onrender.com"],
+    ["127.0.0.1", "localhost", "iamsoup.ru",
+    "www.iamsoup.ru"],
 )
 
 CSRF_TRUSTED_ORIGINS = env_list(
