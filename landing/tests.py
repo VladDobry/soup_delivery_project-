@@ -139,6 +139,14 @@ class SoupPageTests(TestCase):
             'aria-describedby="order-modal-description order-delivery-info"',
         )
         self.assertContains(response, 'id="order-delivery-info"')
+        self.assertContains(response, "Дорогие друзья!")
+        self.assertContains(response, "ПО-НАСТОЯЩЕМУ ДОМАШНЯЯ")
+        self.assertContains(response, "А ещё можно сделать предзаказ!")
+        self.assertContains(
+            response,
+            '<a href="https://t.me/yaestsup" target="_blank" rel="noopener noreferrer">ТГ</a>',
+            html=True,
+        )
         self.assertContains(response, "Адлер, Сириус — бесплатно")
         self.assertContains(response, "Сочи, Красная Поляна — бесплатно от 2200гр")
         self.assertRegex(
