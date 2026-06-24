@@ -582,7 +582,533 @@ img {
 .feature-showcase {
     display: grid;
     grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+    gap: 24px 0;
     padding: 0 28px;
+}
+
+.promo-actions-panel {
+    grid-column: 1 / -1;
+    min-height: 820px;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    gap: 22px;
+    padding: 64px 70px 40px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    background:
+        radial-gradient(circle at 8% 16%, rgba(238, 170, 18, 0.15), transparent 12rem),
+        radial-gradient(circle at 86% 78%, rgba(197, 29, 37, 0.07), transparent 15rem),
+        radial-gradient(rgba(32, 23, 14, 0.1) 0.7px, transparent 0.7px),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 248, 236, 0.18)),
+        var(--paper);
+    background-size: auto, auto, 20px 20px, auto, auto;
+}
+
+.promo-actions-panel::before {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    z-index: 0;
+    border: 2px solid rgba(255, 255, 255, 0.78);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+.promo-actions-panel::after {
+    content: "";
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: -80px;
+    bottom: -116px;
+    z-index: 1;
+    border: 4px dashed rgba(238, 170, 18, 0.48);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.promo-actions-copy,
+.promo-discount-grid,
+.promo-extra-row,
+.promo-order-button {
+    position: relative;
+    z-index: 4;
+}
+
+.promo-actions-copy {
+    width: min(610px, 60%);
+    margin-left: 114px;
+}
+
+.promo-label {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 2px solid var(--yellow);
+    border-radius: 999px;
+    color: var(--muted);
+    background: rgba(255, 248, 236, 0.82);
+    font-size: clamp(14px, 1.15vw, 18px);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.promo-label span {
+    color: var(--ink);
+    font-size: 0.82em;
+}
+
+.promo-actions-copy h3 {
+    margin: 22px 0 0;
+    color: var(--ink);
+    font-size: clamp(48px, 5vw, 74px);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.promo-actions-copy h3 span,
+.promo-actions-copy h3 strong {
+    display: block;
+}
+
+.promo-actions-copy h3 strong {
+    margin-top: 8px;
+    color: var(--red);
+    font-size: 1.06em;
+}
+
+.promo-mascot {
+    width: min(250px, 22vw);
+    position: absolute;
+    top: 40px;
+    right: 92px;
+    z-index: 3;
+    rotate: 0deg;
+    filter: drop-shadow(0 16px 16px rgba(43, 29, 17, 0.18));
+}
+
+.promo-mascot.floaty {
+    animation-duration: 5.5s;
+}
+
+.promo-soup-crop,
+.promo-star,
+.promo-planet,
+.promo-moon,
+.promo-comet {
+    position: absolute;
+    pointer-events: none;
+}
+
+.promo-soup-crop {
+    z-index: 2;
+}
+
+.promo-soup-crop img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgba(43, 29, 17, 0.17));
+}
+
+.promo-soup-crop-left {
+    width: 278px;
+    height: 360px;
+    left: -88px;
+    top: 192px;
+    rotate: -8deg;
+}
+
+.promo-soup-crop-right {
+    width: 230px;
+    height: 270px;
+    right: -42px;
+    bottom: 108px;
+    rotate: 7deg;
+}
+
+.promo-discount-grid {
+    width: min(890px, 78%);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    justify-self: center;
+    margin-top: 8px;
+}
+
+.promo-discount-card {
+    --discount-blob-size: 106px;
+    --discount-blob-top: 124px;
+    min-height: 244px;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    justify-items: center;
+    align-content: stretch;
+    row-gap: 8px;
+    padding: 34px 14px 18px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(20, 19, 18, 0.12);
+    border-radius: 8px;
+    background:
+        radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.82), transparent 8rem),
+        rgba(255, 248, 236, 0.88);
+    box-shadow: 0 12px 26px rgba(43, 29, 17, 0.18);
+    text-align: center;
+}
+
+.promo-discount-card::after {
+    content: "";
+    width: 155px;
+    height: 34px;
+    position: absolute;
+    left: 50%;
+    top: calc(var(--discount-blob-top) + var(--discount-blob-size) - 34px);
+    translate: -50% 0;
+    z-index: 0;
+    border-bottom: 10px solid var(--yellow);
+    border-radius: 50%;
+    rotate: -7deg;
+}
+
+.promo-discount-card b,
+.promo-discount-card small,
+.promo-discount-card strong {
+    position: relative;
+    z-index: 2;
+}
+
+.promo-discount-card b {
+    display: block;
+    color: var(--ink);
+    font-size: clamp(31px, 3.15vw, 45px);
+    line-height: 0.95;
+    font-weight: 800;
+}
+
+.promo-unit {
+    display: inline-block;
+    margin-left: 0.08em;
+    font-size: 0.4em;
+    line-height: 1;
+    vertical-align: baseline;
+}
+
+.promo-discount-card small {
+    display: block;
+    color: var(--red);
+    font-size: clamp(25px, 2.3vw, 34px);
+    line-height: 0.9;
+    font-weight: 800;
+}
+
+.promo-discount-card strong {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--discount-blob-top) + 24px);
+    translate: -50% 0;
+    color: var(--red);
+    font-size: clamp(54px, 5.4vw, 74px);
+    line-height: 0.9;
+    font-weight: 800;
+    text-shadow: none;
+}
+
+.promo-extra-row {
+    width: min(1050px, 100%);
+    display: grid;
+    grid-template-columns: minmax(330px, 0.9fr) minmax(420px, 1.1fr);
+    gap: 18px;
+    justify-self: center;
+    align-items: stretch;
+}
+
+.promo-telegram,
+.promo-gift {
+    min-height: 132px;
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgba(43, 29, 17, 0.16);
+}
+
+.promo-telegram {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 28px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 86% 76%, rgba(238, 170, 18, 0.26), transparent 3.8rem),
+        radial-gradient(circle at 92% 22%, rgba(255, 255, 255, 0.24) 0 1px, transparent 1.5px),
+        var(--ink);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.promo-telegram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(43, 29, 17, 0.24);
+}
+
+.promo-telegram-icon {
+    width: 82px;
+    height: 82px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #2ba4df;
+    box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.72);
+}
+
+.promo-telegram-icon svg {
+    width: 48px;
+    height: 48px;
+    fill: #fff;
+}
+
+.promo-telegram strong {
+    display: block;
+    color: #fff;
+    font-size: clamp(23px, 2.25vw, 34px);
+    line-height: 0.98;
+}
+
+.promo-telegram mark {
+    color: var(--yellow);
+    background: transparent;
+}
+
+.promo-telegram small {
+    display: block;
+    margin-top: 10px;
+    color: var(--yellow);
+    font-size: clamp(14px, 1.25vw, 19px);
+    line-height: 1;
+    font-weight: 800;
+}
+
+.promo-gift {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 22px 34px;
+    background: rgba(255, 248, 236, 0.9);
+    border: 1px solid rgba(20, 19, 18, 0.12);
+}
+
+.promo-gift h4 {
+    margin: 0 0 10px;
+    color: var(--red);
+    font-size: clamp(34px, 3.8vw, 52px);
+    line-height: 0.9;
+}
+
+.promo-gift p {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(18px, 1.7vw, 24px);
+    line-height: 1.13;
+    text-transform: none;
+}
+
+.promo-gift p strong {
+    color: var(--red);
+    font-weight: 800;
+}
+
+.promo-gift-box {
+    width: 116px;
+    height: 90px;
+    justify-self: center;
+    position: relative;
+    border: 3px solid #aa6416;
+    border-radius: 8px;
+    background:
+        linear-gradient(90deg, transparent 40%, #d82028 40% 58%, transparent 58%),
+        linear-gradient(#f7be2d, #eaa821);
+    box-shadow: 0 10px 16px rgba(43, 29, 17, 0.17);
+}
+
+.promo-gift-box::before,
+.promo-gift-box::after,
+.promo-gift-box span::before,
+.promo-gift-box span::after {
+    content: "";
+    position: absolute;
+}
+
+.promo-gift-box::before {
+    width: 136px;
+    height: 26px;
+    left: 50%;
+    top: -20px;
+    translate: -50% 0;
+    border: 3px solid #aa6416;
+    border-radius: 8px;
+    background:
+        linear-gradient(90deg, transparent 41%, #d82028 41% 57%, transparent 57%),
+        #ffc642;
+}
+
+.promo-gift-box::after {
+    width: 60px;
+    height: 42px;
+    left: 50%;
+    top: -54px;
+    translate: -50% 0;
+    border-radius: 50% 50% 8px 8px;
+    background: #d82028;
+    clip-path: polygon(50% 65%, 0 18%, 38% 0, 50% 35%, 62% 0, 100% 18%);
+}
+
+.promo-gift-box span::before,
+.promo-gift-box span::after {
+    width: 22px;
+    height: 22px;
+    top: 20px;
+    border: 3px solid #d82028;
+    border-radius: 50%;
+}
+
+.promo-gift-box span::before {
+    left: 25px;
+}
+
+.promo-gift-box span::after {
+    right: 25px;
+}
+
+.promo-order-button {
+    width: min(300px, 100%);
+    min-height: 68px;
+    justify-self: center;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    background: var(--red);
+    font-size: clamp(26px, 2.5vw, 36px);
+    box-shadow: 0 12px 22px rgba(153, 21, 28, 0.3);
+    transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.promo-order-button:hover {
+    transform: translateY(-2px);
+    background: var(--red-dark);
+    box-shadow: 0 16px 28px rgba(153, 21, 28, 0.35);
+}
+
+.promo-star,
+.promo-planet,
+.promo-moon,
+.promo-comet {
+    z-index: 2;
+    color: var(--yellow);
+    transform: translate(calc(var(--parallax-x) * var(--depth, 0.34)), calc(var(--parallax-y) * var(--depth, 0.34)));
+}
+
+.promo-star {
+    font-size: 28px;
+    animation:
+        drift var(--drift-speed, 7s) ease-in-out infinite alternate,
+        twinkle var(--twinkle-speed, 4.8s) ease-in-out infinite alternate;
+}
+
+.promo-star-a {
+    left: 50%;
+    top: 98px;
+    --depth: 0.32;
+}
+
+.promo-star-b {
+    right: 74px;
+    top: 288px;
+    font-size: 34px;
+    --depth: 0.42;
+}
+
+.promo-star-c {
+    left: 18%;
+    bottom: 90px;
+    font-size: 22px;
+    --depth: 0.25;
+}
+
+.promo-star-d {
+    right: 17%;
+    bottom: 72px;
+    font-size: 18px;
+    --depth: 0.55;
+}
+
+.promo-planet {
+    width: 72px;
+    height: 72px;
+    top: 52px;
+    right: 360px;
+    border-radius: 50%;
+    background:
+        repeating-linear-gradient(164deg, rgba(153, 94, 12, 0.36) 0 4px, transparent 4px 11px),
+        var(--yellow);
+    box-shadow: inset -10px -8px 0 rgba(153, 94, 12, 0.18);
+    animation: drift 8s ease-in-out infinite alternate;
+    --depth: 0.3;
+}
+
+.promo-planet::after {
+    content: "";
+    width: 112px;
+    height: 28px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    rotate: -18deg;
+    border: 7px solid var(--yellow);
+    border-top-color: transparent;
+    border-radius: 50%;
+}
+
+.promo-moon {
+    width: 112px;
+    height: 112px;
+    right: -34px;
+    bottom: -30px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 35%, rgba(20, 19, 18, 0.36) 0 8px, transparent 9px),
+        radial-gradient(circle at 68% 46%, rgba(20, 19, 18, 0.28) 0 6px, transparent 7px),
+        radial-gradient(circle at 48% 70%, rgba(20, 19, 18, 0.22) 0 10px, transparent 11px),
+        #c6b596;
+    border: 3px solid rgba(20, 19, 18, 0.18);
+    animation: drift 9s ease-in-out infinite alternate;
+    --depth: 0.22;
+}
+
+.promo-comet {
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(238, 170, 18, 0.78), transparent);
+}
+
+.promo-comet-a {
+    width: 280px;
+    right: 236px;
+    top: 128px;
+    rotate: -28deg;
+    --depth: 0.38;
+}
+
+.promo-comet-b {
+    width: 190px;
+    left: 74px;
+    bottom: 116px;
+    rotate: 13deg;
+    --depth: 0.2;
 }
 
 .feature-panel {
@@ -2482,6 +3008,39 @@ img {
         grid-template-columns: 1fr;
     }
 
+    .promo-actions-panel {
+        min-height: 0;
+        padding: 48px 34px 34px;
+    }
+
+    .promo-actions-copy {
+        width: min(520px, 68%);
+        margin-left: 0;
+    }
+
+    .promo-actions-copy h3 {
+        font-size: clamp(42px, 6vw, 64px);
+    }
+
+    .promo-mascot {
+        width: min(210px, 28vw);
+        top: 34px;
+        right: 34px;
+    }
+
+    .promo-planet {
+        right: 280px;
+    }
+
+    .promo-discount-grid {
+        width: 100%;
+    }
+
+    .promo-extra-row {
+        grid-template-columns: 1fr;
+        width: min(760px, 100%);
+    }
+
     .feature-panel {
         padding: 0 34px 26px;
     }
@@ -2722,6 +3281,78 @@ img {
 
     .feature-showcase {
         padding-inline: 18px;
+    }
+
+    .promo-actions-panel {
+        padding: 28px 18px 26px;
+        border-radius: 10px;
+    }
+
+    .promo-actions-panel::before {
+        inset: 8px;
+    }
+
+    .promo-actions-copy {
+        width: min(420px, 100%);
+    }
+
+    .promo-actions-copy h3 {
+        font-size: clamp(35px, 9vw, 52px);
+    }
+
+    .promo-mascot,
+    .promo-soup-crop-right,
+    .promo-planet,
+    .promo-comet-a {
+        display: none;
+    }
+
+    .promo-soup-crop-left {
+        width: 160px;
+        height: 208px;
+        left: auto;
+        right: -78px;
+        top: 74px;
+        opacity: 0.3;
+    }
+
+    .promo-discount-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .promo-discount-card {
+        --discount-blob-size: 98px;
+        --discount-blob-top: 104px;
+        min-height: 218px;
+    }
+
+    .promo-extra-row {
+        gap: 12px;
+    }
+
+    .promo-telegram,
+    .promo-gift {
+        min-height: 0;
+    }
+
+    .promo-gift {
+        grid-template-columns: 112px 1fr;
+        gap: 14px;
+        padding: 20px 18px;
+    }
+
+    .promo-gift-box {
+        width: 90px;
+        height: 74px;
+    }
+
+    .promo-gift-box::before {
+        width: 106px;
+    }
+
+    .promo-order-button {
+        min-height: 62px;
     }
 
     .feature-panel {
@@ -3006,6 +3637,61 @@ img {
 
     .feature-panel {
         padding-inline: 0;
+    }
+
+    .promo-actions-panel {
+        padding-inline: 12px;
+    }
+
+    .promo-label {
+        font-size: 13px;
+    }
+
+    .promo-actions-copy h3 {
+        font-size: clamp(31px, 11vw, 44px);
+    }
+
+    .promo-discount-card b {
+        font-size: 34px;
+    }
+
+    .promo-discount-card small {
+        font-size: 25px;
+    }
+
+    .promo-discount-card strong {
+        font-size: 58px;
+    }
+
+    .promo-telegram {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 12px;
+        padding: 20px 16px;
+        text-align: center;
+    }
+
+    .promo-telegram-icon {
+        width: 72px;
+        height: 72px;
+    }
+
+    .promo-telegram strong {
+        font-size: 26px;
+    }
+
+    .promo-gift {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .promo-gift h4 {
+        font-size: 38px;
+    }
+
+    .promo-gift p {
+        font-size: 18px;
     }
 
     .feature-panel-heading h3 {

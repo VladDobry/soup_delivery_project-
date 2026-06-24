@@ -137,7 +137,7 @@ class SoupPageTests(TestCase):
     def test_order_buttons_open_phone_modal(self):
         response = self.client.get(reverse("index"))
 
-        self.assertContains(response, "data-order-open", count=5)
+        self.assertContains(response, "data-order-open", count=6)
         self.assertContains(response, 'class="order-modal"')
         self.assertContains(response, 'id="order-modal-title"')
         self.assertContains(
@@ -223,6 +223,32 @@ class SoupPageTests(TestCase):
 
         self.assertLess(soups_position, gallery_position)
         self.assertLess(gallery_position, features_position)
+
+    def test_promo_actions_block_starts_features(self):
+        response = self.client.get(reverse("index"))
+        content = response.content.decode()
+
+        features_start = content.index('id="delivery"')
+        promo_position = content.index('class="promo-actions-panel reveal"', features_start)
+        set_position = content.index('class="feature-panel feature-set-panel reveal"', features_start)
+        promo = content[promo_position:set_position]
+
+        self.assertLess(promo_position, set_position)
+        self.assertNotIn("promo-actions-first-order", promo)
+        self.assertNotIn("—", promo)
+        self.assertNotIn("–", promo)
+        self.assertContains(response, "На первый заказ")
+        self.assertContains(response, "вкусные бонусы")
+        self.assertContains(response, "1000 гр скидка 5%")
+        self.assertContains(response, "1600 гр скидка 10%")
+        self.assertContains(response, "2200 гр скидка 15%")
+        self.assertContains(response, "+5% за подписку")
+        self.assertContains(response, "на ТГ-канал")
+        self.assertContains(response, "При заказе от")
+        self.assertContains(response, "2 супа в подарок по 250 гр")
+        self.assertIn("data-order-open", promo)
+        self.assertIn('href="https://t.me/yaestsup"', promo)
+        self.assertIn('class="promo-telegram"', promo)
 
     def test_volume_cards_use_branded_jar_images(self):
         response = self.client.get(reverse("index"))
