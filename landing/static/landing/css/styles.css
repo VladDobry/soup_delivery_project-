@@ -2811,7 +2811,7 @@ img {
     color: var(--ink);
     font-size: 17px;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 34px;
     text-transform: none;
 }
 
@@ -2820,6 +2820,31 @@ img {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
+}
+
+.order-dialog > p .order-telegram-link {
+    width: 34px;
+    height: 34px;
+    display: inline-grid;
+    place-items: center;
+    margin: 0 4px;
+    border-radius: 50%;
+    color: var(--paper);
+    background: var(--ink);
+    text-decoration: none;
+    vertical-align: middle;
+    transition: transform 180ms ease, background 180ms ease;
+}
+
+.order-telegram-link svg {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+}
+
+.order-telegram-link:hover {
+    transform: rotate(-8deg) scale(1.08);
+    background: var(--red);
 }
 
 .order-delivery {
@@ -3866,6 +3891,7 @@ img {
 
     .order-dialog > p {
         font-size: 16px;
+        line-height: 30px;
     }
 
     .order-delivery {

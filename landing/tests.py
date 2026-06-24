@@ -184,6 +184,13 @@ class SoupPageTests(TestCase):
 
     def test_order_buttons_open_phone_modal(self):
         response = self.client.get(reverse("index"))
+        styles = (
+            Path(__file__).resolve().parent
+            / "static"
+            / "landing"
+            / "css"
+            / "styles.css"
+        ).read_text()
 
         self.assertContains(response, "data-order-open", count=6)
         self.assertContains(response, 'class="order-modal"')
@@ -196,11 +203,15 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "Дорогие друзья!")
         self.assertContains(response, "ПО-НАСТОЯЩЕМУ ДОМАШНЯЯ")
         self.assertContains(response, "А ещё можно сделать предзаказ!")
-        self.assertContains(
-            response,
-            '<a href="https://t.me/yaestsup" target="_blank" rel="noopener noreferrer">ТГ</a>',
-            html=True,
-        )
+        content = response.content.decode()
+        order_start = content.index('<div class="order-modal"')
+        order_end = content.index("</div>", content.index('<a class="btn order-phone"', order_start))
+        order_modal = content[order_start:order_end]
+        self.assertIn('class="order-telegram-link"', order_modal)
+        self.assertIn('href="https://t.me/yaestsup"', order_modal)
+        self.assertIn('aria-label="ТГ-канал Я Есть Суп"', order_modal)
+        self.assertIn("<svg", order_modal)
+        self.assertNotIn(">ТГ</a>", order_modal)
         self.assertContains(response, "Адлер, Сириус — бесплатно")
         self.assertContains(response, "Сочи, Красная Поляна — бесплатно от 2200гр")
         self.assertRegex(
@@ -214,6 +225,15 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "+7 (928) 851-2525")
         self.assertContains(response, 'href="tel:+79288512525"')
         self.assertContains(response, "data-order-close", count=2)
+        description_start = styles.index(".order-dialog > p {")
+        description_end = styles.index("}", description_start)
+        description_styles = styles[description_start:description_end]
+        self.assertIn("line-height: 34px;", description_styles)
+        telegram_start = styles.index(".order-dialog > p .order-telegram-link")
+        telegram_end = styles.index("}", telegram_start)
+        telegram_styles = styles[telegram_start:telegram_end]
+        self.assertIn("width: 34px;", telegram_styles)
+        self.assertIn("height: 34px;", telegram_styles)
 
     def test_footer_has_no_store_links(self):
         response = self.client.get(reverse("index"))
