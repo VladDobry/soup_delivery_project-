@@ -24,6 +24,54 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-soup-umami-open")
         self.assertContains(response, "Что за умами")
 
+    def test_soup_modal_has_adjacent_navigation(self):
+        response = self.client.get(reverse("index"))
+        script = (
+            Path(__file__).resolve().parent
+            / "static"
+            / "landing"
+            / "js"
+            / "main.js"
+        ).read_text()
+        styles = (
+            Path(__file__).resolve().parent
+            / "static"
+            / "landing"
+            / "css"
+            / "styles.css"
+        ).read_text()
+
+        self.assertContains(response, "data-soup-prev")
+        self.assertContains(response, "data-soup-next")
+        self.assertContains(response, 'aria-label="Предыдущий суп"')
+        self.assertContains(response, 'aria-label="Следующий суп"')
+        self.assertIn("const showAdjacentSoup = (direction) => {", script)
+        self.assertIn(
+            "(currentIndex + direction + soupSequence.length) % soupSequence.length",
+            script,
+        )
+        self.assertIn('window.history.pushState(\n        { soupId: nextOpener.dataset.soupId }', script)
+        self.assertIn('event.key === "ArrowLeft"', script)
+        self.assertIn('event.key === "ArrowRight"', script)
+        self.assertIn('soupDialog?.addEventListener("pointerdown"', script)
+        self.assertIn('soupDialog?.addEventListener("pointerup"', script)
+        self.assertIn("const closeSoupModalDirectly = () => {", script)
+        self.assertIn("closeSoupModalDirectly();", script)
+        closer_start = script.index("soupClosers.forEach")
+        closer_end = script.index("soupSiteLink?.addEventListener", closer_start)
+        closer_script = script[closer_start:closer_end]
+        self.assertIn("closeSoupModalDirectly();", closer_script)
+        self.assertNotIn("closeSoupWithNavigation();", closer_script)
+        self.assertIn(".soup-nav::before", styles)
+        self.assertIn(".soup-nav-prev::before", styles)
+        self.assertIn(".soup-nav-next::before", styles)
+        self.assertIn(".soup-close:hover", styles)
+        close_hover_start = styles.index(".soup-close:hover")
+        close_hover_end = styles.index("}", close_hover_start)
+        close_hover_styles = styles[close_hover_start:close_hover_end]
+        self.assertIn("background: var(--red);", close_hover_styles)
+        self.assertIn("rotate(-8deg) scale(1.08)", close_hover_styles)
+
     def test_home_page_has_no_umami_teaser(self):
         response = self.client.get(reverse("index"))
 

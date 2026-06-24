@@ -463,7 +463,8 @@ img {
 .soup-card:focus-visible,
 .gallery-tile:focus-visible,
 .video-close:focus-visible,
-.soup-close:focus-visible {
+.soup-close:focus-visible,
+.soup-nav:focus-visible {
     outline: 3px solid var(--yellow);
     outline-offset: 4px;
 }
@@ -1732,6 +1733,65 @@ img {
     font-size: 28px;
     line-height: 1;
     cursor: pointer;
+    transition: transform 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.soup-close:hover {
+    color: var(--paper);
+    background: var(--red);
+    transform: rotate(-8deg) scale(1.08);
+}
+
+.soup-nav {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(20, 19, 18, 0.18);
+    border-radius: 50%;
+    color: var(--paper);
+    background: var(--ink);
+    box-shadow: 0 12px 28px rgba(20, 19, 18, 0.2);
+    cursor: pointer;
+    translate: 0 -50%;
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.soup-nav::before {
+    content: "";
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-top: 5px solid currentColor;
+    border-right: 5px solid currentColor;
+    transform-origin: center;
+}
+
+.soup-nav-prev::before {
+    transform: translate(-40%, -50%) rotate(-135deg);
+}
+
+.soup-nav-next::before {
+    transform: translate(-60%, -50%) rotate(45deg);
+}
+
+.soup-nav:hover {
+    color: var(--ink);
+    background: var(--yellow);
+    transform: translateY(-1px);
+}
+
+.soup-nav-prev {
+    left: 14px;
+}
+
+.soup-nav-next {
+    right: 14px;
 }
 
 .soup-passport-header {
@@ -3419,6 +3479,21 @@ img {
 
     .soup-dialog {
         max-height: calc(100vh - 20px);
+    }
+
+    .soup-nav {
+        width: 40px;
+        height: 40px;
+        top: 82px;
+        font-size: 34px;
+    }
+
+    .soup-nav-prev {
+        left: 16px;
+    }
+
+    .soup-nav-next {
+        right: 16px;
     }
 
     .soup-passport-header {

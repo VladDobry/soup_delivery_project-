@@ -3,8 +3,11 @@ const assetVersion = new URL(document.currentScript.src).searchParams.get("v");
 const versionAsset = (path) => `${path}${assetVersion ? `?v=${assetVersion}` : ""}`;
 const toast = document.querySelector(".toast");
 const soupModal = document.querySelector(".soup-modal");
+const soupDialog = document.querySelector(".soup-dialog");
 const soupOpeners = document.querySelectorAll("[data-soup-open]");
 const soupClosers = document.querySelectorAll("[data-soup-close]");
+const soupPrev = document.querySelector("[data-soup-prev]");
+const soupNext = document.querySelector("[data-soup-next]");
 const soupModalImage = document.querySelector("[data-soup-modal-image]");
 const soupModalTitle = document.querySelector("[data-soup-modal-title]");
 const soupModalTagline = document.querySelector("[data-soup-modal-tagline]");
@@ -29,6 +32,9 @@ const orderOpeners = document.querySelectorAll("[data-order-open]");
 const orderClosers = document.querySelectorAll("[data-order-close]");
 const orderCloseButton = document.querySelector(".order-close");
 const soupPriceItems = document.querySelectorAll("[data-soup-price]");
+const soupSequence = Array.from(soupOpeners)
+    .map((opener) => opener.dataset.soupId)
+    .filter(Boolean);
 let activeSoupTrigger = null;
 let activeSoupId = null;
 let previousScrollRestoration = null;
@@ -130,7 +136,7 @@ const soupDetails = {
         },
         passport: {
             types: ["Говяжий", "Петух", "Сёмга"],
-            water: "Горная родниковая",
+            water: "Горная кристально чистая",
             aromatherapy: "Гвоздика, корень сельдерея, лук-порей, укроп, петрушка, розмарин, лук репчатый, морковь, черный перец (горошек), лавровый лист"
         }
     }
@@ -290,24 +296,30 @@ const renderBrothPassport = (passport) => {
     brothPassport.append(typesSection, waterSection, aromaSection);
 };
 
+const renderSoupContent = (trigger) => {
+    if (!trigger) return;
+
+    const detail = soupDetails[trigger.dataset.soupId] || soupDetails.borsch;
+
+    activeSoupTrigger = trigger;
+    activeSoupId = trigger.dataset.soupId;
+    soupModal.style.setProperty("--soup-accent", detail.accent);
+    soupModalImage.src = detail.image;
+    soupModalImage.alt = detail.alt;
+    soupModalTitle.textContent = detail.title;
+    soupModalTagline.textContent = detail.tagline;
+    soupModalDescription.textContent = detail.description;
+    soupModalNote.textContent = detail.note;
+    renderSoupPrices(detail.prices);
+    renderSoupGroups(detail.groups || []);
+    renderBrothPassport(detail.passport);
+};
+
 const setSoupState = (open, trigger = null) => {
     if (!soupModal) return;
 
     if (open && trigger) {
-        const detail = soupDetails[trigger.dataset.soupId] || soupDetails.borsch;
-
-        activeSoupTrigger = trigger;
-        activeSoupId = trigger.dataset.soupId;
-        soupModal.style.setProperty("--soup-accent", detail.accent);
-        soupModalImage.src = detail.image;
-        soupModalImage.alt = detail.alt;
-        soupModalTitle.textContent = detail.title;
-        soupModalTagline.textContent = detail.tagline;
-        soupModalDescription.textContent = detail.description;
-        soupModalNote.textContent = detail.note;
-        renderSoupPrices(detail.prices);
-        renderSoupGroups(detail.groups || []);
-        renderBrothPassport(detail.passport);
+        renderSoupContent(trigger);
     }
 
     soupModal.classList.toggle("is-open", open);
@@ -463,6 +475,27 @@ const findSoupOpener = (soupId) => (
     Array.from(soupOpeners).find((opener) => opener.dataset.soupId === soupId) || null
 );
 
+const showAdjacentSoup = (direction) => {
+    if (!soupModal?.classList.contains("is-open") || !activeSoupId || !soupSequence.length) {
+        return;
+    }
+
+    const activeIndex = soupSequence.indexOf(activeSoupId);
+    const currentIndex = activeIndex === -1 ? 0 : activeIndex;
+    const nextIndex = (currentIndex + direction + soupSequence.length) % soupSequence.length;
+    const nextOpener = findSoupOpener(soupSequence[nextIndex]);
+
+    if (!nextOpener || nextOpener.dataset.soupId === activeSoupId) return;
+
+    disableSoupScrollRestoration();
+    window.history.pushState(
+        { soupId: nextOpener.dataset.soupId },
+        "",
+        nextOpener.dataset.soupUrl
+    );
+    setSoupState(true, nextOpener);
+};
+
 const restoreSoupScrollRestoration = () => {
     if (previousScrollRestoration === null) return;
 
@@ -527,6 +560,48 @@ const closeSoupWithNavigation = () => {
     scrollToSoups(true);
 };
 
+const closeSoupModalDirectly = () => {
+    window.history.replaceState({}, "", "/#soups");
+    setSoupState(false);
+    scrollToSoups(true);
+};
+
+soupPrev?.addEventListener("click", () => showAdjacentSoup(-1));
+soupNext?.addEventListener("click", () => showAdjacentSoup(1));
+
+let soupSwipeStart = null;
+
+soupDialog?.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" || !soupModal?.classList.contains("is-open")) {
+        soupSwipeStart = null;
+        return;
+    }
+
+    soupSwipeStart = {
+        pointerId: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+    };
+});
+
+soupDialog?.addEventListener("pointerup", (event) => {
+    if (!soupSwipeStart || soupSwipeStart.pointerId !== event.pointerId) return;
+
+    const deltaX = event.clientX - soupSwipeStart.x;
+    const deltaY = event.clientY - soupSwipeStart.y;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+    soupSwipeStart = null;
+
+    if (absX < 50 || absX <= absY * 1.25) return;
+
+    showAdjacentSoup(deltaX < 0 ? 1 : -1);
+});
+
+soupDialog?.addEventListener("pointercancel", () => {
+    soupSwipeStart = null;
+});
+
 soupOpeners.forEach((opener) => opener.addEventListener("click", () => {
     if (activeSoupId === opener.dataset.soupId) return;
 
@@ -547,7 +622,7 @@ soupClosers.forEach((closer) => closer.addEventListener("click", (event) => {
     }
 
     event.preventDefault();
-    closeSoupWithNavigation();
+    closeSoupModalDirectly();
 }));
 
 soupSiteLink?.addEventListener("click", (event) => {
@@ -586,10 +661,23 @@ document.addEventListener("keydown", (event) => {
         }
 
         if (soupModal?.classList.contains("is-open")) {
-            closeSoupWithNavigation();
+            closeSoupModalDirectly();
         }
         setUmamiState(false);
         setVideoState(false);
+    }
+
+    const soupIsOnlyOpenModal = soupModal?.classList.contains("is-open") &&
+        !orderModal?.classList.contains("is-open") &&
+        !umamiModal?.classList.contains("is-open") &&
+        !videoModal?.classList.contains("is-open");
+
+    if (soupIsOnlyOpenModal && event.key === "ArrowLeft") {
+        event.preventDefault();
+        showAdjacentSoup(-1);
+    } else if (soupIsOnlyOpenModal && event.key === "ArrowRight") {
+        event.preventDefault();
+        showAdjacentSoup(1);
     }
 
     const activeDialog = orderModal?.classList.contains("is-open")
