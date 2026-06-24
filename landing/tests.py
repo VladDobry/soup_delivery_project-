@@ -45,6 +45,12 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-soup-next")
         self.assertContains(response, 'aria-label="Предыдущий суп"')
         self.assertContains(response, 'aria-label="Следующий суп"')
+        content = response.content.decode()
+        stage_start = content.index('<div class="soup-bowl-stage">')
+        stage_end = content.index('<p class="soup-cook-note"', stage_start)
+        bowl_stage = content[stage_start:stage_end]
+        self.assertIn("data-soup-prev", bowl_stage)
+        self.assertIn("data-soup-next", bowl_stage)
         self.assertIn("const showAdjacentSoup = (direction) => {", script)
         self.assertIn(
             "(currentIndex + direction + soupSequence.length) % soupSequence.length",
@@ -65,6 +71,11 @@ class SoupPageTests(TestCase):
         self.assertIn(".soup-nav::before", styles)
         self.assertIn(".soup-nav-prev::before", styles)
         self.assertIn(".soup-nav-next::before", styles)
+        self.assertIn(".soup-bowl-stage", styles)
+        mobile_nav_start = styles.index("    .soup-nav {", styles.index("@media (max-width: 720px)"))
+        mobile_nav_end = styles.index("}", mobile_nav_start)
+        mobile_nav_styles = styles[mobile_nav_start:mobile_nav_end]
+        self.assertNotIn("top: 82px;", mobile_nav_styles)
         self.assertIn(".soup-close:hover", styles)
         close_hover_start = styles.index(".soup-close:hover")
         close_hover_end = styles.index("}", close_hover_start)

@@ -336,8 +336,6 @@
     <div class="soup-modal" aria-hidden="true">
         <div class="soup-backdrop" data-soup-close></div>
         <div class="soup-dialog" role="dialog" aria-modal="true" aria-labelledby="soup-modal-title">
-            <button class="soup-nav soup-nav-prev" type="button" data-soup-prev aria-label="Предыдущий суп"></button>
-            <button class="soup-nav soup-nav-next" type="button" data-soup-next aria-label="Следующий суп"></button>
             <header class="soup-passport-header">
                 <a class="passport-logo" href="{% url 'index' %}#top" data-soup-close aria-label="Я есть суп">
                     <span>Я</span><span>Есть</span><span>Суп!</span>
@@ -354,8 +352,12 @@
             <section class="soup-passport">
                 <div class="soup-passport-visual">
                     <img class="soup-mascot" src="{% static 'landing/img/hero-mascot.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
-                    <div class="soup-bowl-frame">
-                        <img class="asset" data-soup-modal-image src="" alt="">
+                    <div class="soup-bowl-stage">
+                        <button class="soup-nav soup-nav-prev" type="button" data-soup-prev aria-label="Предыдущий суп"></button>
+                        <div class="soup-bowl-frame">
+                            <img class="asset" data-soup-modal-image src="" alt="">
+                        </div>
+                        <button class="soup-nav soup-nav-next" type="button" data-soup-next aria-label="Следующий суп"></button>
                     </div>
                     <p class="soup-cook-note"><span aria-hidden="true">✦ 🪐 ✦</span><b data-soup-modal-note></b></p>
                 </div>

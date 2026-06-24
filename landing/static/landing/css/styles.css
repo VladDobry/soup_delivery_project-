@@ -1787,11 +1787,11 @@ img {
 }
 
 .soup-nav-prev {
-    left: 14px;
+    left: -24px;
 }
 
 .soup-nav-next {
-    right: 14px;
+    right: -24px;
 }
 
 .soup-passport-header {
@@ -1893,8 +1893,16 @@ img {
     filter: drop-shadow(0 12px 18px rgba(43, 29, 17, 0.18));
 }
 
-.soup-bowl-frame {
+.soup-bowl-stage {
     width: min(360px, 100%);
+    position: relative;
+    display: grid;
+    place-items: center;
+    justify-self: center;
+}
+
+.soup-bowl-frame {
+    width: 100%;
     aspect-ratio: 1 / 1;
     position: relative;
     display: grid;
@@ -3509,16 +3517,15 @@ img {
     .soup-nav {
         width: 40px;
         height: 40px;
-        top: 82px;
         font-size: 34px;
     }
 
     .soup-nav-prev {
-        left: 16px;
+        left: -6px;
     }
 
     .soup-nav-next {
-        right: 16px;
+        right: -6px;
     }
 
     .soup-passport-header {
