@@ -437,6 +437,7 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "На троих")
         self.assertContains(response, "На пятерых")
         self.assertContains(response, "На семерых")
+        self.assertContains(response, "Можно выбрать как один суп, так и собрать объем из разных супов")
         self.assertIn("<small>На троих</small>\n                                            <b>1000гр</b>", content)
         self.assertIn("<small>На пятерых</small>\n                                            <b>1600гр</b>", content)
         self.assertIn("<small>На семерых</small>\n                                            <b>2200гр</b>", content)
