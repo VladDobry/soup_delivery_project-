@@ -240,7 +240,17 @@
                             <strong>Попробуй несколько вкусов сразу!</strong>
                             <p>Идеально для компании, семьи<br>или чтобы найти свой любимый вкус.</p>
                         </header>
-                        <img class="feature-set-image" src="{% static 'landing/img/feature-set-transparent.png' %}" alt="Сет из борща, солянки и ухи">
+                        <img class="feature-set-image" src="{% static 'landing/img/feature-set-4-soups.png' %}" alt="Сет из борща, солянки, ухи и тыквенного супа-пюре">
+                        <div class="feature-set-pricing" aria-label="Цены на сет супов">
+                            {% for set_price in set_prices %}
+                            <div class="feature-set-price-card">
+                                <span>{{ set_price.title }}</span>
+                                <strong>{{ set_price.price }}</strong>
+                                <small>{{ set_price.caption }}</small>
+                            </div>
+                            {% endfor %}
+                            <p>заказ от 4х позиций любого супа</p>
+                        </div>
                     </article>
 
                     <article class="feature-panel feature-volume-panel reveal">
@@ -263,7 +273,7 @@
                                         <img class="feature-jar-image feature-jar-image-small" src="{% static 'landing/img/feature-jar-solyanka-1000g.png' %}" alt="Банка солянки весом 1000гр">
                                     </div>
                                     <p>Сытный обед,<br>ужин<br>или завтрак</p>
-                                    <strong>2500 ₽</strong>
+                                    <strong>{{ default_soup_price_1l }}</strong>
                                 </div>
                                 <div class="feature-volume-item">
                                     <div class="feature-volume-visual">
@@ -278,7 +288,7 @@
                                         <img class="feature-jar-image feature-jar-image-medium" src="{% static 'landing/img/feature-jar-pumpkin-1600g.png' %}" alt="Банка тыквенного супа-пюре весом 1600гр">
                                     </div>
                                     <p>Для<br>большой семьи<br>на каждый день</p>
-                                    <strong>3750 ₽</strong>
+                                    <strong>{{ default_soup_price_15l }}</strong>
                                 </div>
                                 <div class="feature-volume-item">
                                     <div class="feature-volume-visual">
@@ -293,7 +303,7 @@
                                         <img class="feature-jar-image feature-jar-image-large" src="{% static 'landing/img/feature-jar-borsch-2200g.png' %}" alt="Банка борща весом 2200гр">
                                     </div>
                                     <p>Для компании<br>друзей<br></p>
-                                    <strong>4500 ₽</strong>
+                                    <strong>{{ default_soup_price_2l }}</strong>
                                 </div>
                             </div>
                         </div>
@@ -382,9 +392,9 @@
                     <div class="soup-offer-heading">
                         <h3 id="soup-offer-title">Цены</h3>
                         <div class="soup-offer-prices" aria-label="Цены по объёмам">
-                            <span><small>1000гр</small><strong data-soup-price="1l">2500 ₽</strong></span>
-                            <span><small>1600гр</small><strong data-soup-price="15l">3750 ₽</strong></span>
-                            <span><small>2200гр</small><strong data-soup-price="2l">4500 ₽</strong></span>
+                            <span><small>1000гр</small><strong data-soup-price="1l">{{ default_soup_price_1l }}</strong></span>
+                            <span><small>1600гр</small><strong data-soup-price="15l">{{ default_soup_price_15l }}</strong></span>
+                            <span><small>2200гр</small><strong data-soup-price="2l">{{ default_soup_price_2l }}</strong></span>
                         </div>
                     </div>
                     <div class="soup-offer-action">
@@ -586,6 +596,8 @@
         </div>
     </div>
 
+    {{ default_soup_prices|json_script:"default-soup-prices" }}
+    {{ soup_price_overrides|json_script:"soup-price-overrides" }}
     <script src="{% static 'landing/js/main.js' %}?v={{ cache_bust }}"></script>
 </body>
 </html>

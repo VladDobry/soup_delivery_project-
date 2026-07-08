@@ -44,11 +44,36 @@ let videoPreviewInView = false;
 let activeOrderTrigger = null;
 let orderReturnTarget = null;
 
-const defaultSoupPrices = {
+const parseJsonScript = (id, fallback) => {
+    const element = document.getElementById(id);
+    if (!element) return fallback;
+
+    try {
+        return JSON.parse(element.textContent);
+    } catch {
+        return fallback;
+    }
+};
+
+const fallbackDefaultSoupPrices = {
     "1l": "2500 ₽",
     "15l": "3750 ₽",
     "2l": "4500 ₽"
 };
+
+const fallbackSoupPriceOverrides = {
+    ukha: {
+        "1l": "3000 ₽",
+        "15l": "4250 ₽",
+        "2l": "5000 ₽"
+    },
+    broth: {
+        "2l": "2500 ₽"
+    }
+};
+
+const defaultSoupPrices = parseJsonScript("default-soup-prices", fallbackDefaultSoupPrices);
+const soupPriceOverrides = parseJsonScript("soup-price-overrides", fallbackSoupPriceOverrides);
 
 const soupDetails = {
     borsch: {
@@ -92,11 +117,7 @@ const soupDetails = {
         alt: "Уха с рыбой и картофелем",
         accent: "#1f5c8e",
         note: "Готовится с любовью и томлением 25 часов на живом огне",
-        prices: {
-            "1l": "3000 ₽",
-            "15l": "4250 ₽",
-            "2l": "5000 ₽"
-        },
+        prices: soupPriceOverrides.ukha || fallbackSoupPriceOverrides.ukha,
         groups: [
             ["🍲", "Основа", "Коллагеновый бульон из семги. Коллагеновый петуховый бульон"],
             ["🐟", "Рыба", "Семга, зубатка, тунец"],
@@ -131,9 +152,7 @@ const soupDetails = {
         alt: "Коллагеновый бульон",
         accent: "#b98335",
         note: "Томится 25 часов, чтобы вкус стал глубоким, а основа — честной",
-        prices: {
-            "2l": "2500 ₽"
-        },
+        prices: soupPriceOverrides.broth || fallbackSoupPriceOverrides.broth,
         passport: {
             types: ["Говяжий", "Петух", "Сёмга"],
             water: "Горная кристально чистая",

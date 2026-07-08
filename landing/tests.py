@@ -1,3 +1,5 @@
+import html
+import json
 import re
 import tempfile
 from pathlib import Path
@@ -7,10 +9,23 @@ from django.core.management.base import CommandError
 from django.test import TestCase
 from django.urls import reverse
 
+from landing.models import SetPrice, SoupPrice
 from landing.views import SOUP_SLUGS
 
 
 class SoupPageTests(TestCase):
+    @staticmethod
+    def get_json_script(response, script_id):
+        content = response.content.decode()
+        match = re.search(
+            rf'<script id="{re.escape(script_id)}" type="application/json">(.*?)</script>',
+            content,
+            flags=re.S,
+        )
+        if match is None:
+            raise AssertionError(f"JSON script {script_id!r} was not found")
+        return json.loads(html.unescape(match.group(1)))
+
     def test_home_page_has_no_initial_soup(self):
         response = self.client.get(reverse("index"))
 
@@ -161,10 +176,31 @@ class SoupPageTests(TestCase):
         self.assertContains(response, 'data-soup-price="1l"')
         self.assertContains(response, 'data-soup-price="15l"')
         self.assertContains(response, 'data-soup-price="2l"')
-        self.assertIn('"1l": "3000 ₽"', script)
-        self.assertIn('"15l": "4250 ₽"', script)
-        self.assertIn('"2l": "5000 ₽"', script)
-        self.assertIn('prices: {\n            "2l": "2500 ₽"\n        },\n        passport:', script)
+        self.assertEqual(
+            self.get_json_script(response, "default-soup-prices"),
+            {
+                "1l": "2500 ₽",
+                "15l": "3750 ₽",
+                "2l": "4500 ₽",
+            },
+        )
+        self.assertEqual(
+            self.get_json_script(response, "soup-price-overrides"),
+            {
+                "ukha": {
+                    "1l": "3000 ₽",
+                    "15l": "4250 ₽",
+                    "2l": "5000 ₽",
+                },
+                "broth": {
+                    "2l": "2500 ₽",
+                },
+            },
+        )
+        self.assertIn('parseJsonScript("default-soup-prices"', script)
+        self.assertIn('parseJsonScript("soup-price-overrides"', script)
+        self.assertIn("prices: soupPriceOverrides.ukha", script)
+        self.assertIn("prices: soupPriceOverrides.broth", script)
         self.assertIn('const priceRow = item.closest("span");', script)
         self.assertIn("priceRow.hidden = true;", script)
         self.assertIn('priceRow.style.display = "none";', script)
@@ -175,6 +211,64 @@ class SoupPageTests(TestCase):
         self.assertNotContains(response, 'class="feature-gift')
         self.assertNotContains(response, 'class="soup-offer-promo"')
         self.assertContains(response, 'class="btn soup-offer-button"')
+
+    def test_soup_prices_can_be_changed_from_database(self):
+        SoupPrice.objects.filter(
+            price_group=SoupPrice.PriceGroup.DEFAULT,
+            volume=SoupPrice.Volume.ONE_LITER,
+        ).update(price_rub=2600)
+        SoupPrice.objects.filter(
+            price_group=SoupPrice.PriceGroup.UKHA,
+            volume=SoupPrice.Volume.TWO_LITERS,
+        ).update(price_rub=5200)
+
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, "2600 ₽")
+        self.assertEqual(
+            self.get_json_script(response, "default-soup-prices")["1l"],
+            "2600 ₽",
+        )
+        self.assertEqual(
+            self.get_json_script(response, "soup-price-overrides")["ukha"]["2l"],
+            "5200 ₽",
+        )
+
+    def test_inactive_soup_price_is_omitted_from_modal_data(self):
+        SoupPrice.objects.filter(
+            price_group=SoupPrice.PriceGroup.BROTH,
+            volume=SoupPrice.Volume.TWO_LITERS,
+        ).update(is_active=False)
+
+        response = self.client.get(reverse("index"))
+
+        self.assertEqual(
+            self.get_json_script(response, "soup-price-overrides")["broth"],
+            {},
+        )
+
+    def test_soup_set_uses_four_soup_image_and_prices(self):
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, "feature-set-4-soups.png")
+        self.assertNotContains(response, "feature-set-transparent.png")
+        self.assertContains(response, "Сет из борща, солянки, ухи и тыквенного супа-пюре")
+        self.assertContains(response, "350мл")
+        self.assertContains(response, "750₽")
+        self.assertContains(response, "Уха")
+        self.assertContains(response, "850₽")
+        self.assertContains(response, "заказ от 4х позиций любого супа")
+
+    def test_soup_set_prices_can_be_changed_from_database(self):
+        SetPrice.objects.filter(title="350мл").update(price_rub=790)
+        SetPrice.objects.filter(title="Уха").update(price_rub=910)
+
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, "790₽")
+        self.assertContains(response, "910₽")
+        self.assertNotContains(response, "750₽")
+        self.assertNotContains(response, "850₽")
 
     def test_broth_modal_uses_special_passport(self):
         response = self.client.get(reverse("index"))
