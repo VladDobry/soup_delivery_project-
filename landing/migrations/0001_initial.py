@@ -2,18 +2,18 @@ from django.db import migrations, models
 
 
 SOUP_PRICE_SEED = [
-    ("default", "1l", 2500, 10),
-    ("default", "15l", 3750, 20),
-    ("default", "2l", 4500, 30),
-    ("ukha", "1l", 3000, 10),
-    ("ukha", "15l", 4250, 20),
-    ("ukha", "2l", 5000, 30),
-    ("broth", "2l", 2500, 30),
+    ("default", "1l", 1550, 10),
+    ("default", "15l", 2250, 20),
+    ("default", "2l", 2850, 30),
+    ("ukha", "1l", 1550, 10),
+    ("ukha", "15l", 2250, 20),
+    ("ukha", "2l", 2850, 30),
+    ("broth", "2l", 2850, 30),
 ]
 
 SET_PRICE_SEED = [
-    ("350мл", 750, "за порцию", 10),
-    ("Уха", 850, "за порцию", 20),
+    ("любой суп*", 750, "350мл", 10),
+    ("*Уха", 850, "350мл", 20),
 ]
 
 
@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("title", models.CharField(max_length=80, verbose_name="позиция")),
                 ("price_rub", models.PositiveIntegerField(verbose_name="цена, ₽")),
-                ("caption", models.CharField(default="за порцию", max_length=80, verbose_name="подпись")),
+                ("caption", models.CharField(default="350мл", max_length=80, verbose_name="граммовка под ценой")),
                 ("is_active", models.BooleanField(default=True, verbose_name="активна")),
                 ("sort_order", models.PositiveSmallIntegerField(default=0, verbose_name="порядок")),
             ],
@@ -95,7 +95,7 @@ class Migration(migrations.Migration):
                 (
                     "volume",
                     models.CharField(
-                        choices=[("1l", "1000гр"), ("15l", "1600гр"), ("2l", "2200гр")],
+                        choices=[("1l", "1000гр"), ("15l", "1500гр"), ("2l", "2000гр")],
                         max_length=10,
                         verbose_name="объём",
                     ),

@@ -1,3 +1,5 @@
+import re
+
 from django.http import Http404
 from django.shortcuts import render
 from django.db.utils import OperationalError, ProgrammingError
@@ -9,25 +11,30 @@ SOUP_SLUGS = ("borsch", "solyanka", "ukha", "pumpkin", "broth")
 
 FALLBACK_SOUP_PRICES_RUB = {
     SoupPrice.PriceGroup.DEFAULT: {
-        SoupPrice.Volume.ONE_LITER: 2500,
-        SoupPrice.Volume.ONE_AND_HALF_LITER: 3750,
-        SoupPrice.Volume.TWO_LITERS: 4500,
+        SoupPrice.Volume.ONE_LITER: 1550,
+        SoupPrice.Volume.ONE_AND_HALF_LITER: 2250,
+        SoupPrice.Volume.TWO_LITERS: 2850,
     },
     SoupPrice.PriceGroup.UKHA: {
-        SoupPrice.Volume.ONE_LITER: 3000,
-        SoupPrice.Volume.ONE_AND_HALF_LITER: 4250,
-        SoupPrice.Volume.TWO_LITERS: 5000,
+        SoupPrice.Volume.ONE_LITER: 1550,
+        SoupPrice.Volume.ONE_AND_HALF_LITER: 2250,
+        SoupPrice.Volume.TWO_LITERS: 2850,
     },
     SoupPrice.PriceGroup.BROTH: {
-        SoupPrice.Volume.TWO_LITERS: 2500,
+        SoupPrice.Volume.TWO_LITERS: 2850,
     },
 }
 
 FALLBACK_SET_PRICES_RUB = (
-    {"title": "350мл", "price_rub": 750, "caption": "за порцию"},
-    {"title": "Уха", "price_rub": 850, "caption": "за порцию"},
+    {"title": "любой суп*", "price_rub": 750, "caption": "350мл"},
+    {"title": "*Уха", "price_rub": 850, "caption": "350мл"},
 )
 
+FALLBACK_VOLUME_LABELS = {
+    SoupPrice.Volume.ONE_LITER: "1000гр",
+    SoupPrice.Volume.ONE_AND_HALF_LITER: "1500гр",
+    SoupPrice.Volume.TWO_LITERS: "2000гр",
+}
 
 def format_soup_price(price_rub):
     return f"{price_rub} ₽"
@@ -35,6 +42,29 @@ def format_soup_price(price_rub):
 
 def format_set_price(price_rub):
     return f"{price_rub}₽"
+
+
+def format_text_volume_label(label):
+    return re.sub(r"(?<=\d)(?=[^\d\s])", " ", label.strip())
+
+
+def split_volume_label(label):
+    text_label = format_text_volume_label(label)
+    match = re.match(r"^(\S+)\s+(.+)$", text_label)
+    if not match:
+        return {
+            "compact": label,
+            "text": text_label,
+            "amount": text_label,
+            "unit": "",
+        }
+
+    return {
+        "compact": label,
+        "text": text_label,
+        "amount": match.group(1),
+        "unit": match.group(2),
+    }
 
 
 def format_soup_prices(price_data):
@@ -49,6 +79,10 @@ def format_soup_prices(price_data):
 
 def get_soup_price_context():
     fallback_prices = format_soup_prices(FALLBACK_SOUP_PRICES_RUB)
+    volume_labels = {
+        volume: split_volume_label(label)
+        for volume, label in FALLBACK_VOLUME_LABELS.items()
+    }
 
     try:
         prices = list(SoupPrice.objects.all())
@@ -58,6 +92,8 @@ def get_soup_price_context():
     rows_by_group = {}
     for price in prices:
         rows_by_group.setdefault(price.price_group, []).append(price)
+        if price.price_group == SoupPrice.PriceGroup.DEFAULT and price.volume_label:
+            volume_labels[price.volume] = split_volume_label(price.volume_label)
 
     prices_by_group = {}
     for price_group, fallback_group_prices in fallback_prices.items():
@@ -74,6 +110,9 @@ def get_soup_price_context():
 
     return {
         "default_soup_prices": prices_by_group[SoupPrice.PriceGroup.DEFAULT],
+        "soup_volume_1l": volume_labels[SoupPrice.Volume.ONE_LITER],
+        "soup_volume_15l": volume_labels[SoupPrice.Volume.ONE_AND_HALF_LITER],
+        "soup_volume_2l": volume_labels[SoupPrice.Volume.TWO_LITERS],
         "soup_price_overrides": {
             SoupPrice.PriceGroup.UKHA: prices_by_group[SoupPrice.PriceGroup.UKHA],
             SoupPrice.PriceGroup.BROTH: prices_by_group[SoupPrice.PriceGroup.BROTH],

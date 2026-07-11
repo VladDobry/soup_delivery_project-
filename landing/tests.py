@@ -164,14 +164,14 @@ class SoupPageTests(TestCase):
         ).read_text()
 
         self.assertContains(response, "Цены")
-        self.assertContains(response, "2500 ₽")
-        self.assertContains(response, "3750 ₽")
-        self.assertContains(response, "4500 ₽")
+        self.assertContains(response, "1550 ₽")
+        self.assertContains(response, "2250 ₽")
+        self.assertContains(response, "2850 ₽")
         self.assertContains(response, "1000гр")
-        self.assertContains(response, "1600гр")
-        self.assertContains(response, "2200гр")
+        self.assertContains(response, "1500гр")
+        self.assertContains(response, "2000гр")
         self.assertNotContains(response, "1950 ₽")
-        self.assertNotContains(response, "2850 ₽")
+        self.assertNotContains(response, "3750 ₽")
         self.assertNotContains(response, "При покупке любого супа от 1 литра")
         self.assertContains(response, 'data-soup-price="1l"')
         self.assertContains(response, 'data-soup-price="15l"')
@@ -179,21 +179,21 @@ class SoupPageTests(TestCase):
         self.assertEqual(
             self.get_json_script(response, "default-soup-prices"),
             {
-                "1l": "2500 ₽",
-                "15l": "3750 ₽",
-                "2l": "4500 ₽",
+                "1l": "1550 ₽",
+                "15l": "2250 ₽",
+                "2l": "2850 ₽",
             },
         )
         self.assertEqual(
             self.get_json_script(response, "soup-price-overrides"),
             {
                 "ukha": {
-                    "1l": "3000 ₽",
-                    "15l": "4250 ₽",
-                    "2l": "5000 ₽",
+                    "1l": "1550 ₽",
+                    "15l": "2250 ₽",
+                    "2l": "2850 ₽",
                 },
                 "broth": {
-                    "2l": "2500 ₽",
+                    "2l": "2850 ₽",
                 },
             },
         )
@@ -234,6 +234,35 @@ class SoupPageTests(TestCase):
             "5200 ₽",
         )
 
+    def test_soup_volume_labels_can_be_changed_from_database(self):
+        SoupPrice.objects.filter(
+            price_group=SoupPrice.PriceGroup.DEFAULT,
+            volume=SoupPrice.Volume.ONE_LITER,
+        ).update(volume_label="900гр")
+        SoupPrice.objects.filter(
+            price_group=SoupPrice.PriceGroup.DEFAULT,
+            volume=SoupPrice.Volume.ONE_AND_HALF_LITER,
+        ).update(volume_label="1400гр")
+        SoupPrice.objects.filter(
+            price_group=SoupPrice.PriceGroup.DEFAULT,
+            volume=SoupPrice.Volume.TWO_LITERS,
+        ).update(volume_label="2300гр")
+
+        response = self.client.get(reverse("index"))
+        content = response.content.decode()
+
+        self.assertContains(response, "900гр")
+        self.assertContains(response, "1400гр")
+        self.assertContains(response, "2300гр")
+        self.assertContains(response, "900 гр скидка 5%")
+        self.assertContains(response, "1400 гр скидка 10%")
+        self.assertContains(response, "2300 гр скидка 15%")
+        self.assertContains(response, "Готовим новую<br>приятность для заказов")
+        self.assertContains(response, "Сочи, Красная Поляна — бесплатно от 2300гр")
+        self.assertIn("<small>900гр</small><strong data-soup-price=\"1l\">", content)
+        self.assertIn("<small>1400гр</small><strong data-soup-price=\"15l\">", content)
+        self.assertIn("<small>2300гр</small><strong data-soup-price=\"2l\">", content)
+
     def test_inactive_soup_price_is_omitted_from_modal_data(self):
         SoupPrice.objects.filter(
             price_group=SoupPrice.PriceGroup.BROTH,
@@ -253,15 +282,19 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "feature-set-4-soups.png")
         self.assertNotContains(response, "feature-set-transparent.png")
         self.assertContains(response, "Сет из борща, солянки, ухи и тыквенного супа-пюре")
+        self.assertContains(response, "любой суп*")
+        self.assertContains(response, "*Уха")
         self.assertContains(response, "350мл")
         self.assertContains(response, "750₽")
-        self.assertContains(response, "Уха")
         self.assertContains(response, "850₽")
-        self.assertContains(response, "заказ от 4х позиций любого супа")
+        self.assertNotContains(response, "за порцию")
+        self.assertContains(response, "Скидка 20%")
+        self.assertContains(response, "при заказе любых четырёх и более супов")
+        self.assertNotContains(response, "заказ от 4х позиций любого супа")
 
     def test_soup_set_prices_can_be_changed_from_database(self):
-        SetPrice.objects.filter(title="350мл").update(price_rub=790)
-        SetPrice.objects.filter(title="Уха").update(price_rub=910)
+        SetPrice.objects.filter(title="любой суп*").update(price_rub=790)
+        SetPrice.objects.filter(title="*Уха").update(price_rub=910)
 
         response = self.client.get(reverse("index"))
 
@@ -269,6 +302,14 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "910₽")
         self.assertNotContains(response, "750₽")
         self.assertNotContains(response, "850₽")
+
+    def test_soup_set_grammage_can_be_changed_from_database(self):
+        SetPrice.objects.update(caption="400мл")
+
+        response = self.client.get(reverse("index"))
+
+        self.assertContains(response, "400мл")
+        self.assertNotContains(response, "350мл")
 
     def test_broth_modal_uses_special_passport(self):
         response = self.client.get(reverse("index"))
@@ -318,7 +359,7 @@ class SoupPageTests(TestCase):
         self.assertIn("<svg", order_modal)
         self.assertNotIn(">ТГ</a>", order_modal)
         self.assertContains(response, "Адлер, Сириус — бесплатно")
-        self.assertContains(response, "Сочи, Красная Поляна — бесплатно от 2200гр")
+        self.assertContains(response, "Сочи, Красная Поляна — бесплатно от 2000гр")
         self.assertRegex(
             response.content.decode(),
             r"landing/img/hero-logo(?:\.[0-9a-f]+)?\.png",
@@ -347,6 +388,8 @@ class SoupPageTests(TestCase):
         self.assertNotContains(response, "Показать магазины")
         self.assertContains(response, '<footer class="footer section-band"')
         self.assertContains(response, "+7 (928) 851-2525")
+        self.assertContains(response, "iamsoup2525@gmail.com")
+        self.assertContains(response, 'href="mailto:iamsoup2525@gmail.com"')
         self.assertContains(response, "Мы в соцсетях")
         self.assertContains(response, "Суп спасёт")
         self.assertContains(response, 'class="footer-mascot"')
@@ -413,12 +456,15 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "На первый заказ")
         self.assertContains(response, "вкусные бонусы")
         self.assertContains(response, "1000 гр скидка 5%")
-        self.assertContains(response, "1600 гр скидка 10%")
-        self.assertContains(response, "2200 гр скидка 15%")
+        self.assertContains(response, "1500 гр скидка 10%")
+        self.assertContains(response, "2000 гр скидка 15%")
         self.assertContains(response, "+5% за подписку")
         self.assertContains(response, "на ТГ-канал")
-        self.assertContains(response, "При заказе от")
-        self.assertContains(response, "2 супа в подарок по 250 гр")
+        self.assertContains(response, "Скоро")
+        self.assertContains(response, "Готовим новую<br>приятность для заказов")
+        self.assertNotContains(response, "При заказе от")
+        self.assertNotContains(response, "2 супа в подарок")
+        self.assertNotContains(response, "250 гр")
         self.assertIn("data-order-open", promo)
         self.assertIn('href="https://t.me/yaestsup"', promo)
         self.assertIn('class="promo-telegram"', promo)
@@ -433,14 +479,14 @@ class SoupPageTests(TestCase):
         self.assertNotContains(response, "feature-jar-solyanka-1l.png")
         self.assertNotContains(response, "feature-jar-pumpkin-15l.png")
         self.assertNotContains(response, "feature-jar-borsch-2l.png")
-        self.assertContains(response, "Банка тыквенного супа-пюре весом 1600гр")
+        self.assertContains(response, "Банка тыквенного супа-пюре весом 1500гр")
         self.assertContains(response, "На троих")
         self.assertContains(response, "На пятерых")
         self.assertContains(response, "На семерых")
         self.assertContains(response, "Можно выбрать как один суп, так и собрать объем из разных супов")
         self.assertIn("<small>На троих</small>\n                                            <b>1000гр</b>", content)
-        self.assertIn("<small>На пятерых</small>\n                                            <b>1600гр</b>", content)
-        self.assertIn("<small>На семерых</small>\n                                            <b>2200гр</b>", content)
+        self.assertIn("<small>На пятерых</small>\n                                            <b>1500гр</b>", content)
+        self.assertIn("<small>На семерых</small>\n                                            <b>2000гр</b>", content)
         self.assertNotContains(response, "feature-jar-ukha-15l.png")
         self.assertNotContains(response, "feature-jars-volumes-pumpkin.png")
         self.assertNotContains(response, "3350 ₽")

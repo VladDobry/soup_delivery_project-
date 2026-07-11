@@ -56,19 +56,19 @@ const parseJsonScript = (id, fallback) => {
 };
 
 const fallbackDefaultSoupPrices = {
-    "1l": "2500 ₽",
-    "15l": "3750 ₽",
-    "2l": "4500 ₽"
+    "1l": "1550 ₽",
+    "15l": "2250 ₽",
+    "2l": "2850 ₽"
 };
 
 const fallbackSoupPriceOverrides = {
     ukha: {
-        "1l": "3000 ₽",
-        "15l": "4250 ₽",
-        "2l": "5000 ₽"
+        "1l": "1550 ₽",
+        "15l": "2250 ₽",
+        "2l": "2850 ₽"
     },
     broth: {
-        "2l": "2500 ₽"
+        "2l": "2850 ₽"
     }
 };
 

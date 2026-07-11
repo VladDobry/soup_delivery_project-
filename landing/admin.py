@@ -8,13 +8,14 @@ class SoupPriceAdmin(admin.ModelAdmin):
     list_display = (
         "price_group",
         "volume",
+        "volume_label",
         "price_rub",
         "is_active",
         "sort_order",
     )
-    list_editable = ("price_rub", "is_active", "sort_order")
+    list_editable = ("volume_label", "price_rub", "is_active", "sort_order")
     list_filter = ("price_group", "volume", "is_active")
-    search_fields = ("price_group", "volume")
+    search_fields = ("price_group", "volume", "volume_label")
     ordering = ("price_group", "sort_order", "volume")
 
 
