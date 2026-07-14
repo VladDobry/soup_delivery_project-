@@ -3111,8 +3111,12 @@ img {
     inset: 0;
     z-index: 60;
     display: grid;
-    place-items: center;
+    align-items: start;
+    justify-items: center;
     padding: 20px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     opacity: 0;
     pointer-events: none;
     transition: opacity 180ms ease;
@@ -3132,13 +3136,16 @@ img {
 
 .order-dialog {
     width: min(460px, 100%);
+    max-height: calc(100dvh - 40px);
     position: relative;
     z-index: 1;
     display: grid;
     justify-items: center;
     gap: 18px;
     padding: 34px;
-    overflow: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid rgba(20, 19, 18, 0.18);
     border-radius: 14px;
     text-align: center;
@@ -3286,11 +3293,19 @@ img {
     text-transform: uppercase;
 }
 
-.order-phone {
+.order-contact-actions {
     width: 100%;
     min-height: 76px;
     position: relative;
     z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.order-contact-button {
+    width: 100%;
+    min-height: 76px;
     display: grid;
     gap: 5px;
     padding: 14px 20px;
@@ -3299,20 +3314,22 @@ img {
     box-shadow: 0 8px 0 rgba(20, 19, 18, 0.1);
 }
 
-.order-phone:hover {
+.order-contact-button:hover {
     transform: translateY(-3px);
     background: var(--ink);
 }
 
-.order-phone span {
-    font-size: clamp(22px, 5vw, 30px);
+.order-contact-button span {
+    min-width: 0;
+    font-size: clamp(18px, 4vw, 25px);
     line-height: 1;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
 }
 
-.order-phone strong {
+.order-contact-button strong {
     font-size: 12px;
     letter-spacing: 0.12em;
+    line-height: 1.12;
 }
 
 .video-backdrop {
@@ -4570,6 +4587,7 @@ img {
 
     .order-dialog {
         width: 100%;
+        max-height: calc(100dvh - 24px);
         gap: 16px;
         padding: 30px 20px 24px;
         border-radius: 10px;
@@ -4590,8 +4608,21 @@ img {
         font-size: 17px;
     }
 
-    .order-phone {
+    .order-contact-actions {
+        gap: 10px;
+    }
+
+    .order-contact-button {
         min-height: 72px;
+        padding: 13px 12px;
+    }
+
+    .order-contact-button span {
+        font-size: clamp(17px, 6vw, 23px);
+    }
+
+    .order-contact-button strong {
+        font-size: 11px;
     }
 
     .order-wordmark-frame {

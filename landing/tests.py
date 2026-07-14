@@ -362,7 +362,7 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "А ещё можно сделать предзаказ!")
         content = response.content.decode()
         order_start = content.index('<div class="order-modal"')
-        order_end = content.index("</div>", content.index('<a class="btn order-phone"', order_start))
+        order_end = content.index("</div>", content.index('<div class="order-contact-actions"', order_start))
         order_modal = content[order_start:order_end]
         self.assertIn('class="order-telegram-link"', order_modal)
         self.assertIn('href="https://t.me/yaestsup"', order_modal)
@@ -380,7 +380,18 @@ class SoupPageTests(TestCase):
             r"landing/img/hero-mascot(?:\.[0-9a-f]+)?\.png",
         )
         self.assertContains(response, "+7 (928) 851-2525")
+        self.assertContains(response, 'class="order-contact-actions"')
+        self.assertContains(response, 'aria-label="Способы сделать заказ"')
         self.assertContains(response, 'href="tel:+79288512525"')
+        self.assertContains(response, 'href="https://t.me/yaestsup"')
+        self.assertContains(response, 'href="https://wa.me/79288512525"')
+        self.assertContains(response, 'href="sms:+79288512525"')
+        self.assertContains(response, "Позвонить")
+        self.assertContains(response, "Написать в Telegram")
+        self.assertContains(response, "Написать в WhatsApp")
+        self.assertContains(response, "Написать SMS")
+        self.assertEqual(order_modal.count('target="_blank"'), 3)
+        self.assertEqual(order_modal.count('rel="noopener noreferrer"'), 3)
         self.assertContains(response, "data-order-close", count=2)
         description_start = styles.index(".order-dialog > p {")
         description_end = styles.index("}", description_start)
@@ -391,6 +402,31 @@ class SoupPageTests(TestCase):
         telegram_styles = styles[telegram_start:telegram_end]
         self.assertIn("width: 34px;", telegram_styles)
         self.assertIn("height: 34px;", telegram_styles)
+        modal_start = styles.index(".order-modal {")
+        modal_end = styles.index("}", modal_start)
+        modal_styles = styles[modal_start:modal_end]
+        self.assertIn("align-items: start;", modal_styles)
+        self.assertIn("justify-items: center;", modal_styles)
+        self.assertIn("overflow-y: auto;", modal_styles)
+        dialog_start = styles.index(".order-dialog {")
+        dialog_end = styles.index("}", dialog_start)
+        dialog_styles = styles[dialog_start:dialog_end]
+        self.assertIn("max-height: calc(100dvh - 40px);", dialog_styles)
+        self.assertIn("overflow-y: auto;", dialog_styles)
+        actions_start = styles.index(".order-contact-actions")
+        actions_end = styles.index("}", actions_start)
+        actions_styles = styles[actions_start:actions_end]
+        self.assertIn("grid-template-columns: repeat(2, minmax(0, 1fr));", actions_styles)
+        button_start = styles.index(".order-contact-button {")
+        button_end = styles.index("}", button_start)
+        button_styles = styles[button_start:button_end]
+        self.assertIn("min-height: 76px;", button_styles)
+        self.assertIn("background: var(--red);", button_styles)
+        mobile_dialog_start = styles.index("    .order-dialog {", styles.index("@media (max-width: 720px)"))
+        mobile_dialog_end = styles.index("}", mobile_dialog_start)
+        mobile_dialog_styles = styles[mobile_dialog_start:mobile_dialog_end]
+        self.assertIn("max-height: calc(100dvh - 24px);", mobile_dialog_styles)
+        self.assertIn("padding: 30px 20px 24px;", mobile_dialog_styles)
 
     def test_footer_has_no_store_links(self):
         response = self.client.get(reverse("index"))
