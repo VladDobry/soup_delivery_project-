@@ -39,6 +39,17 @@ class SoupPageTests(TestCase):
         self.assertContains(response, "data-soup-umami-open")
         self.assertContains(response, "Что за умами")
 
+    def test_broth_is_first_soup_card(self):
+        response = self.client.get(reverse("index"))
+        content = response.content.decode()
+        grid_start = content.index('<div class="soup-grid">')
+        grid_end = content.index('<p class="section-note">', grid_start)
+        soup_grid = content[grid_start:grid_end]
+        soup_ids = re.findall(r'data-soup-id="([^"]+)"', soup_grid)
+
+        self.assertEqual(soup_ids, list(SOUP_SLUGS))
+        self.assertEqual(soup_ids[0], "broth")
+
     def test_soup_modal_has_adjacent_navigation(self):
         response = self.client.get(reverse("index"))
         script = (

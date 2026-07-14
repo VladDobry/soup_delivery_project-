@@ -7,7 +7,7 @@ from django.db.utils import OperationalError, ProgrammingError
 from .models import SetPrice, SoupMathRow, SoupPrice
 
 
-SOUP_SLUGS = ("borsch", "solyanka", "ukha", "pumpkin", "broth")
+SOUP_SLUGS = ("broth", "borsch", "solyanka", "ukha", "pumpkin")
 
 FALLBACK_SOUP_PRICES_RUB = {
     SoupPrice.PriceGroup.DEFAULT: {

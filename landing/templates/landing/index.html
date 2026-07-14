@@ -108,6 +108,11 @@
                     <span></span>
                 </div>
                 <div class="soup-grid">
+                    <button class="soup-card reveal" type="button" data-soup-open data-soup-id="broth" data-soup-url="{% url 'soup-detail' 'broth' %}" aria-label="Открыть описание супа Коллагеновый бульон">
+                        <div class="soup-label"><h3>Коллагеновый<br>бульон</h3><p>Сила в тебе</p></div>
+                        <img class="asset" src="{% static 'landing/img/soup-broth.png' %}?v={{ cache_bust }}" alt="Коллагеновый бульон">
+                        <span class="soup-composition-cta">Состав</span>
+                    </button>
                     <button class="soup-card reveal" type="button" data-soup-open data-soup-id="borsch" data-soup-url="{% url 'soup-detail' 'borsch' %}" aria-label="Открыть описание супа Борщ">
                         <div class="soup-label"><h3>Борщ</h3><p>XVII<br>века</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-borsch.png' %}" alt="Борщ в черной чаше">
@@ -126,11 +131,6 @@
                     <button class="soup-card reveal" type="button" data-soup-open data-soup-id="pumpkin" data-soup-url="{% url 'soup-detail' 'pumpkin' %}" aria-label="Открыть описание супа Тыквенный суп-пюре">
                         <div class="soup-label"><h3>Тыквенный<br>суп-пюре</h3><p>С лангустинами</p></div>
                         <img class="asset" src="{% static 'landing/img/soup-pumpkin.png' %}" alt="Тыквенный суп-пюре с креветкой">
-                        <span class="soup-composition-cta">Состав</span>
-                    </button>
-                    <button class="soup-card reveal" type="button" data-soup-open data-soup-id="broth" data-soup-url="{% url 'soup-detail' 'broth' %}" aria-label="Открыть описание супа Коллагеновый бульон">
-                        <div class="soup-label"><h3>Коллагеновый<br>бульон</h3><p>Сила в тебе</p></div>
-                        <img class="asset" src="{% static 'landing/img/soup-broth.png' %}?v={{ cache_bust }}" alt="Коллагеновый бульон">
                         <span class="soup-composition-cta">Состав</span>
                     </button>
                 </div>
