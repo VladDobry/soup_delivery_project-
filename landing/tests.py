@@ -365,7 +365,7 @@ class SoupPageTests(TestCase):
         order_end = content.index("</div>", content.index('<div class="order-contact-actions"', order_start))
         order_modal = content[order_start:order_end]
         self.assertIn('class="order-telegram-link"', order_modal)
-        self.assertIn('href="https://t.me/yaestsup"', order_modal)
+        self.assertIn('href="https://telegram.me/yaestsup"', order_modal)
         self.assertIn('aria-label="ТГ-канал Я Есть Суп"', order_modal)
         self.assertIn("<svg", order_modal)
         self.assertNotIn(">ТГ</a>", order_modal)
@@ -383,7 +383,8 @@ class SoupPageTests(TestCase):
         self.assertContains(response, 'class="order-contact-actions"')
         self.assertContains(response, 'aria-label="Способы сделать заказ"')
         self.assertContains(response, 'href="tel:+79288512525"')
-        self.assertContains(response, 'href="https://t.me/yaestsup"')
+        self.assertContains(response, 'href="https://telegram.me/yaestsup"')
+        self.assertNotContains(response, 'href="https://t.me/yaestsup"')
         self.assertContains(response, 'href="https://wa.me/79288512525"')
         self.assertContains(response, 'href="sms:+79288512525"')
         self.assertContains(response, "Позвонить")
@@ -513,7 +514,7 @@ class SoupPageTests(TestCase):
         self.assertNotContains(response, "2 супа в подарок")
         self.assertNotContains(response, "250 гр")
         self.assertIn("data-order-open", promo)
-        self.assertIn('href="https://t.me/yaestsup"', promo)
+        self.assertIn('href="https://telegram.me/yaestsup"', promo)
         self.assertIn('class="promo-telegram"', promo)
 
     def test_volume_cards_use_branded_jar_images(self):
