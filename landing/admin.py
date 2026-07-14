@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import SetPrice, SoupPrice
+from .models import SetPrice, SoupMathRow, SoupMathTerm, SoupPrice
 
 
 @admin.register(SoupPrice)
@@ -26,3 +26,19 @@ class SetPriceAdmin(admin.ModelAdmin):
     list_filter = ("is_active",)
     search_fields = ("title", "caption")
     ordering = ("sort_order", "id")
+
+
+class SoupMathTermInline(admin.TabularInline):
+    model = SoupMathTerm
+    extra = 0
+    fields = ("sort_order", "visual_type", "volume_label")
+    ordering = ("sort_order", "id")
+
+
+@admin.register(SoupMathRow)
+class SoupMathRowAdmin(admin.ModelAdmin):
+    list_display = ("sort_order", "is_active", "price_rub", "total_weight_label")
+    list_editable = ("is_active", "price_rub", "total_weight_label")
+    list_filter = ("is_active",)
+    ordering = ("sort_order", "id")
+    inlines = (SoupMathTermInline,)

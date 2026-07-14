@@ -312,6 +312,65 @@
                 </div>
             </section>
 
+            <section class="section-band soup-math-line" id="soup-math" aria-labelledby="soup-math-title">
+                <img class="soup-math-decor soup-math-planet soup-math-planet-top" src="{% static 'landing/img/math-planet.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
+                <img class="soup-math-decor soup-math-planet soup-math-planet-bottom" src="{% static 'landing/img/math-planet.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
+                <img class="soup-math-decor soup-math-spoon" src="{% static 'landing/img/math-spoon.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
+                <span class="soup-math-star soup-math-star-a" aria-hidden="true">✦</span>
+                <span class="soup-math-star soup-math-star-b" aria-hidden="true">✶</span>
+                <span class="soup-math-star soup-math-star-c" aria-hidden="true">✦</span>
+                <span class="soup-math-star soup-math-star-d" aria-hidden="true">✧</span>
+
+                <header class="soup-math-header reveal">
+                    <h2 id="soup-math-title"><span>СУПер</span> математика</h2>
+                    <p>Чем больше общий объём — тем выгоднее каждая ложка.</p>
+                </header>
+
+                <div class="soup-math-board reveal" aria-label="Супер математика выгодных объёмов">
+                    {% for math_row in soup_math_rows %}
+                    <article class="soup-math-row{% if math_row.is_mix %} soup-math-row-mix{% endif %}">
+                        <div class="soup-math-equation">
+                            {% for term in math_row.terms %}
+                            {% if not forloop.first %}
+                            <span class="soup-math-symbol" aria-hidden="true">+</span>
+                            {% endif %}
+                            <span class="soup-math-term{% if term.is_bowl %} soup-math-term-bowl{% endif %}">
+                                <img class="{{ term.visual_class }}" src="{% static term.visual_src %}?v={{ cache_bust }}" alt="">
+                                <strong>{{ term.volume_label }}</strong>
+                            </span>
+                            {% endfor %}
+                            <span class="soup-math-symbol" aria-hidden="true">=</span>
+                        </div>
+                        <div class="soup-math-result">
+                            <strong>{{ math_row.price }}</strong>
+                            <span>{{ math_row.total_weight_label }}</span>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+
+                <div class="soup-math-logic reveal">
+                    <h3><span aria-hidden="true"></span>ЛОГИКА ПРЕИМУЩЕСТВА:<span aria-hidden="true"></span></h3>
+                    <div class="soup-math-benefits">
+                        <article>
+                            <span class="soup-math-number">1</span>
+                            <img src="{% static 'landing/img/math-scale.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
+                            <p><strong>СЧИТАЕМ</strong> общий вес,<br>а не порции.</p>
+                        </article>
+                        <article>
+                            <span class="soup-math-number">2</span>
+                            <img src="{% static 'landing/img/math-bowl.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
+                            <p><strong>КАЖДОЙ ТАРЕЛКЕ</strong> свой суп радуется.<br>Борщ сегодня.<br>Уха завтра.<br>Солянка послезавтра.</p>
+                        </article>
+                        <article>
+                            <span class="soup-math-number">3</span>
+                            <img src="{% static 'landing/img/math-fridge.png' %}?v={{ cache_bust }}" alt="" aria-hidden="true">
+                            <p><strong>РАЗНООБРАЗНОЕ МЕНЮ</strong> супов на несколько дней.<br>Отлично живут<br>в холодильнике.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
         <footer class="footer section-band" id="contacts">

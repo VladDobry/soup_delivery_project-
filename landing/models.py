@@ -54,6 +54,47 @@ class SetPrice(models.Model):
         return f"{self.title} · {self.price_rub} ₽"
 
 
+class SoupMathRow(models.Model):
+    price_rub = models.PositiveIntegerField("цена, ₽")
+    total_weight_label = models.CharField("общий вес", max_length=40)
+    is_active = models.BooleanField("активна", default=True)
+    sort_order = models.PositiveSmallIntegerField("порядок", default=0)
+
+    class Meta:
+        verbose_name = "строка супер математики"
+        verbose_name_plural = "СУПер математика"
+        ordering = ("sort_order", "id")
+
+    def __str__(self):
+        return f"{self.price_rub} ₽ · {self.total_weight_label}"
+
+
+class SoupMathTerm(models.Model):
+    class VisualType(models.TextChoices):
+        JAR_1L = "jar_1l", "Банка 1 л"
+        JAR_15L = "jar_15l", "Банка 1,5 л"
+        JAR_BORSCH_1L = "jar_borsch_1l", "Банка борща 1 л"
+        TAKEAWAY_035L = "takeaway_035l", "Тарелка с собой 0,35 л"
+
+    row = models.ForeignKey(
+        SoupMathRow,
+        on_delete=models.CASCADE,
+        related_name="terms",
+        verbose_name="строка",
+    )
+    volume_label = models.CharField("объём", max_length=40)
+    visual_type = models.CharField("картинка", max_length=30, choices=VisualType.choices)
+    sort_order = models.PositiveSmallIntegerField("порядок", default=0)
+
+    class Meta:
+        verbose_name = "слагаемое супер математики"
+        verbose_name_plural = "Слагаемые супер математики"
+        ordering = ("sort_order", "id")
+
+    def __str__(self):
+        return f"{self.volume_label} · {self.get_visual_type_display()}"
+
+
 class SiteGrammageSetting(models.Model):
     class SettingKey(models.TextChoices):
         GIFT_PORTION = "gift_portion", "Граммовка подарочного супа"

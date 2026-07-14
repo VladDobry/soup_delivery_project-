@@ -1377,6 +1377,321 @@ img {
     text-align: center;
 }
 
+.soup-math-line {
+    padding: 54px 42px 58px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 12% 12%, rgba(238, 170, 18, 0.14), transparent 15rem),
+        radial-gradient(circle at 88% 82%, rgba(197, 29, 37, 0.08), transparent 15rem);
+}
+
+.soup-math-line::before {
+    content: "";
+    position: absolute;
+    inset: 18px 26px;
+    z-index: -1;
+    border: 1px dashed rgba(20, 19, 18, 0.12);
+    border-radius: 18px;
+    pointer-events: none;
+}
+
+.soup-math-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.soup-math-header h2 {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(58px, 9.2vw, 126px);
+    line-height: 0.86;
+    font-weight: 900;
+    letter-spacing: 0;
+}
+
+.soup-math-header h2 span {
+    color: var(--red-dark);
+}
+
+.soup-math-header p {
+    margin: 22px 0 0;
+    color: var(--ink);
+    font-size: clamp(20px, 2.4vw, 33px);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.soup-math-board {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 6px;
+    margin: 24px auto 0;
+    width: min(1110px, 100%);
+}
+
+.soup-math-row {
+    min-height: 132px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 0.26fr);
+    align-items: center;
+    border: 2px solid rgba(20, 19, 18, 0.82);
+    border-radius: 12px;
+    background: rgba(255, 248, 236, 0.74);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+}
+
+.soup-math-equation {
+    min-width: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: space-around;
+    align-items: center;
+    gap: clamp(8px, 1.6vw, 26px);
+    padding: 10px clamp(14px, 2.3vw, 28px);
+}
+
+.soup-math-row-mix .soup-math-equation {
+    gap: clamp(4px, 0.7vw, 8px);
+    padding-inline: clamp(10px, 1.5vw, 18px);
+}
+
+.soup-math-term {
+    min-width: 104px;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.2vw, 16px);
+}
+
+.soup-math-term strong {
+    color: var(--red-dark);
+    font-size: clamp(26px, 3.36vw, 43px);
+    line-height: 1;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.soup-math-symbol {
+    color: var(--ink);
+    font-size: clamp(42px, 5vw, 64px);
+    line-height: 1;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.soup-math-jar,
+.soup-math-bowl {
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 8px rgba(43, 29, 17, 0.14));
+}
+
+.soup-math-jar-small {
+    width: 74px;
+    height: 94px;
+}
+
+.soup-math-jar-medium {
+    width: 82px;
+    height: 102px;
+}
+
+.soup-math-bowl {
+    width: 116px;
+    height: 78px;
+}
+
+.soup-math-result {
+    min-height: 100%;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    padding: 16px 12px 14px;
+    border-left: 2px dashed rgba(20, 19, 18, 0.54);
+    text-align: center;
+}
+
+.soup-math-result strong {
+    color: var(--red-dark);
+    font-size: clamp(38px, 4.48vw, 58px);
+    line-height: 0.9;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.soup-math-result span {
+    margin-top: 8px;
+    color: var(--ink);
+    font-size: clamp(18px, 1.76vw, 25px);
+    line-height: 0.95;
+    font-weight: 900;
+}
+
+.soup-math-logic {
+    position: relative;
+    z-index: 2;
+    width: min(1110px, 100%);
+    margin: 18px auto 0;
+}
+
+.soup-math-logic h3 {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 18px;
+    margin: 0 0 14px;
+    color: var(--ink);
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1;
+    font-weight: 900;
+    text-align: center;
+}
+
+.soup-math-logic h3 span::before,
+.soup-math-logic h3 span::after {
+    content: "";
+    display: block;
+    height: 2px;
+    border-top: 2px dashed rgba(20, 19, 18, 0.7);
+}
+
+.soup-math-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.soup-math-benefits article {
+    min-height: 142px;
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    padding: 18px 18px 16px 20px;
+    border: 2px solid rgba(20, 19, 18, 0.82);
+    border-radius: 12px;
+    background: rgba(255, 248, 236, 0.72);
+}
+
+.soup-math-benefits img {
+    width: 92px;
+    height: 92px;
+    object-fit: contain;
+}
+
+.soup-math-benefits p {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(15px, 1.08vw, 18px);
+    line-height: 1.08;
+    font-weight: 700;
+    text-transform: none;
+    overflow-wrap: anywhere;
+}
+
+.soup-math-benefits p strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--red-dark);
+    font-size: 1.12em;
+    line-height: 0.98;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.soup-math-number {
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(20, 19, 18, 0.82);
+    border-radius: 50%;
+    color: #fff;
+    background: var(--red-dark);
+    font-size: 23px;
+    line-height: 1;
+    font-weight: 900;
+    box-shadow: 0 4px 0 rgba(20, 19, 18, 0.1);
+}
+
+.soup-math-decor,
+.soup-math-star {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    transform: translate(calc(var(--parallax-x) * var(--depth, 0.22)), calc(var(--parallax-y) * var(--depth, 0.22)));
+}
+
+.soup-math-planet-top {
+    width: 82px;
+    right: 56px;
+    top: 30px;
+    rotate: 14deg;
+    --depth: 0.34;
+}
+
+.soup-math-planet-bottom {
+    width: 76px;
+    left: 86px;
+    bottom: 176px;
+    rotate: -11deg;
+    --depth: 0.18;
+}
+
+.soup-math-spoon {
+    width: 150px;
+    right: 50px;
+    bottom: 104px;
+    rotate: -10deg;
+    --depth: 0.28;
+}
+
+.soup-math-star {
+    color: var(--ink);
+    font-size: 30px;
+    animation:
+        drift var(--drift-speed, 7s) ease-in-out infinite alternate,
+        twinkle var(--twinkle-speed, 4.8s) ease-in-out infinite alternate;
+}
+
+.soup-math-star-a {
+    left: 56px;
+    top: 72px;
+    --depth: 0.36;
+}
+
+.soup-math-star-b {
+    right: 26px;
+    top: 282px;
+    color: var(--red-dark);
+    --depth: 0.42;
+}
+
+.soup-math-star-c {
+    left: 42px;
+    bottom: 176px;
+    font-size: 24px;
+    --depth: 0.24;
+}
+
+.soup-math-star-d {
+    right: 36px;
+    bottom: 246px;
+    font-size: 22px;
+    --depth: 0.3;
+}
+
 .gallery-line {
     padding: 22px 28px 30px;
 }
@@ -3258,6 +3573,58 @@ img {
         margin-top: 0;
     }
 
+    .soup-math-line {
+        padding-inline: 28px;
+    }
+
+    .soup-math-row {
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 0.3fr);
+    }
+
+    .soup-math-equation {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .soup-math-term {
+        min-width: 84px;
+        gap: 10px;
+    }
+
+    .soup-math-jar-small {
+        width: 58px;
+        height: 82px;
+    }
+
+    .soup-math-jar-medium {
+        width: 66px;
+        height: 90px;
+    }
+
+    .soup-math-bowl {
+        width: 92px;
+        height: 68px;
+    }
+
+    .soup-math-benefits {
+        gap: 12px;
+    }
+
+    .soup-math-benefits article {
+        grid-template-columns: 86px 1fr;
+        gap: 12px;
+        padding-inline: 14px;
+    }
+
+    .soup-math-benefits img {
+        width: 82px;
+        height: 82px;
+    }
+
+    .soup-math-spoon {
+        display: none;
+    }
+
     .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -3611,6 +3978,147 @@ img {
 
     .feature-jar-image-medium {
         height: 210px;
+    }
+
+    .soup-math-line {
+        padding: 36px 18px 42px;
+    }
+
+    .soup-math-line::before {
+        inset: 10px;
+        border-radius: 12px;
+    }
+
+    .soup-math-header h2 {
+        font-size: clamp(48px, 14vw, 82px);
+        line-height: 0.92;
+    }
+
+    .soup-math-header p {
+        margin-top: 14px;
+        font-size: clamp(18px, 5.5vw, 26px);
+    }
+
+    .soup-math-board {
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .soup-math-row {
+        min-height: 0;
+        grid-template-columns: 1fr;
+        overflow: hidden;
+    }
+
+    .soup-math-equation {
+        grid-auto-flow: row;
+        grid-template-columns: repeat(5, minmax(0, auto));
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 10px 10px;
+    }
+
+    .soup-math-row-mix .soup-math-equation {
+        grid-template-columns: repeat(7, minmax(0, auto));
+        gap: 4px;
+    }
+
+    .soup-math-term {
+        min-width: 0;
+        grid-template-columns: 1fr;
+        gap: 5px;
+        justify-items: center;
+    }
+
+    .soup-math-term strong {
+        font-size: clamp(19px, 5.6vw, 29px);
+    }
+
+    .soup-math-symbol {
+        align-self: center;
+        font-size: clamp(28px, 8vw, 42px);
+    }
+
+    .soup-math-jar-small {
+        width: 48px;
+        height: 68px;
+    }
+
+    .soup-math-jar-medium {
+        width: 54px;
+        height: 74px;
+    }
+
+    .soup-math-bowl {
+        width: 70px;
+        height: 50px;
+    }
+
+    .soup-math-result {
+        min-height: 0;
+        padding: 12px 14px 14px;
+        border-top: 2px dashed rgba(20, 19, 18, 0.54);
+        border-left: 0;
+    }
+
+    .soup-math-result strong {
+        font-size: clamp(35px, 10.4vw, 51px);
+    }
+
+    .soup-math-result span {
+        font-size: clamp(16px, 4.8vw, 22px);
+    }
+
+    .soup-math-logic {
+        margin-top: 18px;
+    }
+
+    .soup-math-logic h3 {
+        grid-template-columns: 1fr;
+        gap: 0;
+        font-size: clamp(24px, 7vw, 36px);
+    }
+
+    .soup-math-logic h3 span {
+        display: none;
+    }
+
+    .soup-math-benefits {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .soup-math-benefits article {
+        min-height: 118px;
+        grid-template-columns: 86px 1fr;
+        padding: 16px 16px 14px;
+    }
+
+    .soup-math-benefits img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .soup-math-number {
+        width: 32px;
+        height: 32px;
+        left: 10px;
+        top: 10px;
+        font-size: 19px;
+    }
+
+    .soup-math-planet-top,
+    .soup-math-planet-bottom,
+    .soup-math-star-b,
+    .soup-math-star-c,
+    .soup-math-star-d {
+        display: none;
+    }
+
+    .soup-math-star-a {
+        left: 14px;
+        top: 36px;
+        font-size: 20px;
     }
 
     .gallery-line {
@@ -3981,6 +4489,65 @@ img {
     .feature-volume-item > strong {
         margin-top: 3px;
         text-align: center;
+    }
+
+    .soup-math-line {
+        padding-inline: 12px;
+    }
+
+    .soup-math-header h2 {
+        font-size: clamp(42px, 15vw, 62px);
+    }
+
+    .soup-math-equation {
+        gap: 5px;
+        padding-inline: 6px;
+    }
+
+    .soup-math-row-mix .soup-math-equation {
+        gap: 2px;
+    }
+
+    .soup-math-term strong {
+        font-size: clamp(16px, 4.8vw, 22px);
+    }
+
+    .soup-math-symbol {
+        font-size: clamp(24px, 7vw, 34px);
+    }
+
+    .soup-math-jar-small {
+        width: 40px;
+        height: 58px;
+    }
+
+    .soup-math-jar-medium {
+        width: 46px;
+        height: 64px;
+    }
+
+    .soup-math-bowl {
+        width: 56px;
+        height: 42px;
+    }
+
+    .soup-math-result strong {
+        font-size: clamp(30px, 9.6vw, 40px);
+    }
+
+    .soup-math-benefits article {
+        grid-template-columns: 72px 1fr;
+        gap: 10px;
+        padding-right: 12px;
+    }
+
+    .soup-math-benefits img {
+        width: 68px;
+        height: 68px;
+    }
+
+    .soup-math-benefits p {
+        font-size: 15px;
     }
 
     .soup-card {
